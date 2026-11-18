@@ -236,7 +236,7 @@
                 </div>
             </article>
             <!-- RIGHT COLUMN: SIDEBAR (~30% width -> 4 cols) -->
-            <aside class="lg:col-span-4 flex flex-col gap-space-xl"><!-- SEARCH WIDGET -->
+            <aside class="lg:col-span-4 flex flex-col gap-space-xl lg:sticky lg:top-28"><!-- SEARCH WIDGET -->
                 <div class="flex flex-col w-full bg-white p-space-md shadow-sm border border-outline-variant/30">
                     <!-- Header Tab + Accent Line -->
                     <div class="relative flex flex-col w-full border-b-2 border-primary mb-space-md">
@@ -278,60 +278,6 @@
                             <li class="py-2.5 text-on-surface-variant">Belum ada berita terbaru.</li>
                         @endforelse
                     </ul>
-                </div>
-
-                <!-- RECENT COMMENTS WIDGET -->
-                <div class="flex flex-col w-full bg-white p-space-md shadow-sm border border-outline-variant/30">
-                    <!-- Header Tab + Accent Line -->
-                    <div class="relative flex flex-col w-full border-b-2 border-primary mb-space-sm">
-                        <div class="self-start bg-primary text-white font-bold text-label-md px-4 py-1.5 tracking-wide">
-                            Recent Comments
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-space-sm">
-                        <!-- Comment 1 -->
-                        <div class="p-space-sm rounded-DEFAULT bg-surface-container-low flex flex-col gap-1">
-                            <div class="flex items-center gap-2 font-label-md text-label-md">
-                                <span
-                                    class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-bold text-[11px] shrink-0">MC</span>
-                                <span class="font-bold text-on-surface">Marcus Chen</span>
-                                <span class="text-on-surface-variant font-normal">on</span>
-                                <a class="text-primary font-semibold hover:underline truncate" href="#">Predictive Failure</a>
-                            </div>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant italic leading-snug">
-                                “Great telemetry thresholds. The vibration harmonic frequency guide resolved our pump cavitation
-                                issues.”
-                            </p>
-                        </div>
-                        <!-- Comment 2 -->
-                        <div class="p-space-sm rounded-DEFAULT bg-surface-container-low flex flex-col gap-1">
-                            <div class="flex items-center gap-2 font-label-md text-label-md">
-                                <span
-                                    class="w-6 h-6 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-[11px] shrink-0">HV</span>
-                                <span class="font-bold text-on-surface">Hendrik V.</span>
-                                <span class="text-on-surface-variant font-normal">on</span>
-                                <a class="text-primary font-semibold hover:underline truncate" href="#">Hydraulic Systems</a>
-                            </div>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant italic leading-snug">
-                                “Will this drop-in proportional valve fit the 336D series boom cylinder manifold without
-                                machining?”
-                            </p>
-                        </div>
-                        <!-- Comment 3 -->
-                        <div class="p-space-sm rounded-DEFAULT bg-surface-container-low flex flex-col gap-1">
-                            <div class="flex items-center gap-2 font-label-md text-label-md">
-                                <span
-                                    class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-bold text-[11px] shrink-0">PQ</span>
-                                <span class="font-bold text-on-surface">PT Quarry Tech</span>
-                                <span class="text-on-surface-variant font-normal">on</span>
-                                <a class="text-primary font-semibold hover:underline truncate" href="#">Maintenance Guide</a>
-                            </div>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant italic leading-snug">
-                                “Very helpful undercarriage wear chart. We calibrated our daily track slack to 45mm based on
-                                this.”
-                            </p>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- ARCHIVES WIDGET -->
@@ -440,81 +386,6 @@
             </div>
         @endif
             </a>
-        </div>
-    </div>
-</section>
-<!-- LEAVE A REPLY (COMMENT FORM) SECTION -->
-<section class="w-full py-space-2xl bg-surface-container-low">
-    <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin">
-        <div
-            class="max-w-4xl p-space-xl rounded-DEFAULT bg-surface-container-low shadow-sm flex flex-col gap-space-lg">
-            <!-- HEADER -->
-            <div class="flex flex-col gap-space-xs">
-                <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
-                    Leave a reply
-                </h2>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">
-                    Your email address will not be published. Required fields are marked <span
-                        class="text-error font-bold">*</span>
-                </p>
-            </div>
-            <!-- FORM -->
-            <form class="flex flex-col gap-space-md"
-                onsubmit="event.preventDefault(); alert('Your comment has been submitted for peer review.');">
-                <!-- COMMENT TEXTAREA -->
-                <div class="flex flex-col gap-1.5">
-                    <label class="font-label-lg text-label-lg text-on-surface font-semibold" for="comment-text">
-                        Comment <span class="text-error">*</span>
-                    </label>
-                    <textarea
-                        class="w-full p-space-md rounded-DEFAULT bg-white text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                        id="comment-text" placeholder="Write your technical analysis, questions, or field experiences..."
-                        required="" rows="5"></textarea>
-                </div>
-                <!-- 3-FIELD ROW: NAME, EMAIL, WEBSITE -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
-                    <div class="flex flex-col gap-1.5">
-                        <label class="font-label-lg text-label-lg text-on-surface font-semibold" for="comment-name">
-                            Name <span class="text-error">*</span>
-                        </label>
-                        <input
-                            class="w-full px-space-md py-3 rounded-full bg-white text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                            id="comment-name" placeholder="John Doe" required="" type="text">
-                    </div>
-                    <div class="flex flex-col gap-1.5">
-                        <label class="font-label-lg text-label-lg text-on-surface font-semibold" for="comment-email">
-                            Email <span class="text-error">*</span>
-                        </label>
-                        <input
-                            class="w-full px-space-md py-3 rounded-full bg-white text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                            id="comment-email" placeholder="john.doe@miningcorp.com" required="" type="email">
-                    </div>
-                    <div class="flex flex-col gap-1.5">
-                        <label class="font-label-lg text-label-lg text-on-surface font-semibold" for="comment-website">
-                            Website
-                        </label>
-                        <input
-                            class="w-full px-space-md py-3 rounded-full bg-white text-on-surface font-body-md text-body-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                            id="comment-website" placeholder="https://company.com" type="url">
-                    </div>
-                </div>
-                <!-- REMEMBER CHECKBOX -->
-                <div class="flex items-center gap-3 pt-space-xs">
-                    <input class="w-5 h-5 rounded accent-primary cursor-pointer" id="save-info" type="checkbox">
-                    <label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer select-none"
-                        for="save-info">
-                        Save my name, email, and website in this browser for the next time I comment.
-                    </label>
-                </div>
-                <!-- SUBMIT BUTTON -->
-                <div class="pt-space-sm">
-                    <button
-                        class="px-8 py-3.5 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-semibold hover:bg-primary-container shadow-sm hover:shadow-md transition-all"
-                        type="submit">
-                        Post Comment
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
 </section>
