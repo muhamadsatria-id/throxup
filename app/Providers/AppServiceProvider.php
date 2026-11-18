@@ -40,16 +40,22 @@ class AppServiceProvider extends ServiceProvider
                     ? Cache::rememberForever('nav_categories', fn () => Category::select('id', 'nama', 'slug')->get()->toArray())
                     : [];
 
+                // Menu Products di header & footer hanya menampilkan maksimal 7 kategori.
+                $menuCategories = Schema::hasTable('categories')
+                    ? Cache::rememberForever('menu_categories', fn () => Category::menuList()->toArray())
+                    : [];
+
                 $modalData = Schema::hasTable('modal_banners')
                     ? Cache::rememberForever('active_modal_banner', fn () => ModalBanner::where('is_active', true)->latest()->first()?->toArray())
                     : null;
 
                 $view->with([
-                    'profile'       => $profileData ? new Fluent($profileData) : null,
-                    'platform'      => $platformData ? new Fluent($platformData) : null,
-                    'siteSetting'   => $settingData ? new Fluent($settingData) : null,
+                    'profile' => $profileData ? new Fluent($profileData) : null,
+                    'platform' => $platformData ? new Fluent($platformData) : null,
+                    'siteSetting' => $settingData ? new Fluent($settingData) : null,
                     'navCategories' => $navCategories,
-                    'activeModal'   => $modalData ? new Fluent($modalData) : null,
+                    'menuCategories' => $menuCategories,
+                    'activeModal' => $modalData ? new Fluent($modalData) : null,
                 ]);
             });
         }
@@ -59,7 +65,9 @@ class AppServiceProvider extends ServiceProvider
         Platform::saved(fn () => Cache::forget('site_platform'));
         Setting::saved(fn () => Cache::forget('site_setting'));
         Category::saved(fn () => Cache::forget('nav_categories'));
+        Category::saved(fn () => Cache::forget('menu_categories'));
         Category::deleted(fn () => Cache::forget('nav_categories'));
+        Category::deleted(fn () => Cache::forget('menu_categories'));
         ModalBanner::saved(fn () => Cache::forget('active_modal_banner'));
         ModalBanner::deleted(fn () => Cache::forget('active_modal_banner'));
     }

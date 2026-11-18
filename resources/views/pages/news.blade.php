@@ -1,15 +1,10 @@
 @extends('layouts.app')
 @section('content')
-<section class="w-full bg-surface shadow-sm relative overflow-hidden">
+<section class="w-full bg-surface-container-low shadow-sm relative overflow-hidden">
                 <div
                     class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-space-lg pb-space-xl relative z-10 flex flex-col items-center text-center">
                     <!-- Breadcrumb Navigation -->
-                    <nav aria-label="Breadcrumb"
-                        class="flex flex-wrap items-center justify-center gap-space-xs text-on-surface-variant font-label-md text-label-md mb-space-md">
-                        <a class="hover:text-primary transition-colors" href="/">Beranda</a>
-                        <span aria-hidden="true">/</span>
-                        <span class="text-primary font-bold" aria-current="page">Berita &amp; Wawasan</span>
-                    </nav>
+                    <x-breadcrumb-navigation align="center" class="mb-space-md" :items="[['label' => 'Berita & Wawasan']]" />
 
                     <!-- Headline & Subtitle -->
                     <div class="max-w-3xl mx-auto">

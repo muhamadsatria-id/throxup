@@ -1,18 +1,13 @@
 @extends('layouts.app')
 @section('content')
 <!-- BREADCRUMB STRIP -->
-<section class="w-full bg-surface-container-low shadow-sm relative overflow-hidden">
-    <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-space-lg pb-space-md relative z-10">
+<section class="w-full bg-surface-container-low relative overflow-hidden">
+    <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-space-sm pb-space-md relative z-10">
         <!-- Breadcrumb Navigation -->
-        <nav aria-label="Breadcrumb"
-            class="flex flex-wrap items-center justify-start gap-space-xs text-on-surface-variant font-label-md text-label-md">
-            <a class="hover:text-primary transition-colors" data-path="home" href="#">Home</a>
-            <span aria-hidden="true">/</span>
-            <a class="hover:text-primary transition-colors hidden sm:inline" data-path="news" href="#">News &amp;
-                Insights</a>
-            <span aria-hidden="true" class="hidden sm:inline">/</span>
-            <span class="text-primary font-bold min-w-0 max-w-full truncate" aria-current="page">{{ $news->judul }}</span>
-        </nav>
+        <x-breadcrumb-navigation :items="[
+            ['label' => 'News & Insights', 'url' => route('news'), 'hide_on_mobile' => true],
+            ['label' => $news->judul],
+        ]" />
     </div>
 </section>
 <!-- MAIN EDITORIAL CONTENT GRID -->

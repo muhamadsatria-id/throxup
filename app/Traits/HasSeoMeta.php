@@ -34,6 +34,7 @@ trait HasSeoMeta
             // Jika record lama belum punya seoMeta, buatkan otomatis
             if (! $seoMeta) {
                 $model->createAutomaticSeoMeta();
+
                 return;
             }
 
@@ -65,21 +66,21 @@ trait HasSeoMeta
     protected function automaticSeoMetaPayload(): array
     {
         $brandName = config('app.name', 'Thorxup');
-        $rawTitle  = $this->seoAutoTitle();
+        $rawTitle = $this->seoAutoTitle();
         $fullTitle = Str::contains(mb_strtolower($rawTitle), mb_strtolower($brandName))
             ? $rawTitle
             : "{$rawTitle} | {$brandName}";
 
         return [
-            'title'         => Str::limit($fullTitle, 70, ''),
-            'deskripsi'     => $this->seoAutoDescription() !== null
+            'title' => Str::limit($fullTitle, 70, ''),
+            'deskripsi' => $this->seoAutoDescription() !== null
                 ? Str::limit($this->seoAutoDescription(), 160, '')
                 : null,
-            'keyword'       => $this->seoAutoKeywords(),
+            'keyword' => $this->seoAutoKeywords(),
             'canonical_url' => $this->seoAutoCanonicalUrl(),
-            'robots'        => $this->seoAutoRobots(),
-            'og_image'      => $this->seoAutoOgImage(),
-            'schema_json'   => $this->seoAutoSchema(),
+            'robots' => $this->seoAutoRobots(),
+            'og_image' => $this->seoAutoOgImage(),
+            'schema_json' => $this->seoAutoSchema(),
         ];
     }
 
@@ -91,7 +92,7 @@ trait HasSeoMeta
             }
         }
 
-        return class_basename($this) . ' #' . $this->getKey();
+        return class_basename($this).' #'.$this->getKey();
     }
 
     protected function seoAutoDescription(): ?string
@@ -100,6 +101,7 @@ trait HasSeoMeta
             if (filled($this->{$field} ?? null)) {
                 $clean = strip_tags((string) $this->{$field});
                 $clean = html_entity_decode($clean, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
                 return trim(preg_replace('/\s+/u', ' ', $clean));
             }
         }
@@ -107,6 +109,7 @@ trait HasSeoMeta
         if (filled($this->detail_produk ?? null)) {
             $value = $this->detail_produk;
             $clean = strip_tags(is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : (string) $value);
+
             return trim(preg_replace('/\s+/u', ' ', $clean));
         }
 
@@ -118,7 +121,7 @@ trait HasSeoMeta
         $sourceText = $this->seoAutoTitle();
 
         if ($this instanceof Product && filled($this->sku ?? null)) {
-            $sourceText .= ' ' . $this->sku;
+            $sourceText .= ' '.$this->sku;
         }
 
         $words = preg_split('/[\s,\-\/]+/u', strip_tags($sourceText)) ?: [];
@@ -149,11 +152,15 @@ trait HasSeoMeta
     {
         // Pastikan nama route di sini sama persis dengan ->name(...) di routes/web.php
         $routes = [
-            Product::class  => 'detail-product',
-            Category::class => 'category',
-            News::class     => 'detail-news',
-            Page::class     => 'page',
+            Product::class => 'detail-product',
+            News::class => 'detail-news',
+            Page::class => 'page',
         ];
+
+        // Kategori tidak punya halaman sendiri; canonical diarahkan ke katalog yang terfilter slug.
+        if (static::class === Category::class && filled($this->slug ?? null)) {
+            return route('product', ['category' => $this->slug]);
+        }
 
         if (isset($routes[static::class]) && filled($this->slug ?? null)) {
             try {
@@ -164,7 +171,7 @@ trait HasSeoMeta
         }
 
         if (filled($this->slug ?? null)) {
-            return url('/' . ltrim((string) $this->slug, '/'));
+            return url('/'.ltrim((string) $this->slug, '/'));
         }
 
         return rtrim((string) config('app.url'), '/');
@@ -194,18 +201,18 @@ trait HasSeoMeta
     protected function seoAutoSchema(): ?array
     {
         $type = match (static::class) {
-            Product::class  => 'Product',
-            News::class     => 'NewsArticle',
+            Product::class => 'Product',
+            News::class => 'NewsArticle',
             Category::class => 'CollectionPage',
-            Page::class     => 'WebPage',
-            Profile::class  => 'Organization',
-            default         => 'WebPage',
+            Page::class => 'WebPage',
+            Profile::class => 'Organization',
+            default => 'WebPage',
         };
 
         $schema = [
             '@context' => 'https://schema.org',
-            '@type'    => $type,
-            'name'     => $this->seoAutoTitle(),
+            '@type' => $type,
+            'name' => $this->seoAutoTitle(),
         ];
 
         if ($description = $this->seoAutoDescription()) {
@@ -220,7 +227,7 @@ trait HasSeoMeta
             // Ubah path storage relatif menjadi URL penuh untuk validasi Google Schema
             $schema['image'] = Str::startsWith($image, ['http://', 'https://'])
                 ? $image
-                : asset('storage/' . ltrim($image, '/'));
+                : asset('storage/'.ltrim($image, '/'));
         }
 
         // Field spesifik agar lolos Rich Results Google
@@ -230,7 +237,7 @@ trait HasSeoMeta
             }
             $schema['brand'] = [
                 '@type' => 'Brand',
-                'name'  => config('app.name', 'Thorxup'),
+                'name' => config('app.name', 'Thorxup'),
             ];
         } elseif ($this instanceof News) {
             $schema['headline'] = $this->seoAutoTitle();
@@ -253,13 +260,13 @@ trait HasSeoMeta
     {
         $seo = $this->seoMeta;
 
-        $title       = $seo?->title ?? $this->seoAutoTitle();
+        $title = $seo?->title ?? $this->seoAutoTitle();
         $description = $seo?->deskripsi ?? $this->seoAutoDescription();
-        $canonical   = $seo?->canonical_url ?? $this->seoAutoCanonicalUrl();
-        $robots      = $seo?->robots ?? $this->seoAutoRobots();
-        $ogPath      = $seo?->og_image ?? $this->seoAutoOgImage();
-        $ogImage     = $ogPath
-            ? (Str::startsWith($ogPath, ['http://', 'https://']) ? $ogPath : asset('storage/' . ltrim($ogPath, '/')))
+        $canonical = $seo?->canonical_url ?? $this->seoAutoCanonicalUrl();
+        $robots = $seo?->robots ?? $this->seoAutoRobots();
+        $ogPath = $seo?->og_image ?? $this->seoAutoOgImage();
+        $ogImage = $ogPath
+            ? (Str::startsWith($ogPath, ['http://', 'https://']) ? $ogPath : asset('storage/'.ltrim($ogPath, '/')))
             : null;
 
         SEOTools::setTitle($title, false);

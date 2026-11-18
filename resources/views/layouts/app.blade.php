@@ -4,37 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    {{-- 1. Fallback SEO Otomatis --}}
     @php
         if (! \Artesaos\SEOTools\Facades\SEOTools::getTitle()) {
-            \Artesaos\SEOTools\Facades\SEOTools::setTitle(data_get($profile, 'nama', config('app.name', 'Thorxup')));
-            if ($desc = data_get($profile, 'deskripsi')) { \Artesaos\SEOTools\Facades\SEOTools::setDescription(\Illuminate\Support\Str::limit(strip_tags($desc), 155));
+            \Artesaos\SEOTools\Facades\SEOTools::setTitle(data_get($profile ?? null, 'nama', config('app.name', 'Thorxup')));
+            if ($desc = data_get($profile ?? null, 'deskripsi')) { \Artesaos\SEOTools\Facades\SEOTools::setDescription(\Illuminate\Support\Str::limit(strip_tags($desc), 155));
             }
         }
     @endphp
     {!! SEO::generate() !!}
-
-    {{-- 2. Favicon Dinamis --}}
-    @if($favicon = data_get($profile, 'favicon'))
+    @if($favicon = data_get($profile ?? null, 'favicon'))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . $favicon) }}">
     @else
         <link rel="icon" href="{{ asset('favicon.ico') }}">
     @endif
+    {!! data_get($siteSetting ?? null, 'gsc_verification') !!}
+    {!! data_get($siteSetting ?? null, 'ga4_code') !!}
+    {!! data_get($siteSetting ?? null, 'gtm_head_code') !!}
+    {!! data_get($siteSetting ?? null, 'custom_head_scripts') !!}
 
-    {{-- 3. Google Search Console, GA4, GTM Head & Custom Head Scripts --}}
-    {!! data_get($siteSetting, 'gsc_verification') !!}
-    {!! data_get($siteSetting, 'ga4_code') !!}
-    {!! data_get($siteSetting, 'gtm_head_code') !!}
-    {!! data_get($siteSetting, 'custom_head_scripts') !!}
-
-    {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-
-    {{-- Tailwind & Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.tailwindcss.com"></script>
     <script id="tailwind-config">
@@ -92,28 +83,25 @@
     </script>
     @stack('styles')
 </head>
-<body class="bg-surface font-body-md text-on-surface antialiased">
-    {{-- 4. GTM Noscript Body --}}
-    {!! data_get($siteSetting, 'gtm_body_code') !!}
+<body class="bg-surface-container-low font-body-md text-on-surface antialiased">
+    {!! data_get($siteSetting ?? null, 'gtm_body_code') !!}
 
     {{-- 5. Header --}}
     <x-header />
 
     {{-- 6. Konten Halaman --}}
-    <main class="w-full pt-20 bg-surface min-h-screen">
+    <main class="w-full pt-20 bg-surface-container-low min-h-screen">
         @yield('content')
     </main>
 
    {{-- 7. Footer --}}
     <x-footer />
 
-    {{-- 8. Floating WhatsApp --}}
-    @if($wa = data_get($profile, 'whatsapp'))
+    @if($wa = data_get($profile ?? null, 'whatsapp'))
         <x-floating-whatsapp :phone="$wa" />
     @endif
 
-    {{-- 9. Custom Scripts Sebelum Penutup Body --}}
-    {!! data_get($siteSetting, 'custom_body_scripts') !!}
+    {!! data_get($siteSetting ?? null, 'custom_body_scripts') !!}
     @stack('scripts')
 </body>
 </html>

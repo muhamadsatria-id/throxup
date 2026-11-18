@@ -2,26 +2,23 @@
 
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\NewsController;
-use App\Http\Controllers\ProfileController;
-use App\Models\QuoteRequest;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\PageController;
+use App\Http\Controllers\Front\ProductController;
+use App\Models\QuoteRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
-
-Route::get('/{page:slug}', [PageController::class, 'show'])->name('page');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 Route::get('/news', [NewsController::class, 'index'])->name('news');
-Route::get('/product', function () {
-    return view('pages.product');
-})->name('product');
+Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
 
-Route::post('/contact', function (Illuminate\Http\Request $request) {
+Route::post('/contact', function (Request $request) {
     $validated = $request->validate([
         'full_name' => ['required', 'string', 'max:255'],
         'business_email' => ['required', 'email', 'max:255'],
@@ -40,13 +37,10 @@ Route::post('/contact', function (Illuminate\Http\Request $request) {
 
     return redirect()->route('home')->with('quote_status', $message);
 })->name('quote.store');
-Route::get('/detail-product/{slug}', function ($slug) {
-    return view('pages.detail-product', ['slug' => $slug]);
-})->name('detail-product');
-Route::get('/category/{slug}', function ($slug) {
-    return view('pages.category', ['slug' => $slug]);
-})->name('category');
+Route::get('/detail-product/{slug}', [ProductController::class, 'show'])->name('detail-product');
 Route::get('/detail-news/{slug}', [NewsController::class, 'show'])->name('detail-news');
+
+Route::get('/{page:slug}', [PageController::class, 'show'])->name('page');
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);

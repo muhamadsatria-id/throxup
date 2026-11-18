@@ -11,7 +11,7 @@ use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -50,10 +50,9 @@ class ProductsRelationManager extends RelationManager
                     ->nullable()->helperText('(opsional)')
                     ->helperText('Tekan Enter untuk menambah keunggulan.')
                     ->columnSpanFull(),
-                KeyValue::make('detail_produk')
-                    ->nullable()->helperText('(opsional)')
-                    ->keyLabel('Spesifikasi')
-                    ->valueLabel('Nilai')
+                RichEditor::make('detail_produk')
+                    ->nullable()
+                    ->helperText('(opsional) Tampil sebagai konten rich text di bagian Detail Produk halaman produk.')
                     ->columnSpanFull(),
                 FileUpload::make('images')
                     ->image()

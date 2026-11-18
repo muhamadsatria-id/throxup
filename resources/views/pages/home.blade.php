@@ -541,7 +541,7 @@
                                 </div>
                                 <a aria-label="Go to Tokopedia"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
-                                    href="{{ $platform?->tokopedia ?? '#' }}" rel="noopener noreferrer" target="_blank">
+                                    href="{{ \App\Models\Platform::first()?->tokopedia ?? '#' }}" rel="noopener noreferrer" target="_blank">
                                     <span class="material-symbols-outlined text-[22px]">south_east</span>
                                 </a>
                             </div>
@@ -570,7 +570,7 @@
                                 </div>
                                 <a aria-label="Go to Shopee Mall"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
-                                    href="{{ $platform?->shopee ?? '#' }}" rel="noopener noreferrer" target="_blank">
+                                    href="{{ \App\Models\Platform::first()?->shopee ?? '#' }}" rel="noopener noreferrer" target="_blank">
                                     <span class="material-symbols-outlined text-[22px]">south_east</span>
                                 </a>
                             </div>
@@ -599,7 +599,7 @@
                                 </div>
                                 <a aria-label="Go to TikTok Shop"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
-                                    href="{{ $platform?->tiktok_shop ?? '#' }}">
+                                    href="{{ \App\Models\Platform::first()?->tiktok_shop ?? '#' }}">
                                     <span class="material-symbols-outlined text-[22px]">south_east</span>
                                 </a>
                             </div>
@@ -657,7 +657,7 @@
                                 </div>
                                 <a aria-label="Go to Lazada Mall"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
-                                    href="{{ $platform?->lazada ?? '#' }}">
+                                    href="{{ \App\Models\Platform::first()?->lazada ?? '#' }}">
                                     <span class="material-symbols-outlined text-[22px]">south_east</span>
                                 </a>
                             </div>
