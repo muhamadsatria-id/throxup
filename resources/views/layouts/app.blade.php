@@ -10,6 +10,12 @@
             if ($desc = data_get($profile ?? null, 'deskripsi')) { \Artesaos\SEOTools\Facades\SEOTools::setDescription(\Illuminate\Support\Str::limit(strip_tags($desc), 155));
             }
         }
+        $embedCode = function ($value) {
+            $value = is_string($value) ? trim($value) : '';
+
+            // Field ini untuk tag HTML/script. Teks biasa (mis. salah ketik) tidak boleh tampil di halaman.
+            return str_contains($value, '<') ? $value : '';
+        };
     @endphp
     {!! SEO::generate() !!}
     @if($favicon = data_get($profile ?? null, 'favicon'))
@@ -17,10 +23,10 @@
     @else
         <link rel="icon" href="{{ asset('favicon.ico') }}">
     @endif
-    {!! data_get($siteSetting ?? null, 'gsc_verification') !!}
-    {!! data_get($siteSetting ?? null, 'ga4_code') !!}
-    {!! data_get($siteSetting ?? null, 'gtm_head_code') !!}
-    {!! data_get($siteSetting ?? null, 'custom_head_scripts') !!}
+    {!! $embedCode(data_get($siteSetting ?? null, 'gsc_verification')) !!}
+    {!! $embedCode(data_get($siteSetting ?? null, 'ga4_code')) !!}
+    {!! $embedCode(data_get($siteSetting ?? null, 'gtm_head_code')) !!}
+    {!! $embedCode(data_get($siteSetting ?? null, 'custom_head_scripts')) !!}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -84,7 +90,7 @@
     @stack('styles')
 </head>
 <body class="bg-surface-container-low font-body-md text-on-surface antialiased">
-    {!! data_get($siteSetting ?? null, 'gtm_body_code') !!}
+    {!! $embedCode(data_get($siteSetting ?? null, 'gtm_body_code')) !!}
 
     {{-- 5. Header --}}
     <x-header />
@@ -101,7 +107,7 @@
         <x-floating-whatsapp :phone="$wa" />
     @endif
 
-    {!! data_get($siteSetting ?? null, 'custom_body_scripts') !!}
+    {!! $embedCode(data_get($siteSetting ?? null, 'custom_body_scripts')) !!}
     @stack('scripts')
 </body>
 </html>

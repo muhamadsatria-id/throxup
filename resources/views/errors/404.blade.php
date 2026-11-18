@@ -1,28 +1,46 @@
 @extends('layouts.app')
 
+@push('styles')
+<style>
+    html, body {
+        height: 100vh;
+        overflow: hidden;
+    }
+    header, nav, footer {
+        display: none !important;
+    }
+    main {
+        padding-top: 0 !important;
+        min-height: 100vh !important;
+        height: 100vh !important;
+    }
+</style>
+@endpush
+
 @section('content')
-<section class="relative overflow-hidden bg-[#EBF2FE] py-20 md:py-28">
-    {{-- Elemen Dekoratif Kanan-Bawah (konsisten dengan header halaman lain) --}}
+<section class="relative flex h-screen w-full items-center justify-center overflow-hidden bg-surface-container-low px-4">
+    {{-- Elemen Dekoratif Kanan-Bawah --}}
     <img src="{{ asset('images/elemen.png') }}"
          alt=""
-         class="pointer-events-none absolute bottom-0 right-0 w-48 opacity-80 md:w-72">
+         class="pointer-events-none absolute bottom-0 right-0 w-44 opacity-80 md:w-64">
 
-    <div class="container relative z-10 mx-auto px-4 text-center">
-        <span class="inline-block rounded-full bg-blue-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-700">
-            Error 404
-        </span>
+    <div class="container relative z-10 mx-auto text-center">
+        {{-- Angka 404 Ekstra Besar --}}
+        <p class="select-none text-8xl font-black leading-none tracking-tighter text-primary sm:text-9xl md:text-[11rem]">
+            404
+        </p>
 
-        <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 md:text-6xl">
+        <h1 class="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
             Halaman Tidak Ditemukan
         </h1>
 
-        <p class="mx-auto mt-4 max-w-xl text-base text-slate-600 md:text-lg">
+        <p class="mx-auto mt-3 max-w-lg text-sm text-slate-600 sm:text-base">
             Maaf, halaman atau suku cadang yang Anda cari mungkin telah dipindahkan, dihapus, atau alamat URL yang dimasukkan tidak tepat.
         </p>
 
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a href="{{ url('/') }}"
-               class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">
+               class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-container">
                 Kembali ke Beranda
             </a>
 
