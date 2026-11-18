@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('platforms', function (Blueprint $table) {
+            $table->id();
+            $table->string('tiktok')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('shopee')->nullable();
+            $table->string('tiktok_shop')->nullable();
+            $table->string('tokopedia')->nullable();
+            $table->string('lazada')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('platforms');
+    }
+};
