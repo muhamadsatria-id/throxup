@@ -8,7 +8,11 @@
         @forelse ($heroCarousels as $hero)
             <div class="w-full flex-shrink-0 relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center">
                 <div class="absolute inset-0 z-0">
-                    <img alt="{{ $hero->judul }}" class="w-full h-full object-cover object-center transform scale-105"
+                    <img alt="{{ $hero->judul }}"
+                        class="w-full h-full object-cover object-center transform scale-105"
+                        loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                        fetchpriority="{{ $loop->first ? 'high' : 'low' }}"
+                        decoding="async"
                         src="{{ asset('storage/' . $hero->image) }}" />
                     <div class="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/55 to-primary/45"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-primary/30"></div>
@@ -153,7 +157,7 @@
                                 <div class="relative h-36 md:h-48 overflow-hidden bg-surface-container">
                                     @if ($article->thumbnail)
                                         <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                                            alt="{{ $article->judul }}"
+                                            alt="{{ $article->judul }}" loading="lazy" decoding="async"
                                             src="{{ asset('storage/' . $article->thumbnail) }}" />
                                     @endif
                                 </div>

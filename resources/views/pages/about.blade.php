@@ -21,8 +21,9 @@
     </div>
 
     <!-- GAMBAR ELEMEN DEKORATIF KANAN BAWAH -->
-    <img src="elemen.png" alt="" aria-hidden="true"
-        class="absolute bottom-0 right-0 w-44 sm:w-72 lg:w-92 h-auto opacity-20 pointer-events-none select-none z-0" />
+    <div aria-hidden="true"
+        class="absolute bottom-0 right-0 w-44 sm:w-72 lg:w-92 h-44 sm:h-72 lg:h-92 opacity-20 pointer-events-none select-none z-0 bg-[radial-gradient(circle_at_70%_30%,rgba(187,195,255,0.55),transparent_62%)]">
+    </div>
 </section>
 <!-- MAIN NARRATIVE & MEDIA SECTION -->
 <section class="w-full py-space-2xl bg-surface-container-low">
@@ -99,6 +100,7 @@
                 <div class="rounded-md bg-surface-container-lowest overflow-hidden shadow-md flex flex-col">
                     <div class="relative w-full h-56 bg-surface-container">
                         <img alt="Heavy machinery tracks, steel sprockets and rollers workshop application"
+                            loading="lazy" decoding="async"
                             class="w-full h-full object-cover"
                             src="https://lh3.googleusercontent.com/aida/ALJJyrDbzQqNtyqjbTrA2m_XbLklVB8l_Ucy0_riJZTbCoQkhm6IUMvwwefm2huXXG4zp0Y7a0kwLKWEGYGOcU6ruGBrxK1reB5NftSJJ4Ivq82HCPYgjMgF5oSMMZaAKkmWDgGu7grdp-n68ME0d6WOj4D7v-gVRK0qszz9oyfOn144taUstVRWTYFsR1xcGzS42M7WwzF-p9YqdHv7hDYim0ey3cMpfZUBQ-TqlXCJQPojgg">
 
@@ -142,8 +144,9 @@
                 </div>
 
                 <!-- GAMBAR ELEMEN DEKORATIF KIRI BAWAH -->
-                <img src="elemen.png" alt="" aria-hidden="true"
-                    class="absolute bottom-0 left-0 w-48 lg:w-64 h-auto opacity-15 pointer-events-none select-none z-0" />
+                <div aria-hidden="true"
+                    class="absolute bottom-0 left-0 w-48 lg:w-64 h-48 lg:h-64 opacity-15 pointer-events-none select-none z-0 bg-[radial-gradient(circle_at_30%_70%,rgba(187,195,255,0.5),transparent_62%)]">
+                </div>
             </div>
 
             <!-- CARD 2: MISSION (CLEAN INDUSTRIAL WHITE WITH STEPS) -->

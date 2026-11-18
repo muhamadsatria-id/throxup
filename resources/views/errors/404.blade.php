@@ -20,9 +20,8 @@
 @section('content')
 <section class="relative flex h-screen w-full items-center justify-center overflow-hidden bg-surface-container-low px-4">
     {{-- Elemen Dekoratif Kanan-Bawah --}}
-    <img src="{{ asset('images/elemen.png') }}"
-         alt=""
-         class="pointer-events-none absolute bottom-0 right-0 w-44 opacity-80 md:w-64">
+    <div aria-hidden="true"
+         class="pointer-events-none absolute bottom-0 right-0 w-44 h-44 opacity-80 md:w-64 md:h-64 bg-[radial-gradient(circle_at_70%_30%,rgba(187,195,255,0.55),transparent_62%)]"></div>
 
     <div class="container relative z-10 mx-auto text-center">
         {{-- Angka 404 Ekstra Besar --}}

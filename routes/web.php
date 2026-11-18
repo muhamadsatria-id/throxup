@@ -4,19 +4,19 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\NewsController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Front\ProductController;
+use App\Http\Controllers\RobotsController;
+use App\Http\Controllers\SitemapController;
 use App\Models\QuoteRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', function () {
-    return view('pages.about');
-})->name('about');
+Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name('contact');
+
+// /contact mengarah ke formulir yang sama di beranda agar tidak ada halaman kosong/duplikat.
+Route::redirect('/contact', '/#contact', 301)->name('contact');
 
 Route::post('/contact', function (Request $request) {
     $validated = $request->validate([
@@ -37,6 +37,10 @@ Route::post('/contact', function (Request $request) {
 
     return redirect()->route('home')->with('quote_status', $message);
 })->name('quote.store');
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/robots.txt', RobotsController::class)->name('robots');
+
 Route::get('/detail-product/{slug}', [ProductController::class, 'show'])->name('detail-product');
 Route::get('/detail-news/{slug}', [NewsController::class, 'show'])->name('detail-news');
 
@@ -44,4 +48,4 @@ Route::get('/{page:slug}', [PageController::class, 'show'])->name('page');
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
-});
+})->name('fallback');

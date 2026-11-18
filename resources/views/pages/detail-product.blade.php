@@ -43,6 +43,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
                         class="relative w-full h-[440px] md:h-[520px] rounded-md overflow-hidden bg-surface-container-high flex items-center justify-center cursor-crosshair">
                         @if ($mainImage)
                         <img alt="{{ $product->nama }}" id="mainProductImg" src="{{ $mainImage }}"
+                            loading="eager" fetchpriority="high" decoding="async"
                             class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
                         @else
                         <div id="mainProductImg"
@@ -63,7 +64,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
                         data-img-src="{{ $image }}" data-img-alt="{{ $product->nama }}"
                         aria-label="Tampilkan foto produk {{ $index + 1 }}">
                         <div class="relative w-full h-24 rounded-md overflow-hidden bg-surface-container">
-                            <img alt="{{ $product->nama }} — foto {{ $index + 1 }}"
+                            <img alt="{{ $product->nama }} — foto {{ $index + 1 }}" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                                 src="{{ $image }}">
                         </div>

@@ -80,8 +80,9 @@
     </div>
 
     <!-- GAMBAR ELEMEN DEKORATIF KANAN BAWAH -->
-    <img src="elemen.png" alt="" aria-hidden="true"
-        class="absolute bottom-0 right-0 w-44 sm:w-72 lg:w-92 h-auto opacity-20 pointer-events-none select-none z-0" />
+    <div aria-hidden="true"
+        class="absolute bottom-0 right-0 w-44 sm:w-72 lg:w-92 h-44 sm:h-72 lg:h-92 opacity-20 pointer-events-none select-none z-0 bg-[radial-gradient(circle_at_70%_30%,rgba(187,195,255,0.55),transparent_62%)]">
+    </div>
 </section>
 <!-- Main Catalog Architecture: 2-Column Split -->
 <section class="w-full max-w-[1360px] mx-auto px-margin-mobile lg:px-margin py-space-xl">

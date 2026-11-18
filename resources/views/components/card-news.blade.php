@@ -4,6 +4,7 @@
     <div
         class="md:w-5/12 relative overflow-hidden bg-surface-container-high shrink-0 aspect-[16/10] md:aspect-auto">
         <img alt="Hydraulic pumps, heavy duty hydraulic cylinders, pressure valves and steel piping industrial components closeup engineering"
+            loading="lazy" decoding="async"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
             src="https://lh3.googleusercontent.com/aida/ALJJyrBFtABTNdyL-Wl16c2wVTxZJ6AjoLebwoJDqm3jpDdurL2JOAYcUL7v98ePicVPz0GRIHpyeuogp3o-LYLZVc5v0zWkkp8nIzH4i_DBgSnC3KYFHcC1znBV97oLvJ-LqU0BuT2BglBo3kfQ7VHJwYWzGDSFZcPLiMTI2QfTURb6o3QboK7fiKN59hZNDtT0Ha-pezUlbzC1ezTIu94x4BXMVFTqV5q4WPHh845twH-xXg">
         <div class="absolute top-space-sm left-space-sm">

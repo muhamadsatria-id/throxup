@@ -8,10 +8,8 @@ use App\Models\Page;
 use App\Models\Product;
 use App\Models\Profile;
 use App\Models\SeoMeta;
-use Artesaos\SEOTools\Facades\JsonLd;
+use App\Services\SeoService;
 use Artesaos\SEOTools\Facades\OpenGraph;
-use Artesaos\SEOTools\Facades\SEOMeta as SEOMetaFacade;
-use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Str;
 
@@ -65,7 +63,7 @@ trait HasSeoMeta
 
     protected function automaticSeoMetaPayload(): array
     {
-        $brandName = config('app.name', 'Thorxup');
+        $brandName = app(SeoService::class)->siteName();
         $rawTitle = $this->seoAutoTitle();
         $fullTitle = Str::contains(mb_strtolower($rawTitle), mb_strtolower($brandName))
             ? $rawTitle
@@ -174,7 +172,7 @@ trait HasSeoMeta
             return url('/'.ltrim((string) $this->slug, '/'));
         }
 
-        return rtrim((string) config('app.url'), '/');
+        return rtrim(url('/'), '/');
     }
 
     protected function seoAutoOgImage(): ?string
@@ -213,6 +211,7 @@ trait HasSeoMeta
             '@context' => 'https://schema.org',
             '@type' => $type,
             'name' => $this->seoAutoTitle(),
+            'inLanguage' => 'id-ID',
         ];
 
         if ($description = $this->seoAutoDescription()) {
@@ -235,12 +234,34 @@ trait HasSeoMeta
             if (filled($this->sku ?? null)) {
                 $schema['sku'] = $this->sku;
             }
+
+            if (filled($this->category?->nama ?? null)) {
+                $schema['category'] = $this->category->nama;
+            }
+
             $schema['brand'] = [
                 '@type' => 'Brand',
-                'name' => config('app.name', 'Thorxup'),
+                'name' => app(SeoService::class)->siteName(),
             ];
         } elseif ($this instanceof News) {
             $schema['headline'] = $this->seoAutoTitle();
+            $schema['articleSection'] = 'News';
+            $schema['author'] = [
+                '@type' => 'Person',
+                'name' => $this->author?->name ?? app(SeoService::class)->siteName(),
+            ];
+            $schema['publisher'] = [
+                '@type' => 'Organization',
+                'name' => app(SeoService::class)->siteName(),
+            ];
+
+            if ($url = $this->seoAutoCanonicalUrl()) {
+                $schema['mainEntityOfPage'] = [
+                    '@type' => 'WebPage',
+                    '@id' => $url,
+                ];
+            }
+
             if ($this->published_at) {
                 $schema['datePublished'] = $this->published_at->toIso8601String();
             }
@@ -259,58 +280,44 @@ trait HasSeoMeta
     public function applySeo(): void
     {
         $seo = $this->seoMeta;
+        $auto = $this->automaticSeoMetaPayload();
+        $isManual = (bool) ($seo?->is_manual ?? false);
 
-        $title = $seo?->title ?? $this->seoAutoTitle();
-        $description = $seo?->deskripsi ?? $this->seoAutoDescription();
-        $canonical = $seo?->canonical_url ?? $this->seoAutoCanonicalUrl();
-        $robots = $seo?->robots ?? $this->seoAutoRobots();
-        $ogPath = $seo?->og_image ?? $this->seoAutoOgImage();
-        $ogImage = $ogPath
-            ? (Str::startsWith($ogPath, ['http://', 'https://']) ? $ogPath : asset('storage/'.ltrim($ogPath, '/')))
-            : null;
+        $schema = ! $isManual || ! is_array($seo->schema_json)
+            ? $auto['schema_json']
+            : $seo->schema_json;
 
-        SEOTools::setTitle($title, false);
-        if ($description) {
-            SEOTools::setDescription($description);
-        }
-        if ($canonical) {
-            SEOTools::setCanonical($canonical);
-        }
-        SEOMetaFacade::setRobots($robots);
+        $ogType = match (true) {
+            $this instanceof Product => 'product',
+            $this instanceof News => 'article',
+            $this instanceof Profile => 'profile',
+            default => 'website',
+        };
 
-        if (filled($seo?->keyword)) {
-            SEOMetaFacade::setKeywords(array_map('trim', explode(',', $seo->keyword)));
-        }
+        app(SeoService::class)->apply([
+            'title' => (string) ($isManual ? ($seo->title ?: $auto['title']) : $auto['title']),
+            'append_brand' => true,
+            'description' => $isManual ? ($seo->deskripsi ?: $auto['deskripsi']) : $auto['deskripsi'],
+            'canonical' => $isManual ? ($seo->canonical_url ?: $auto['canonical_url']) : $auto['canonical_url'],
+            'robots' => $isManual ? ($seo->robots ?: $auto['robots']) : $auto['robots'],
+            'image' => $isManual ? ($seo->og_image ?: $auto['og_image']) : $auto['og_image'],
+            'keywords' => $isManual ? ($seo->keyword ?: $auto['keyword']) : $auto['keyword'],
+            'og_type' => $ogType,
+            'schema' => is_array($schema) ? $schema : null,
+            'schema_type' => match (true) {
+                $this instanceof Product => 'Product',
+                $this instanceof News => 'NewsArticle',
+                default => 'WebPage',
+            },
+        ]);
 
-        if ($canonical) {
-            OpenGraph::setUrl($canonical);
-        }
-        OpenGraph::setTitle($title);
-        if ($description) {
-            OpenGraph::setDescription($description);
-        }
-        if ($ogImage) {
-            OpenGraph::addImage($ogImage);
-        }
-
-        SEOTools::twitter()->setTitle($title);
-        if ($description) {
-            SEOTools::twitter()->setDescription($description);
-        }
-        if ($ogImage) {
-            SEOTools::twitter()->setImage($ogImage);
-        }
-
-        $schema = $seo?->schema_json ?? $this->seoAutoSchema();
-        if (is_array($schema) && ! empty($schema)) {
-            if (isset($schema['@type'])) {
-                JsonLd::setType($schema['@type']);
-            }
-            foreach ($schema as $key => $value) {
-                if (! in_array($key, ['@context', '@type']) && ! is_null($value)) {
-                    JsonLd::addValue($key, $value);
-                }
-            }
+        if ($this instanceof News) {
+            OpenGraph::setArticle(array_filter([
+                'published_time' => $this->published_at?->toIso8601String(),
+                'modified_time' => $this->updated_at?->toIso8601String(),
+                'author' => $this->author?->name ?? app(SeoService::class)->siteName(),
+                'section' => 'News',
+            ]));
         }
     }
 }

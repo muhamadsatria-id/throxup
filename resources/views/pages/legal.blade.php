@@ -2,9 +2,8 @@
 
 @section('content')
 <section class="relative overflow-hidden bg-[#EBF2FE] py-16 md:py-24">
-    <img src="{{ asset('images/elemen.png') }}"
-         alt=""
-         class="pointer-events-none absolute bottom-0 right-0 w-44 opacity-80 md:w-64">
+    <div aria-hidden="true"
+         class="pointer-events-none absolute bottom-0 right-0 w-44 h-44 opacity-80 md:w-64 md:h-64 bg-[radial-gradient(circle_at_70%_30%,rgba(187,195,255,0.55),transparent_62%)]"></div>
 
     <div class="relative z-10 mx-auto max-w-[1360px] px-margin-mobile text-center lg:px-margin">
         <x-breadcrumb-navigation align="center" class="mb-3" :items="[['label' => $page->judul]]" />

@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\SeoService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, SeoService $seo)
     {
         $categorySlug = trim((string) $request->query('category', ''));
         $search = trim((string) $request->query('q', ''));
@@ -23,9 +24,48 @@ class ProductController extends Controller
             ))
             ->when($search !== '', fn ($query) => $query->where('nama', 'like', '%'.$search.'%'))
             ->latest()
-            ->paginate(12);
+            ->paginate(12)
+            ->withQueryString();
 
         $categories = Category::query()->orderBy('nama')->get();
+        $activeCategory = $categories->firstWhere('slug', $categorySlug);
+
+        $baseUrl = route('product', $activeCategory ? ['category' => $activeCategory->slug] : []);
+        $canonical = $search !== ''
+            ? $baseUrl
+            : $request->fullUrlWithoutQuery(['q']);
+
+        $pageTitle = match (true) {
+            $search !== '' => 'Hasil pencarian "'.$search.'"',
+            $activeCategory !== null => $activeCategory->nama.' — Katalog Produk',
+            default => 'Katalog Produk & Suku Cadang Alat Berat',
+        };
+
+        $description = match (true) {
+            $search !== '' => 'Hasil pencarian produk THORXup untuk "'.$search.'". Temukan suku cadang, sistem hidrolik, dan komponen alat berat yang sesuai.',
+            $activeCategory !== null => $activeCategory->deskripsi
+                ?: 'Katalog '.$activeCategory->nama.' pilihan THORXup untuk kebutuhan pertambangan, manufaktur, dan perawatan mesin industri.',
+            default => 'Jelajahi katalog suku cadang OEM, sistem hidrolik, powertrain, dan ground engaging tools THORXup untuk operasi pertambangan dan manufaktur.',
+        };
+
+        $seo->apply([
+            'title' => $pageTitle,
+            'description' => $description,
+            'canonical' => $canonical,
+            'robots' => $search !== '' ? 'noindex, follow' : 'index, follow',
+            'image' => $products->first()?->imageUrl(),
+            'og_type' => 'website',
+            'schema' => $seo->itemListSchema(
+                $activeCategory?->nama ?? 'Katalog Produk THORXup',
+                $products->getCollection()
+                    ->map(fn (Product $product) => [
+                        'name' => $product->nama,
+                        'url' => route('detail-product', $product->slug),
+                    ])
+                    ->all(),
+                $canonical,
+            ),
+        ]);
 
         return view('pages.product', [
             'products' => $products,
@@ -35,7 +75,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function show(string $slug)
+    public function show(string $slug, SeoService $seo)
     {
         $product = Product::query()
             ->where('slug', $slug)

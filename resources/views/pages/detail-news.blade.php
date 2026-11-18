@@ -69,7 +69,8 @@
                     <div
                         class="relative w-full aspect-[16/9] rounded-DEFAULT overflow-hidden bg-surface-container shadow-md">
                         <img class="w-full h-full object-cover"
-                            data-alt="High precision industrial hydraulic test bench featuring electro-proportional variable displacement pumps, manifold blocks, steel braided high pressure hoses rated for 3900 PSI, digital pressure transducers, and electric motor coupling inside an engineering assembly shop with warm technical overhead lighting."
+                            alt="{{ $news->judul }}"
+                            loading="eager" fetchpriority="high" decoding="async"
                             src="{{ $news->thumbnail ? asset('storage/' . $news->thumbnail) : '' }}">
 
                     </div>
@@ -86,7 +87,8 @@
                         <div
                             class="relative w-full aspect-[16/9] rounded-DEFAULT overflow-hidden bg-surface-container shadow-md">
                             <img class="w-full h-full object-cover"
-                                data-alt="Heavy industrial turbo-diesel engine with exposed helical gear powertrain assembly, heavy flywheel, transmission casing, and precision machined gear teeth in an engineering manufacturing plant with an engineer working in the background."
+                                alt="Turbo-diesel engine dan powertrain alat berat di fasilitas manufaktur"
+                                loading="lazy" decoding="async"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgPUWAbeTFpRE4aBdHF19eSzwgY9FlkCXEN_Ls_8gzQO3gxxNl4a-V_xAPjOIKchIFFRJeQQ-rftXKXSQjzfadSQQMBFmFyeiS3BvuHcb8Hq6SKLQ73BYzT1tp0OITOmLcfAfdTFLU3oJ9Xiiih_-aB59SeDR_fZlwotHTREd7cSpqbHlyrxamOzVxmxzVR9Qb-0AqVAgSwIcxMVhS5ass45qQ3xx_445jEFF5uPGA">
 
                         </div>
@@ -358,7 +360,7 @@
                 <a class="group relative aspect-[4/3] rounded-DEFAULT overflow-hidden shadow-md flex flex-col justify-end p-space-md md:p-space-lg transition-transform duration-300 hover:-translate-y-1 {{ $loop->index >= 3 ? 'md:hidden' : '' }}"
                     href="{{ route('detail-news', $related->slug) }}">
                     @if ($related->thumbnail)
-                        <img alt="{{ $related->judul }}"
+                        <img alt="{{ $related->judul }}" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             src="{{ asset('storage/' . $related->thumbnail) }}">
                     @endif

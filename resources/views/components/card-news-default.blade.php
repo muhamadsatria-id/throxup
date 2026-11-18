@@ -15,7 +15,7 @@
     <div
         class="md:w-5/12 relative overflow-hidden bg-surface-container-high shrink-0 aspect-[16/9]">
         @if ($image)
-            <img alt="{{ $title }}"
+            <img alt="{{ $title }}" loading="lazy" decoding="async"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 src="{{ $image }}" />
         @endif

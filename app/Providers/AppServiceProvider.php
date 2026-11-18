@@ -3,10 +3,17 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\HeroCarousel;
 use App\Models\ModalBanner;
+use App\Models\News;
+use App\Models\Page;
 use App\Models\Platform;
+use App\Models\Product;
 use App\Models\Profile;
 use App\Models\Setting;
+use App\Services\SeoService;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -60,6 +67,15 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
+        // Halaman 404 tidak boleh diindeks, termasuk saat slug tidak ditemukan lewat route /{page:slug}.
+        // Laravel me-render error lewat namespace "errors::404", sedangkan fallback memakai "errors.404".
+        $noindex404 = function () {
+            SEOTools::setTitle('Halaman Tidak Ditemukan', false);
+            SEOMeta::setRobots('noindex, nofollow');
+        };
+
+        View::composer(['errors.404', 'errors::404', 'errors::4xx'], $noindex404);
+
         // Otomatis hapus cache setiap kali admin mengubah data di Filament
         Profile::saved(fn () => Cache::forget('site_profile'));
         Platform::saved(fn () => Cache::forget('site_platform'));
@@ -70,5 +86,19 @@ class AppServiceProvider extends ServiceProvider
         Category::deleted(fn () => Cache::forget('menu_categories'));
         ModalBanner::saved(fn () => Cache::forget('active_modal_banner'));
         ModalBanner::deleted(fn () => Cache::forget('active_modal_banner'));
+
+        // SEO memakai gambar hero/logo sebagai OG image default.
+        HeroCarousel::saved(fn () => Cache::forget('seo_default_image'));
+        HeroCarousel::deleted(fn () => Cache::forget('seo_default_image'));
+
+        // Sitemap ikut berubah saat konten publik berubah.
+        Product::saved(fn () => SeoService::flushSitemap());
+        Product::deleted(fn () => SeoService::flushSitemap());
+        News::saved(fn () => SeoService::flushSitemap());
+        News::deleted(fn () => SeoService::flushSitemap());
+        Page::saved(fn () => SeoService::flushSitemap());
+        Page::deleted(fn () => SeoService::flushSitemap());
+        Category::saved(fn () => SeoService::flushSitemap());
+        Category::deleted(fn () => SeoService::flushSitemap());
     }
 }
