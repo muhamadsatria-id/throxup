@@ -1,12 +1,124 @@
 @extends('layouts.app')
 @section('content')
+
+@if (isset($activeModals) && $activeModals->isNotEmpty())
+    <div id="home-modal-banner"
+        class="fixed inset-0 z-[90] flex items-center justify-center px-4 py-8"
+        role="dialog"
+        aria-modal="true"
+        aria-label="{{ $activeModals->first()->title ?: 'Pengumuman' }}">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-modal-backdrop></div>
+
+        <div class="relative z-10 w-full max-w-2xl">
+            <button type="button"
+                class="fixed right-4 top-4 z-[100] flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-800 shadow-lg transition hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-white/40"
+                data-modal-close
+                aria-label="Tutup banner">
+                <span class="material-symbols-outlined text-[22px]" aria-hidden="true">close</span>
+            </button>
+
+            @foreach ($activeModals as $index => $modal)
+                <div data-modal-slide="{{ $index }}"
+                    class="relative rounded-lg bg-white p-2 shadow-2xl {{ $index === 0 ? '' : 'hidden' }}">
+                    @if ($modal->link_url)
+                        <a href="{{ $modal->link_url }}"
+                            class="block overflow-hidden rounded-md"
+                            aria-label="{{ $modal->title ?: 'Lihat detail banner' }}">
+                            <img src="{{ asset('storage/' . $modal->image) }}"
+                                alt="{{ $modal->title ?: 'Banner pengumuman' }}"
+                                class="block max-h-[70vh] w-full object-contain">
+                        </a>
+                    @else
+                        <img src="{{ asset('storage/' . $modal->image) }}"
+                            alt="{{ $modal->title ?: 'Banner pengumuman' }}"
+                            class="block max-h-[70vh] w-full rounded-md object-contain">
+                    @endif
+                </div>
+            @endforeach
+
+            @if ($activeModals->count() > 1)
+                <button type="button"
+                    class="fixed bottom-4 left-[calc(50%-48px)] z-[100] flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-800 shadow-xl transition hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-white/40 sm:absolute sm:bottom-auto sm:left-[-64px] sm:top-1/2 sm:translate-x-0 sm:-translate-y-1/2"
+                    data-modal-prev
+                    aria-label="Banner sebelumnya">
+                    <span class="material-symbols-outlined text-[28px]" aria-hidden="true">chevron_left</span>
+                </button>
+                <button type="button"
+                    class="fixed bottom-4 left-[calc(50%+4px)] z-[100] flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-800 shadow-xl transition hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-white/40 sm:absolute sm:bottom-auto sm:left-auto sm:right-[-64px] sm:top-1/2 sm:translate-x-0 sm:-translate-y-1/2"
+                    data-modal-next
+                    aria-label="Banner berikutnya">
+                    <span class="material-symbols-outlined text-[28px]" aria-hidden="true">chevron_right</span>
+                </button>
+            @endif
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('home-modal-banner');
+            if (!modal) return;
+
+            document.body.classList.add('overflow-hidden');
+
+            const closeModal = function () {
+                modal.remove();
+                document.body.classList.remove('overflow-hidden');
+            };
+
+            modal.querySelectorAll('[data-modal-close]').forEach(function (closeButton) {
+                closeButton.addEventListener('click', closeModal);
+            });
+            modal.querySelector('[data-modal-backdrop]').addEventListener('click', closeModal);
+
+            const slides = Array.from(modal.querySelectorAll('[data-modal-slide]'));
+            let currentSlide = 0;
+
+            const showSlide = function (index) {
+                currentSlide = (index + slides.length) % slides.length;
+                slides.forEach(function (slide, slideIndex) {
+                    slide.classList.toggle('hidden', slideIndex !== currentSlide);
+                });
+            };
+
+            const previousButton = modal.querySelector('[data-modal-prev]');
+            const nextButton = modal.querySelector('[data-modal-next]');
+
+            if (previousButton) {
+                previousButton.addEventListener('click', function () {
+                    showSlide(currentSlide - 1);
+                });
+            }
+
+            if (nextButton) {
+                nextButton.addEventListener('click', function () {
+                    showSlide(currentSlide + 1);
+                });
+            }
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && document.getElementById('home-modal-banner')) {
+                    closeModal();
+                }
+
+                if (slides.length > 1 && event.key === 'ArrowLeft') {
+                    showSlide(currentSlide - 1);
+                }
+
+                if (slides.length > 1 && event.key === 'ArrowRight') {
+                    showSlide(currentSlide + 1);
+                }
+            });
+        });
+    </script>
+@endif
+
 <section
-    class="relative w-full -mt-20 overflow-hidden bg-primary text-on-primary min-h-[85vh] lg:min-h-[90vh] flex items-center select-none cursor-grab active:cursor-grabbing"
+    class="relative w-full -mt-20 overflow-hidden bg-primary text-on-primary  flex items-center select-none cursor-grab active:cursor-grabbing"
     id="heroCarousel">
     <div class="relative w-full h-full min-h-svh lg:min-h-svh flex transition-transform duration-700 ease-out"
         id="carouselTrack">
         @forelse ($heroCarousels as $hero)
-            <div class="w-full flex-shrink-0 relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center">
+            <div class="w-full flex-shrink-0 relative flex flex-col justify-center">
                 <div class="absolute inset-0 z-0">
                     <img alt="{{ $hero->judul }}"
                         class="w-full h-full object-cover object-center transform scale-105"
@@ -17,7 +129,7 @@
                     <div class="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/55 to-primary/45"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-primary/30"></div>
                 </div>
-                <div class="relative z-10 max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-36 pb-space-2xl w-full flex flex-col justify-center">
+                <div class="relative z-10 max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-18 pb-space-2xl w-full flex flex-col justify-center">
                     <div class="max-w-3xl my-auto py-space-xl text-center mx-auto">
                         <h1 class="font-display-hero text-display-hero-mobile md:text-display-hero text-on-primary tracking-tight font-extrabold leading-tight">
                             {{ $hero->judul }}
@@ -46,12 +158,12 @@
     </div>
     @if ($heroCarousels->count() > 1)
         <button aria-label="Previous Slide"
-            class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/25 active:scale-95 text-on-primary backdrop-blur-md border border-white/25 shadow-xl transition-all flex items-center justify-center group"
+            class="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/25 active:scale-95 text-on-primary backdrop-blur-md border border-white/25 shadow-xl transition-all items-center justify-center group"
             id="carouselPrevBtn">
             <span class="material-symbols-outlined text-[28px] group-hover:-translate-x-0.5 transition-transform">chevron_left</span>
         </button>
         <button aria-label="Next Slide"
-            class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/25 active:scale-95 text-on-primary backdrop-blur-md border border-white/25 shadow-xl transition-all flex items-center justify-center group"
+            class="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/25 active:scale-95 text-on-primary backdrop-blur-md border border-white/25 shadow-xl transition-all items-center justify-center group"
             id="carouselNextBtn">
             <span class="material-symbols-outlined text-[28px] group-hover:translate-x-0.5 transition-transform">chevron_right</span>
         </button>

@@ -1,3 +1,9 @@
+@php
+    $profileName = trim((string) data_get($profile ?? null, 'nama', ''));
+    $profileName = $profileName !== '' ? $profileName : 'THORXup';
+    $profileLogo = data_get($profile ?? null, 'logo');
+@endphp
+
 <header
 
     class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-outline-variant/30 shadow-sm">
@@ -6,13 +12,24 @@
 
         class="h-20 w-full max-w-[1360px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between">
 
-        <div class="flex items-center"><a
-
-                class="flex items-baseline tracking-tight font-headline-md text-headline-md text-primary"
-
-                data-path="home" href="{{ route('home') }}"><span class="font-extrabold">THORX</span><span
-
-                    class="text-label-md font-label-md uppercase tracking-wider text-secondary -translate-y-2 ml-0.5">up</span></a>
+        <div class="flex items-center">
+            <a class="flex items-center tracking-tight text-primary"
+                data-path="home" href="{{ route('home') }}">
+                @if ($profileLogo)
+                    <img src="{{ asset('storage/' . ltrim((string) $profileLogo, '/')) }}"
+                        alt="{{ $profileName }}"
+                        class="h-12 max-w-44 object-contain">
+                @else
+                    @if (str_ends_with(strtolower($profileName), 'up'))
+                        <span class="font-headline-md text-headline-md flex items-baseline">
+                            <span class="font-extrabold">{{ substr($profileName, 0, -2) }}</span>
+                            <span class="text-label-md font-label-md uppercase tracking-wider text-secondary -translate-y-2 ml-0.5">{{ substr($profileName, -2) }}</span>
+                        </span>
+                    @else
+                        <span class="font-headline-md text-headline-md font-extrabold">{{ $profileName }}</span>
+                    @endif
+                @endif
+            </a>
 
         </div>
 
@@ -126,21 +143,21 @@
 
         <a href="{{ route('home') }}"
 
-            class="font-label-lg font-bold text-lg transition-colors {{ request()->routeIs('home') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary' }}">Home</a>
+            class="font-label-lg font-bold text-3xl transition-colors {{ request()->routeIs('home') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary' }}">Home</a>
 
         <a href="{{ route('about') }}"
 
-            class="font-label-lg font-bold text-lg transition-colors {{ request()->routeIs('about') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary' }}">About us</a>
+            class="font-label-lg font-bold text-3xl transition-colors {{ request()->routeIs('about') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary' }}">About us</a>
 
         <a href="{{ route('news') }}"
 
-            class="font-label-lg font-bold text-lg transition-colors {{ request()->routeIs('news') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary' }}">News</a>
+            class="font-label-lg font-bold text-3xl transition-colors {{ request()->routeIs('news') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary' }}">News</a>
 
         <div class="w-full max-w-xs">
 
             <button id="mobile-products-toggle" type="button"
 
-                class="w-full flex items-center font-bold justify-center gap-space-xs font-label-lg text-lg transition-colors {{ request()->routeIs('product', 'detail-product') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary' }}">
+                class="w-full flex items-center font-bold justify-center gap-space-xs font-label-lg text-3xl transition-colors {{ request()->routeIs('product', 'detail-product') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary' }}">
 
                 <span>Products</span>
 
@@ -168,7 +185,7 @@
 
         <a href="{{ route('home') }}#contact"
 
-            class="font-label-lg font-bold text-lg transition-colors text-on-surface-variant hover:text-primary">Contact</a>
+            class="font-label-lg font-bold text-3xl transition-colors text-on-surface-variant hover:text-primary">Contact</a>
 
     </div>
 

@@ -27,6 +27,17 @@ class SeoMetaResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+        protected static bool $shouldRegisterNavigation = false;
+
+    public static function canViewAny(): bool
+    {
+        if (request()->routeIs(static::getRouteBaseName() . '.*')) {
+            abort(404);
+        }
+
+        return false;
+    }
+    
     public static function form(Schema $schema): Schema
     {
         return SeoMetaForm::configure($schema);

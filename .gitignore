@@ -1,5 +1,9 @@
 *.log
 .DS_Store
+AGENTS.md
+CLAUDE.md
+CLOUDE.md
+opencode.json
 .env
 .env.backup
 .env.production

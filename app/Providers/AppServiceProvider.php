@@ -29,43 +29,42 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        if (! app()->runningInConsole()) {
-            View::composer('*', function ($view) {
-                $profileData = Schema::hasTable('profiles')
-                    ? Cache::rememberForever('site_profile', fn () => Profile::first()?->toArray())
-                    : null;
+        View::composer('*', function ($view) {
+            $profileData = Schema::hasTable('profiles')
+                ? Cache::rememberForever('site_profile', fn () => Profile::first()?->toArray())
+                : null;
 
-                $platformData = Schema::hasTable('platforms')
-                    ? Cache::rememberForever('site_platform', fn () => Platform::first()?->toArray())
-                    : null;
+            $platformData = Schema::hasTable('platforms')
+                ? Cache::rememberForever('site_platform', fn () => Platform::first()?->toArray())
+                : null;
 
-                $settingData = Schema::hasTable('settings')
-                    ? Cache::rememberForever('site_setting', fn () => Setting::first()?->toArray())
-                    : null;
+            $settingData = Schema::hasTable('settings')
+                ? Cache::rememberForever('site_setting', fn () => Setting::first()?->toArray())
+                : null;
 
-                $navCategories = Schema::hasTable('categories')
-                    ? Cache::rememberForever('nav_categories', fn () => Category::select('id', 'nama', 'slug')->get()->toArray())
-                    : [];
+            $navCategories = Schema::hasTable('categories')
+                ? Cache::rememberForever('nav_categories', fn () => Category::select('id', 'nama', 'slug')->get()->toArray())
+                : [];
 
-                // Menu Products di header & footer hanya menampilkan maksimal 7 kategori.
-                $menuCategories = Schema::hasTable('categories')
-                    ? Cache::rememberForever('menu_categories', fn () => Category::menuList()->toArray())
-                    : [];
+            // Menu Products di header & footer hanya menampilkan maksimal 7 kategori.
+            $menuCategories = Schema::hasTable('categories')
+                ? Cache::rememberForever('menu_categories', fn () => Category::menuList()->toArray())
+                : [];
 
-                $modalData = Schema::hasTable('modal_banners')
-                    ? Cache::rememberForever('active_modal_banner', fn () => ModalBanner::where('is_active', true)->latest()->first()?->toArray())
-                    : null;
+            $modalData = Schema::hasTable('modal_banners')
+                ? Cache::rememberForever('active_modal_banners', fn () => ModalBanner::where('is_active', true)->latest()->get()->map(fn (ModalBanner $modal) => $modal->toArray())->all())
+                : [];
 
-                $view->with([
-                    'profile' => $profileData ? new Fluent($profileData) : null,
-                    'platform' => $platformData ? new Fluent($platformData) : null,
-                    'siteSetting' => $settingData ? new Fluent($settingData) : null,
-                    'navCategories' => $navCategories,
-                    'menuCategories' => $menuCategories,
-                    'activeModal' => $modalData ? new Fluent($modalData) : null,
-                ]);
-            });
-        }
+            $view->with([
+                'profile' => $profileData ? new Fluent($profileData) : null,
+                'platform' => $platformData ? new Fluent($platformData) : null,
+                'siteSetting' => $settingData ? new Fluent($settingData) : null,
+                'navCategories' => $navCategories,
+                'menuCategories' => $menuCategories,
+                'activeModals' => collect($modalData)->map(fn (array $modal) => new Fluent($modal)),
+                'activeModal' => $modalData ? new Fluent($modalData[0]) : null,
+            ]);
+        });
 
         // Halaman 404 tidak boleh diindeks, termasuk saat slug tidak ditemukan lewat route /{page:slug}.
         // Laravel me-render error lewat namespace "errors::404", sedangkan fallback memakai "errors.404".
@@ -84,8 +83,14 @@ class AppServiceProvider extends ServiceProvider
         Category::saved(fn () => Cache::forget('menu_categories'));
         Category::deleted(fn () => Cache::forget('nav_categories'));
         Category::deleted(fn () => Cache::forget('menu_categories'));
-        ModalBanner::saved(fn () => Cache::forget('active_modal_banner'));
-        ModalBanner::deleted(fn () => Cache::forget('active_modal_banner'));
+        ModalBanner::saved(function () {
+            Cache::forget('active_modal_banners');
+            Cache::forget('active_modal_banner');
+        });
+        ModalBanner::deleted(function () {
+            Cache::forget('active_modal_banners');
+            Cache::forget('active_modal_banner');
+        });
 
         // SEO memakai gambar hero/logo sebagai OG image default.
         HeroCarousel::saved(fn () => Cache::forget('seo_default_image'));

@@ -28,6 +28,18 @@ class PageResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'judul';
 
+    protected static bool $shouldRegisterNavigation = false;
+
+    // Lempar ke 404 HANYA jika user mengakses URL milik resource Pages
+    public static function canViewAny(): bool
+    {
+        if (request()->routeIs('filament.*.resources.pages.*')) {
+            abort(404);
+        }
+
+        return false;
+    }
+    
     public static function form(Schema $schema): Schema
     {
         return PageForm::configure($schema);

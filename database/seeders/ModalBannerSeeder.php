@@ -2,16 +2,21 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ModalBanner;
+use App\Support\DummyImage;
 use Illuminate\Database\Seeder;
 
 class ModalBannerSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        ModalBanner::firstOrCreate(
+            ['title' => 'Promo Service Kit Perdana'],
+            [
+                'image' => DummyImage::make('modal-banners', 'service-kit', 'Service Kit Perdana', 1000, 700),
+                'link_url' => '/product',
+                'is_active' => true,
+            ],
+        );
     }
 }

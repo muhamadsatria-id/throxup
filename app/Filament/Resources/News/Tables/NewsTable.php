@@ -19,7 +19,9 @@ class NewsTable
             ->columns([
                 TextColumn::make('judul')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->limit(50)
+                    ->tooltip(fn (TextColumn $column): ?string => strlen($column->getState()) > $column->getCharacterLimit() ? $column->getState() : null),
                 TextColumn::make('slug')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),

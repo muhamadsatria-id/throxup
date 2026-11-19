@@ -22,7 +22,7 @@ class HomeController extends Controller
             ->where('is_active', true)
             ->with('category')
             ->latest()
-            ->take(6)
+            ->take(8)
             ->get();
 
         $news = News::query()

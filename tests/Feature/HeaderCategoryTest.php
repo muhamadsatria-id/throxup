@@ -22,3 +22,42 @@ test('header product menu shows at most seven categories plus all products link'
         ->not->toContain(route('product', ['category' => 'category-8']))
         ->not->toContain('Category 9');
 });
+
+test('header displays configured profile logo and fallback text', function () {
+    \App\Models\Profile::create([
+        'nama' => 'THORXup',
+        'deskripsi' => 'Profil',
+        'vision' => 'Visi',
+        'mission' => [],
+        'email' => 'hello@example.com',
+        'phone' => '-',
+        'whatsapp' => '-',
+        'logo' => 'profiles/test-logo.png',
+    ]);
+
+    Cache::forget('site_profile');
+
+    $html = view('components.header', [
+        'profile' => new \Illuminate\Support\Fluent(
+            \App\Models\Profile::first()->toArray()
+        ),
+        'menuCategories' => [],
+    ])->render();
+
+    expect($html)
+        ->toContain(asset('storage/profiles/test-logo.png'))
+        ->toContain('alt="THORXup"');
+
+    \App\Models\Profile::first()->update(['logo' => null]);
+
+    $html = view('components.header', [
+        'profile' => new \Illuminate\Support\Fluent(
+            \App\Models\Profile::first()->fresh()->toArray()
+        ),
+        'menuCategories' => [],
+    ])->render();
+
+    expect($html)
+        ->toContain('THORX')
+        ->toContain('up');
+});
