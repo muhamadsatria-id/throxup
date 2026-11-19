@@ -64,9 +64,17 @@ it('shows modal carousel buttons for multiple active banners', function () {
 });
 
 it('uses Indonesian metadata and a single h1 on the home page', function () {
-    Cache::forget('home_hero_carousels');
-    Cache::forget('home_featured_products');
-    Cache::forget('home_latest_news');
+    \App\Models\HeroCarousel::create([
+        'judul' => 'Komponen Alat Berat Siap Pakai',
+        'deskripsi' => 'Suku cadang dan sistem hidrolik untuk alat berat.',
+        'image' => 'hero/test.jpg',
+        'is_active' => true,
+        'order' => 1,
+    ]);
+
+    Cache::forget('home_hero_carousels_v2');
+    Cache::forget('home_featured_products_v2');
+    Cache::forget('home_latest_news_v2');
 
     $this->get('/')
         ->assertOk()

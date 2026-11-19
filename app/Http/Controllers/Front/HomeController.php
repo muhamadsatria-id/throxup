@@ -14,25 +14,39 @@ class HomeController extends Controller
 {
     public function index(SeoService $seo)
     {
-        $heroCarousels = Cache::remember('home_hero_carousels', 300, fn () => HeroCarousel::query()
+        $heroData = Cache::remember('home_hero_carousels_v2', 300, fn () => HeroCarousel::query()
             ->where('is_active', true)
             ->orderBy('order')
-            ->get());
+            ->get()
+            ->toArray());
+        $heroCarousels = HeroCarousel::hydrate($heroData);
 
-        $products = Cache::remember('home_featured_products', 300, fn () => Product::query()
+        $productData = Cache::remember('home_featured_products_v2', 300, fn () => Product::query()
             ->where('is_active', true)
             ->with('category')
             ->latest()
             ->take(8)
-            ->get());
+            ->get()
+            ->toArray());
+        $products = Product::hydrate($productData);
+        $products->each(function (Product $product) {
+            $category = $product->getAttribute('category');
+            $product->setRelation('category', $category ? new \Illuminate\Support\Fluent($category) : null);
+        });
 
-        $news = Cache::remember('home_latest_news', 300, fn () => News::query()
+        $newsData = Cache::remember('home_latest_news_v2', 300, fn () => News::query()
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->with('author')
             ->latest('published_at')
             ->take(6)
-            ->get());
+            ->get()
+            ->toArray());
+        $news = News::hydrate($newsData);
+        $news->each(function (News $article) {
+            $author = $article->getAttribute('author');
+            $article->setRelation('author', $author ? new \Illuminate\Support\Fluent($author) : null);
+        });
 
         $platform = Platform::query()->first();
         $hero = $heroCarousels->first();
