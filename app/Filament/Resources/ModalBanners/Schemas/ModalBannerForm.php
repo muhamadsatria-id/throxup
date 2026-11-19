@@ -20,7 +20,9 @@ class ModalBannerForm
                 FileUpload::make('image')
                     ->label('Gambar Banner')
                     ->image()
-                    ->disk('public')->directory('modal-banners')
+                    ->previewable(false)
+                    ->fetchFileInformation(false)
+                    ->disk('public')->visibility('public')->directory('modal-banners')
                     ->required()
                     ->columnSpanFull(),
                 TextInput::make('link_url')

@@ -39,7 +39,7 @@ class PageResource extends Resource
 
         return false;
     }
-    
+
     public static function form(Schema $schema): Schema
     {
         return PageForm::configure($schema);

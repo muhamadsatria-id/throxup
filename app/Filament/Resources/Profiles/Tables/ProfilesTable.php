@@ -32,9 +32,9 @@ class ProfilesTable
                     ->label('Alamat')
                     ->limit(40)
                     ->toggleable(isToggledHiddenByDefault: true),
-                ImageColumn::make('logo')->disk('public')
+                ImageColumn::make('logo')->disk('public')->visibility('public')->checkFileExistence(false)
                     ->toggleable(isToggledHiddenByDefault: true),
-                ImageColumn::make('favicon')->disk('public')
+                ImageColumn::make('favicon')->disk('public')->visibility('public')->checkFileExistence(false)
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()

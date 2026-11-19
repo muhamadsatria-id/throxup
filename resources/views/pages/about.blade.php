@@ -138,8 +138,7 @@
 
                     <p
                         class="font-headline-md text-headline-md font-bold leading-snug tracking-tight text-surface-container-lowest">
-                        “To be trusted solution for mining &amp; manufacturing operations through high
-                        performance product that enhance productivity, reliability, and sustainability.”
+                        “{{ $profile?->vision ?: 'Visi perusahaan belum diisi.' }}”
                     </p>
                 </div>
 
@@ -158,40 +157,25 @@
                 </div>
 
                 <div class="flex flex-col gap-space-md">
-                    <div
-                        class="flex items-baseline gap-space-md pb-space-sm border-b border-outline-variant/30">
-                        <span
-                            class="text-[32px] font-extrabold text-primary shrink-0 leading-none">01</span>
+                    @forelse ($profile?->mission ?? [] as $index => $mission)
+                        <div @class([
+                            'flex items-baseline gap-space-md',
+                            'pb-space-sm' => $loop->first,
+                            'py-space-sm' => ! $loop->first && ! $loop->last,
+                            'pt-space-sm' => $loop->last,
+                            'border-b border-outline-variant/30' => ! $loop->last,
+                        ])>
+                            <span
+                                class="text-[32px] font-extrabold text-primary shrink-0 leading-none">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
+                            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                                {{ $mission }}
+                            </p>
+                        </div>
+                    @empty
                         <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                            Deliver high quality and high durability products to support mining activities
-                            under
-                            demanding operational conditions.</p>
-                    </div>
-                    <div
-                        class="flex items-baseline gap-space-md py-space-sm border-b border-outline-variant/30">
-                        <span
-                            class="text-[32px] font-extrabold text-primary shrink-0 leading-none">02</span>
-                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                            Provide productivity and reliability oriented solutions to improve work
-                            effectiveness
-                            and reduce operational risk.</p>
-                    </div>
-                    <div
-                        class="flex items-baseline gap-space-md py-space-sm border-b border-outline-variant/30">
-                        <span
-                            class="text-[32px] font-extrabold text-primary shrink-0 leading-none">03</span>
-                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                            Ensure product availability and timely distribution through responsive and
-                            consistent
-                            supply chain management.</p>
-                    </div>
-                    <div class="flex items-baseline gap-space-md pt-space-sm">
-                        <span
-                            class="text-[32px] font-extrabold text-primary shrink-0 leading-none">04</span>
-                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                            Evaluation, technical support, and portfolio development aligned with the
-                            evolving needs of the mining industry.</p>
-                    </div>
+                            Misi perusahaan belum diisi.
+                        </p>
+                    @endforelse
                 </div>
             </div>
         </div>

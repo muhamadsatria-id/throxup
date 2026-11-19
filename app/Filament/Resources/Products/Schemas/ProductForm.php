@@ -49,7 +49,9 @@ class ProductForm
                 FileUpload::make('images')
                     ->image()
                     ->multiple()
-                    ->disk('public')->directory('products')
+                    ->previewable(false)
+                    ->fetchFileInformation(false)
+                    ->disk('public')->visibility('public')->directory('products')
                     ->nullable()->helperText('(opsional)')
                     ->columnSpanFull(),
                 Toggle::make('is_active')

@@ -20,6 +20,7 @@ it('shows the active modal banner on the home page', function () {
     $this->get('/')
         ->assertOk()
         ->assertSee('id="home-modal-banner"', false)
+        ->assertSee('thorxup-home-modal-banner-shown', false)
         ->assertSee('Pengumuman THORXup')
         ->assertSee($modal->link_url)
         ->assertSee(asset('storage/modal-banners/test-banner.jpg'), false);

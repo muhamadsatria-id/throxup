@@ -24,7 +24,7 @@ class HeroCarouselsTable
                     ->label('Headline')
                     ->searchable()
                     ->sortable(),
-                ImageColumn::make('image')->disk('public')
+                ImageColumn::make('image')->disk('public')->visibility('public')->checkFileExistence(false)
                     ->label('Gambar'),
                 TextColumn::make('order')
                     ->label('Urutan')

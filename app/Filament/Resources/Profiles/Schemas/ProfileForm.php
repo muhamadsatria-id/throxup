@@ -52,11 +52,15 @@ class ProfileForm
                     ->columnSpanFull(),
                 FileUpload::make('logo')
                     ->image()
-                    ->disk('public')->directory('profiles')
+                    ->previewable(false)
+                    ->fetchFileInformation(false)
+                    ->disk('public')->visibility('public')->directory('profiles')
                     ->nullable()->helperText('(opsional)'),
                 FileUpload::make('favicon')
                     ->image()
-                    ->disk('public')->directory('profiles')
+                    ->previewable(false)
+                    ->fetchFileInformation(false)
+                    ->disk('public')->visibility('public')->directory('profiles')
                     ->nullable()->helperText('(opsional)'),
             ]);
     }

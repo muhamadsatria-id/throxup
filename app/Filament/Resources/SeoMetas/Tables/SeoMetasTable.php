@@ -40,7 +40,7 @@ class SeoMetasTable
                     ->label('Canonical')
                     ->limit(40)
                     ->toggleable(isToggledHiddenByDefault: true),
-                ImageColumn::make('og_image')->disk('public')
+                ImageColumn::make('og_image')->disk('public')->visibility('public')->checkFileExistence(false)
                     ->label('OG Image')
                     ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('is_manual')

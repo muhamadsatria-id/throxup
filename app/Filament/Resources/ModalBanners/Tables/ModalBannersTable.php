@@ -21,7 +21,7 @@ class ModalBannersTable
                 TextColumn::make('title')
                     ->label('Judul / Alt Text')
                     ->searchable(),
-                ImageColumn::make('image')->disk('public')
+                ImageColumn::make('image')->disk('public')->visibility('public')->checkFileExistence(false)
                     ->label('Gambar'),
                 TextColumn::make('link_url')
                     ->label('URL Tujuan')

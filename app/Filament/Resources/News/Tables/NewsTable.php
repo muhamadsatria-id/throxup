@@ -33,7 +33,7 @@ class NewsTable
                     ->label('Dipublikasikan')
                     ->dateTime()
                     ->sortable(),
-                ImageColumn::make('thumbnail')->disk('public')
+                ImageColumn::make('thumbnail')->disk('public')->visibility('public')->checkFileExistence(false)
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()

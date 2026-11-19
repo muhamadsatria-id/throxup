@@ -3,13 +3,13 @@
 
 @if (isset($activeModals) && $activeModals->isNotEmpty())
     <div id="home-modal-banner"
-        class="fixed inset-0 z-[90] flex items-center justify-center px-4 py-8"
+        class="fixed inset-0 z-[90] hidden items-center justify-center px-4 py-8"
         role="dialog"
         aria-modal="true"
         aria-label="{{ $activeModals->first()->title ?: 'Pengumuman' }}">
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-modal-backdrop></div>
 
-        <div class="relative z-10 w-full max-w-2xl">
+        <div class="relative z-10 w-full max-w-2xl mx-auto px-0">
             <button type="button"
                 class="fixed right-4 top-4 z-[100] flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-800 shadow-lg transition hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-white/40"
                 data-modal-close
@@ -20,24 +20,34 @@
             </button>
 
             @foreach ($activeModals as $index => $modal)
+                @php
+                    $modalImagePath = public_path('storage/' . ltrim((string) $modal->image, '/'));
+                    $modalImageSize = @getimagesize($modalImagePath);
+                    $modalRatio = $modalImageSize
+                        ? ($modalImageSize[0] / max($modalImageSize[1], 1))
+                        : 1.43;
+                    $modalFrameClass = $modalRatio < 0.85
+                        ? 'w-[72vw] max-w-[420px]'
+                        : ($modalRatio > 1.15
+                            ? 'w-[calc(100vw-32px)] max-w-2xl'
+                            : 'w-[82vw] max-w-[520px]');
+                @endphp
                 <div data-modal-slide="{{ $index }}"
-                    class="relative rounded-lg bg-white p-2 shadow-2xl {{ $index === 0 ? '' : 'hidden' }}">
+                    class="relative mx-auto {{ $modalFrameClass }} rounded-lg bg-white p-2 shadow-2xl {{ $index === 0 ? '' : 'hidden' }}">
                     @if ($modal->link_url)
                         <a href="{{ $modal->link_url }}"
                             class="block overflow-hidden rounded-md"
                             aria-label="{{ $modal->title ?: 'Lihat detail banner' }}">
                             <img src="{{ asset('storage/' . $modal->image) }}"
                                 alt="{{ $modal->title ?: 'Banner pengumuman' }}"
-                                width="1000"
-                                height="700"
-                                class="block max-h-[70vh] w-full object-contain">
+                                title="{{ $modal->title ?: 'Banner pengumuman' }}"
+                                class="block h-auto max-h-[70vh] w-full rounded-md object-contain">
                         </a>
                     @else
                         <img src="{{ asset('storage/' . $modal->image) }}"
                             alt="{{ $modal->title ?: 'Banner pengumuman' }}"
-                            width="1000"
-                            height="700"
-                            class="block max-h-[70vh] w-full rounded-md object-contain">
+                            title="{{ $modal->title ?: 'Banner pengumuman' }}"
+                            class="block h-auto max-h-[70vh] w-full rounded-md object-contain">
                     @endif
                 </div>
             @endforeach
@@ -64,6 +74,27 @@
     </div>
 
     <script>
+        (function () {
+            const modal = document.getElementById('home-modal-banner');
+            if (!modal) return;
+
+            const storageKey = 'thorxup-home-modal-banner-shown';
+
+            try {
+                if (sessionStorage.getItem(storageKey) === '1') {
+                    modal.remove();
+                    return;
+                }
+
+                sessionStorage.setItem(storageKey, '1');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } catch (error) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        })();
+
         document.addEventListener('DOMContentLoaded', function () {
             const modal = document.getElementById('home-modal-banner');
             if (!modal) return;
@@ -131,6 +162,7 @@
             <div class="w-full min-w-full shrink-0 relative overflow-hidden flex flex-col justify-center">
                 <div class="absolute inset-0 z-0 overflow-hidden">
                     <img alt="{{ $hero->judul }}"
+                        title="{{ $hero->judul }}"
                         class="w-full h-full object-cover object-center"
                         loading="{{ $loop->first ? 'eager' : 'lazy' }}"
                         fetchpriority="{{ $loop->first ? 'high' : 'low' }}"
@@ -204,13 +236,92 @@
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-space-sm">
             @foreach ($heroCarousels as $index => $hero)
                 <button aria-label="Slide {{ $index + 1 }}"
-                    class="carousel-dot transition-all duration-300 {{ $index === 0 ? 'w-8 h-2.5 rounded-full bg-secondary-fixed shadow-md' : 'w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white/70' }}"
+                    class="carousel-dot h-2.5 w-2.5 rounded-full bg-white/40 transition-transform duration-300 ease-out {{ $index === 0 ? 'scale-150 bg-secondary-fixed shadow-md' : 'scale-100 hover:bg-white/70' }}"
                     data-slide-index="{{ $index }}"></button>
             @endforeach
         </div>
     @endif
 </section>
 <!-- 2. CATEGORY SECTION -->
+<section class="w-full bg-surface-low py-space-2xl border-b border-outline-variant/30" id="product-categories">
+    <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin">
+        <div class="w-16 h-1 bg-primary rounded-md mx-auto mb-space-lg"></div>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg mb-space-2xl">
+            <div class="flex flex-col gap-space-xs max-w-2xl">
+                <span class="font-label-spec text-label-spec uppercase tracking-wider text-secondary font-bold">
+                    KATEGORI PRODUK</span>
+                <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-extrabold tracking-tight">
+                    Kategori Peralatan &amp; Material Industri</h2>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-md text-left md:text-right">
+                Telusuri kategori produk yang tersedia di sistem.
+            </p>
+        </div>
+
+        @if (isset($categories) && $categories->isNotEmpty())
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-gutter lg:auto-rows-[220px]">
+                @foreach ($categories->take(7)->values() as $index => $category)
+                    @php
+                        $layout = match ($index) {
+                            0 => 'sm:col-span-2 lg:col-span-4 lg:row-span-2',
+                            1, 2, 3, 4 => 'lg:col-span-4 lg:row-span-1',
+                            5 => 'lg:col-span-7 lg:row-span-1',
+                            6 => 'lg:col-span-5 lg:row-span-1',
+                            default => 'lg:col-span-4',
+                        };
+                        $isDark = $index !== 3 && $index !== 6;
+                        $categoryImage = $category->image
+                            ? asset('storage/' . ltrim((string) $category->image, '/'))
+                            : null;
+                    @endphp
+
+                    <a href="{{ route('product.category', ['category' => $category->slug]) }}"
+                        class="{{ $layout }} group relative min-h-[220px] rounded-md overflow-hidden shadow-sm hover:shadow-xl border border-outline-variant/30 transition-all duration-300 flex flex-col justify-end p-space-lg
+                        {{ $isDark ? 'bg-inverse-surface text-white' : 'bg-primary-container text-on-primary' }}">
+                        @if ($categoryImage)
+                            <img src="{{ $categoryImage }}"
+                                alt="{{ $category->nama }}"
+                                title="{{ $category->nama }}"
+                                loading="lazy"
+                                decoding="async"
+                                width="800"
+                                height="600"
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t {{ $index === 5 ? 'from-black/90 via-black/60 to-black/20' : 'from-black/90 via-black/45 to-black/20' }}"></div>
+                        @else
+                            <div class="absolute inset-0 {{ $index === 6 ? 'bg-primary-container' : 'bg-surface-container-low' }}"></div>
+                        @endif
+
+                        <div class="relative z-10 flex items-end justify-between w-full mt-auto gap-3">
+                            <div class="max-w-[82%]">
+                                <span class="{{ $isDark ? 'text-secondary-fixed' : 'text-primary-fixed-dim' }} text-label-spec uppercase tracking-wider font-semibold">
+                                    Kategori
+                                </span>
+                                <h3 class="{{ $isDark ? 'text-white' : 'text-on-primary' }} {{ $index === 0 ? 'font-headline-lg text-headline-lg' : 'font-headline-md text-headline-md' }} font-extrabold leading-tight mt-0.5">
+                                    {{ $category->nama }}
+                                </h3>
+                                @if ($category->deskripsi)
+                                    <p class="{{ $isDark ? 'text-surface-container-highest' : 'text-on-primary-container' }} font-body-sm text-body-sm mt-1 line-clamp-2">
+                                        {{ $category->deskripsi }}
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="w-11 h-11 shrink-0 rounded-md {{ $isDark ? 'bg-white text-on-surface group-hover:bg-primary group-hover:text-on-primary' : 'bg-white text-primary group-hover:bg-secondary-fixed' }} flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-105">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        @else
+            <p class="text-center text-on-surface-variant">Belum ada kategori.</p>
+        @endif
+    </div>
+</section>
+
 <!-- 3. PRODUCTS SECTION -->
  <section class="w-full bg-surface-container-low pb-space-2xl pt-space-2xl" id="inventory-showcase">
                 <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin">
@@ -304,6 +415,7 @@
                                     @if ($article->thumbnail)
                                         <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                                             alt="{{ $article->judul }}" loading="lazy" decoding="async"
+                                            title="{{ $article->judul }}"
                                             width="800"
                                             height="450"
                                             src="{{ asset('storage/' . $article->thumbnail) }}" />
@@ -833,11 +945,11 @@
         function renderDots() {
             dots.forEach(function (dot, index) {
                 if (index === current) {
-                    dot.classList.remove('w-2.5', 'h-2.5', 'bg-white/40', 'hover:bg-white/70');
-                    dot.classList.add('w-8', 'h-2.5', 'bg-secondary-fixed', 'shadow-md');
+                    dot.classList.remove('scale-100', 'bg-white/40', 'hover:bg-white/70');
+                    dot.classList.add('scale-150', 'bg-secondary-fixed', 'shadow-md');
                 } else {
-                    dot.classList.remove('w-8', 'h-2.5', 'bg-secondary-fixed', 'shadow-md');
-                    dot.classList.add('w-2.5', 'h-2.5', 'bg-white/40', 'hover:bg-white/70');
+                    dot.classList.remove('scale-150', 'bg-secondary-fixed', 'shadow-md');
+                    dot.classList.add('scale-100', 'bg-white/40', 'hover:bg-white/70');
                 }
             });
         }

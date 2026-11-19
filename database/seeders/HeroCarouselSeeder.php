@@ -10,35 +10,31 @@ class HeroCarouselSeeder extends Seeder
 {
     public function run(): void
     {
-        foreach ([
-            [
-                'judul' => 'Komponen Alat Berat Siap Pakai',
-                'deskripsi' => 'Assembly replacement yang diuji lapangan untuk excavator, wheel loader, dan bulldozer. Stok tersedia untuk pengiriman cepat ke lokasi proyek.',
-                'button_text' => 'Lihat Katalog',
-                'button_url' => '/product',
-                'order' => 1,
-            ],
-            [
-                'judul' => 'Presisi yang Menjaga Uptime',
-                'deskripsi' => 'Setiap unit melewati pemeriksaan dimensi dan uji beban sebelum dikirim, sehingga mesin Anda kembali bekerja lebih cepat.',
-                'button_text' => 'Konsultasi Teknis',
-                'button_url' => '/#contact',
-                'order' => 2,
-            ],
-            [
-                'judul' => 'Partner Rantai Pasok Andal',
-                'deskripsi' => 'Dari unit tunggal sampai kebutuhan fleet, kami bantu mencocokkan spesifikasi, ketersediaan, dan estimasi pengiriman.',
-                'button_text' => 'Baca Artikel',
-                'button_url' => '/news',
-                'order' => 3,
-            ],
-        ] as $index => $item) {
-            HeroCarousel::firstOrCreate(
+        /** @var array{categories: array<int, array<string, mixed>>} $catalogue */
+        $catalogue = require database_path('data/catalogue.php');
+
+        $slides = collect($catalogue['categories'])
+            ->take(3)
+            ->map(fn (array $category, int $index) => [
+                'judul' => $category['nama'],
+                'deskripsi' => $category['deskripsi'],
+                'button_text' => 'Lihat Produk',
+                'button_url' => '/product/category/'.$category['slug'],
+                'order' => $index + 1,
+                'image' => DummyImage::make(
+                    'hero-carousels',
+                    'hero-'.$category['slug'],
+                    $category['nama'],
+                    1600,
+                    700,
+                ),
+                'is_active' => true,
+            ]);
+
+        foreach ($slides as $item) {
+            HeroCarousel::updateOrCreate(
                 ['judul' => $item['judul']],
-                $item + [
-                    'image' => DummyImage::make('hero-carousels', 'hero-'.($index + 1), $item['judul'], 1600, 700),
-                    'is_active' => true,
-                ],
+                $item,
             );
         }
     }

@@ -10,10 +10,10 @@ class ModalBannerSeeder extends Seeder
 {
     public function run(): void
     {
-        ModalBanner::firstOrCreate(
-            ['title' => 'Promo Service Kit Perdana'],
+        ModalBanner::updateOrCreate(
+            ['title' => 'Katalog Produk Pertambangan'],
             [
-                'image' => DummyImage::make('modal-banners', 'service-kit', 'Service Kit Perdana', 1000, 700),
+                'image' => DummyImage::make('modal-banners', 'katalog', 'Katalog Produk Pertambangan', 1000, 700),
                 'link_url' => '/product',
                 'is_active' => true,
             ],

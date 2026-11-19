@@ -1,7 +1,7 @@
 @php
-    $profileName = trim((string) data_get($profile ?? null, 'nama', ''));
-    $profileName = $profileName !== '' ? $profileName : 'THORXup';
-    $profileLogo = data_get($profile ?? null, 'logo');
+$profileName = trim((string) data_get($profile ?? null, 'nama', ''));
+$profileName = $profileName !== '' ? $profileName : 'THORXup';
+$profileLogo = data_get($profile ?? null, 'logo');
 @endphp
 
 <header
@@ -16,20 +16,21 @@
             <a class="flex items-center tracking-tight text-primary"
                 data-path="home" href="{{ route('home') }}">
                 @if ($profileLogo)
-                    <img src="{{ asset('storage/' . ltrim((string) $profileLogo, '/')) }}"
-                        alt="{{ $profileName }}"
-                        width="78"
-                        height="84"
-                        class="h-[84px] w-[78px] object-contain">
+                <img src="{{ asset('storage/' . ltrim((string) $profileLogo, '/')) }}"
+                    alt="{{ $profileName }}"
+                    title="{{ $profileName }}"
+                    width="78"
+                    height="84"
+                    class="h-[84px] w-[78px] object-contain">
                 @else
-                    @if (str_ends_with(strtolower($profileName), 'up'))
-                        <span class="font-headline-md text-headline-md flex items-baseline">
-                            <span class="font-extrabold">{{ substr($profileName, 0, -2) }}</span>
-                            <span class="text-label-md font-label-md uppercase tracking-wider text-secondary -translate-y-2 ml-0.5">{{ substr($profileName, -2) }}</span>
-                        </span>
-                    @else
-                        <span class="font-headline-md text-headline-md font-extrabold">{{ $profileName }}</span>
-                    @endif
+                @if (str_ends_with(strtolower($profileName), 'up'))
+                <span class="font-headline-md text-headline-md flex items-baseline">
+                    <span class="font-extrabold">{{ substr($profileName, 0, -2) }}</span>
+                    <span class="text-label-md font-label-md uppercase tracking-wider text-secondary -translate-y-2 ml-0.5">{{ substr($profileName, -2) }}</span>
+                </span>
+                @else
+                <span class="font-headline-md text-headline-md font-extrabold">{{ $profileName }}</span>
+                @endif
                 @endif
             </a>
 

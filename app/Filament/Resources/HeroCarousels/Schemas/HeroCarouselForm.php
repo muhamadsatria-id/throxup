@@ -26,7 +26,9 @@ class HeroCarouselForm
                 FileUpload::make('image')
                     ->label('Gambar Background')
                     ->image()
-                    ->disk('public')->directory('hero-carousels')
+                    ->previewable(false)
+                    ->fetchFileInformation(false)
+                    ->disk('public')->visibility('public')->directory('hero-carousels')
                     ->required()
                     ->columnSpanFull(),
                 TextInput::make('button_text')

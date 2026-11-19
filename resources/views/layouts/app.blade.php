@@ -28,6 +28,32 @@
         };
     @endphp
     {!! SEO::generate() !!}
+    @php
+        $canonicalUrl = 'https://' . preg_replace('/^www\./i', '', (string) parse_url(url()->current(), PHP_URL_HOST))
+            . parse_url(url()->current(), PHP_URL_PATH)
+            . (parse_url(url()->current(), PHP_URL_QUERY) ? '?' . parse_url(url()->current(), PHP_URL_QUERY) : '');
+    @endphp
+    <link rel="canonical" href="{{ $canonicalUrl }}">
+    @php
+        $seoTitle = \Artesaos\SEOTools\Facades\SEOMeta::getTitle() ?: 'THORXup';
+        $seoDescription = \Artesaos\SEOTools\Facades\SEOMeta::getDescription()
+            ?: 'THORXup menghadirkan heavy machinery, hydraulic systems, powertrain, dan spare parts industri.';
+        $seoImage = request()->routeIs('home') && isset($heroCarousels) && $heroCarousels->first()?->image
+            ? asset('storage/' . $heroCarousels->first()->image)
+            : (data_get($profile ?? null, 'logo')
+                ? asset('storage/' . data_get($profile, 'logo'))
+                : asset('favicon.ico'));
+    @endphp
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ data_get($profile ?? null, 'nama', 'THORXup') }}">
+    <meta property="og:title" content="{{ $seoTitle }}">
+    <meta property="og:description" content="{{ $seoDescription }}">
+    <meta property="og:url" content="{{ $canonicalUrl }}">
+    <meta property="og:image" content="{{ $seoImage }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $seoTitle }}">
+    <meta name="twitter:description" content="{{ $seoDescription }}">
+    <meta name="twitter:image" content="{{ $seoImage }}">
     <link rel="sitemap" type="application/xml" href="{{ route('sitemap') }}">
     @if($favicon = data_get($profile ?? null, 'favicon'))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . $favicon) }}">
@@ -53,7 +79,14 @@
         <link rel="preload" as="image" href="{{ asset('storage/' . $heroCarousels->first()->image) }}" fetchpriority="high">
     @endif
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @php
+        $vite = app(\Illuminate\Foundation\Vite::class);
+        $appCssUrl = $vite->asset('resources/css/app.css');
+    @endphp
+    <link rel="preload" href="{{ $appCssUrl }}" as="style" crossorigin>
+    <link rel="stylesheet" href="{{ $appCssUrl }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ $appCssUrl }}"></noscript>
+    @vite(['resources/js/app.js'])
     @stack('head')
     @stack('styles')
 </head>

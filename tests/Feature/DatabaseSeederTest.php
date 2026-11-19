@@ -13,6 +13,7 @@ use App\Models\SeoMeta;
 use App\Models\Setting;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 test('database seeder populates public content with local placeholder images', function () {
@@ -20,18 +21,21 @@ test('database seeder populates public content with local placeholder images', f
 
     $this->seed(DatabaseSeeder::class);
 
-    expect(User::where('email', 'admin@throxup.test')->exists())->toBeTrue()
+    $admin = User::query()->where('email', 'admin@thorx.up')->firstOrFail();
+
+    expect($admin->name)->toBe('muhamad satria')
+        ->and(Hash::check('password123', $admin->password))->toBeTrue()
         ->and(Profile::count())->toBe(1)
         ->and(Platform::count())->toBe(1)
         ->and(Setting::count())->toBe(1)
-        ->and(Category::count())->toBe(8)
-        ->and(Product::count())->toBe(12)
+        ->and(Category::count())->toBe(7)
+        ->and(Product::count())->toBe(131)
         ->and(News::count())->toBe(6)
         ->and(Page::count())->toBe(4)
         ->and(HeroCarousel::count())->toBe(3)
         ->and(ModalBanner::count())->toBe(1)
         ->and(QuoteRequest::count())->toBe(3)
-        ->and(SeoMeta::count())->toBeGreaterThan(30);
+        ->and(SeoMeta::count())->toBeGreaterThan(140);
 
     $hero = HeroCarousel::query()->orderBy('order')->firstOrFail();
     $svg = Storage::disk('public')->get($hero->image);
@@ -52,7 +56,12 @@ test('database seeder populates public content with local placeholder images', f
 
     $profile = Profile::query()->firstOrFail();
     expect($profile->logo)->toStartWith('profiles/')
-        ->and(Storage::disk('public')->exists($profile->logo))->toBeTrue();
+        ->and(Storage::disk('public')->exists($profile->logo))->toBeTrue()
+        ->and($profile->vision)->toBe('To be a trusted solution for mining operations through high-performance products that enhance productivity, reliability, and sustainability.')
+        ->and($profile->mission)->toHaveCount(4)
+        ->and(str_contains($profile->deskripsi, 'Durability - Performance - Reliability - Expertise'))->toBeTrue()
+        ->and(Product::query()->where('nama', 'SCRAPER LOADER')->exists())->toBeTrue()
+        ->and(Category::query()->where('slug', 'chemical')->exists())->toBeTrue();
 
     expect(Storage::disk('public')->exists(ModalBanner::query()->firstOrFail()->image))->toBeTrue()
         ->and(Storage::disk('public')->exists(Category::query()->firstOrFail()->image))->toBeTrue();

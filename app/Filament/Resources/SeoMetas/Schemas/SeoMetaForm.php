@@ -74,7 +74,7 @@ class SeoMetaForm
                 FileUpload::make('og_image')
                     ->label('OG Image')
                     ->image()
-                    ->disk('public')->directory('seo')
+                    ->disk('public')->visibility('public')->directory('seo')
                     ->nullable()->helperText('(opsional)'),
                 KeyValue::make('schema_json')
                     ->label('Schema JSON-LD')

@@ -31,7 +31,10 @@ class NewsForm
                     ->helperText('Diisi otomatis oleh sistem.'),
                 FileUpload::make('thumbnail')
                     ->image()
-                    ->disk('public')->directory('news')
+                    ->previewable(false)
+                    ->fetchFileInformation(false)
+                    ->disk('public')->visibility('public')->directory('news')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/bmp', 'image/svg+xml'])
                     ->nullable()->helperText('(opsional)'),
                 RichEditor::make('deskripsi')
                     ->label('Isi Berita')

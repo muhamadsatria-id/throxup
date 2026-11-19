@@ -12,7 +12,7 @@ class NewsSeeder extends Seeder
 {
     public function run(): void
     {
-        $authorId = User::query()->where('email', 'admin@throxup.test')->value('id')
+        $authorId = User::query()->where('email', 'admin@thorx.up')->value('id')
             ?? User::query()->value('id');
 
         foreach ([

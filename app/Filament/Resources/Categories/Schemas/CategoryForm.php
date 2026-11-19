@@ -27,7 +27,10 @@ class CategoryForm
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image()
-                    ->disk('public')->directory('categories')
+                    ->previewable(false)
+                    ->fetchFileInformation(false)
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/bmp', 'image/svg+xml'])
+                    ->disk('public')->visibility('public')->directory('categories')
                     ->nullable()->helperText('(opsional)'),
             ]);
     }

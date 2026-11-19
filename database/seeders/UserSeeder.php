@@ -8,19 +8,19 @@ use Illuminate\Database\Seeder;
 class UserSeeder extends Seeder
 {
     /**
-     * Akun admin & editor untuk Filament dan penulis berita dummy.
+     * Akun admin sesuai permintaan dan akun editor pendukung.
      */
     public function run(): void
     {
         foreach ([
-            ['name' => 'Admin THORXup', 'email' => 'admin@throxup.test'],
-            ['name' => 'Editor THORXup', 'email' => 'editor@throxup.test'],
+            ['name' => 'muhamad satria', 'email' => 'admin@thorx.up'],
+            ['name' => 'Editor THORXup', 'email' => 'editor@thorx.up'],
         ] as $attributes) {
-            User::firstOrCreate(
+            User::updateOrCreate(
                 ['email' => $attributes['email']],
                 [
                     'name' => $attributes['name'],
-                    'password' => 'password',
+                    'password' => 'password123',
                     'email_verified_at' => now(),
                 ],
             );

@@ -25,7 +25,7 @@ class CategoriesTable
                 TextColumn::make('deskripsi')
                     ->limit(50)
                     ->toggleable(isToggledHiddenByDefault: true),
-                ImageColumn::make('image')->disk('public')
+                ImageColumn::make('image')->disk('public')->visibility('public')->checkFileExistence(false)
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()

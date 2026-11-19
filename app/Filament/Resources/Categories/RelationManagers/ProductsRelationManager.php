@@ -57,7 +57,7 @@ class ProductsRelationManager extends RelationManager
                 FileUpload::make('images')
                     ->image()
                     ->multiple()
-                    ->disk('public')->directory('products')
+                    ->disk('public')->visibility('public')->directory('products')
                     ->nullable()->helperText('(opsional)')
                     ->columnSpanFull(),
                 Toggle::make('is_active')

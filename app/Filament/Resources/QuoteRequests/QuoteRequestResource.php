@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\QuoteRequests;
 
-use App\Filament\Resources\QuoteRequests\Pages\CreateQuoteRequest;
 use App\Filament\Resources\QuoteRequests\Pages\EditQuoteRequest;
 use App\Filament\Resources\QuoteRequests\Pages\ListQuoteRequests;
 use App\Models\QuoteRequest;
@@ -165,7 +164,7 @@ class QuoteRequestResource extends Resource
                     ->label('Balas Email')
                     ->icon('heroicon-o-envelope')
                     ->color('success')
-                    ->url(fn (QuoteRequest $record): string => 'mailto:' . $record->business_email . '?subject=' . rawurlencode('Re: ' . ($record->subject ?? 'Formal Quote Request')))
+                    ->url(fn (QuoteRequest $record): string => 'mailto:'.$record->business_email.'?subject='.rawurlencode('Re: '.($record->subject ?? 'Formal Quote Request')))
                     ->openUrlInNewTab(),
 
                 EditAction::make()
