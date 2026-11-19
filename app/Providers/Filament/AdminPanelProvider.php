@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Widgets\ContentStatsWidget;
+use App\Models\Profile;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -18,6 +19,8 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -35,6 +38,21 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->favicon(function (): ?string {
+                $profile = Cache::get('site_profile');
+
+                if ($profile === null && Schema::hasTable('profiles')) {
+                    $profile = Cache::rememberForever(
+                        'site_profile',
+                        fn () => Profile::first()?->toArray(),
+                    );
+                }
+
+                $path = data_get($profile, 'favicon') ?? data_get($profile, 'logo');
+
+                // Fallback sengaja null: public/favicon.ico masih 0 byte.
+                return $path ? asset('storage/' . $path) : null;
+            })
             ->colors([
                 'primary' => $primary,
             ])

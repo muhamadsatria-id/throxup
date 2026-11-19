@@ -25,7 +25,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
 
 <!-- Breadcrumb Navigation Bar -->
 <section class="w-full bg-surface-container-low relative overflow-hidden">
-    <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-space-sm pb-space-md relative z-10">
+    <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-space-lg pb-space-md relative z-10">
         <!-- Breadcrumb Navigation -->
         <x-breadcrumb-navigation :items="$breadcrumbItems" />
     </div>
