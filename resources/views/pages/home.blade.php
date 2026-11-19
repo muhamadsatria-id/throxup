@@ -329,14 +329,13 @@
                     <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg mb-space-xl">
                         <div class="flex flex-col gap-space-xs"><span
                                 class="font-label-spec text-label-spec uppercase tracking-wider text-secondary font-bold">
-                                INVENTORY SHOWCASE</span>
+                                KATALOG PRODUK</span>
                             <h2
                                 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-extrabold tracking-tight">
-                                Latest Heavy Machinery &amp; Parts</h2>
+                                Alat Berat &amp; Suku Cadang Terbaru</h2>
                         </div>
                         <p class="font-body-md text-body-md text-on-surface-variant max-w-md text-left md:text-right">
-                            High-performance machinery and heavy-duty replacement assemblies rigorously tested for
-                            immediate field deployment.</p>
+                            Unit alat berat berperforma tinggi dan komponen pengganti standar industri (heavy-duty) yang telah teruji ketat dan siap langsung beroperasi di lapangan.</p>
                     </div>
                     <!-- 4 Showcase Product Cards Grid -->
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
@@ -361,7 +360,7 @@
                     @endif
                 </div>
             </section>
-                        <section class="w-full py-space-2xl bg-on-secondary-fixed text-on-primary relative overflow-hidden">
+            <section class="w-full py-space-2xl bg-on-secondary-fixed text-on-primary relative overflow-hidden">
                 <!-- Decorative background geometric accents -->
                 <div
                     class="absolute right-0 top-0 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl pointer-events-none">
@@ -374,12 +373,12 @@
                         <div class="w-12 h-1 bg-secondary-container rounded-full mb-space-lg"></div>
                         <blockquote
                             class="font-display-hero text-headline-lg-mobile md:text-headline-lg text-on-primary font-extrabold leading-snug tracking-tight">
-                            “Built for Unyielding Reliability. When the ground is tough and operations can’t stop,
-                            THORXup powers the machines that build the world’s infrastructure.”
+                            “Dirancang untuk Keandalan Tanpa Kompromi. Saat medan kerja begitu berat dan operasional tak
+                            boleh terhenti, THORXup menggerakkan alat berat yang membangun infrastruktur dunia.”
                         </blockquote>
                         <p class="font-body-md text-body-md text-secondary-fixed-dim mt-space-md max-w-xl">
-                            Zero tolerance for downtime. Every hydraulic line, roller assembly, and cylinder is
-                            stress-tested beyond ISO threshold benchmarks.
+                            Tanpa toleransi terhadap waktu henti (downtime). Setiap jalur hidrolik, rakitan roller, dan
+                            silinder telah melalui uji ketahanan ekstrem melampaui ambang batas standar ISO.
                         </p>
                     </div>
                     <!-- Key Performance Metrics / Stats Bar -->
@@ -393,17 +392,16 @@
                     <div class="flex items-center justify-between mb-space-2xl">
                         <div class="flex flex-col gap-space-xs">
                             <span
-                                class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">TECHNICAL
-                                DIGEST • INSIGHTS</span>
+                                class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">
+                                ARTIKEL TEKNIS</span>
                             <h2
                                 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-extrabold tracking-tight">
-                                Industry Insights &amp; Latest News
+                                Berita Terbaru Alat Berat
                             </h2>
                         </div>
                         <p
                             class="font-body-md text-body-md text-on-surface-variant max-w-md text-left md:text-right hidden sm:block">
-                            Engineering reports, field telemetry findings, and heavy equipment maintenance updates from
-                            our technical specialists.</p>
+                            Laporan rekayasa teknik, temuan data telemetri lapangan, serta panduan dan pembaruan perawatan (maintenance) alat berat langsung dari tim spesialis kami.</p>
                     </div>
                     <!-- 3 Editorial Cards Grid -->
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-gutter">
@@ -476,15 +474,14 @@
                     <!-- Section Header -->
                     <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg mb-space-2xl">
                         <div class="flex flex-col gap-space-xs max-w-2xl"><span
-                                class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">ABOUT
+                                class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">TENTANG
                                 THORXUP</span>
                             <h2
                                 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-extrabold tracking-tight">
-                                Engineering the Backbone of Industrial Productivity</h2>
+                                Suplai Suku Cadang Alat Berat untuk Produktivitas Industri</h2>
                         </div>
-                        <p class="font-body-md text-body-md text-on-surface-variant max-w-md">Headquartered in the
-                            global manufacturing corridor, THORXup provides heavy machinery engineering and rapid
-                            component supply to fleets and mine operators worldwide.</p>
+                        <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                            Berbasis di pusat koridor manufaktur global, THORXup menghadirkan layanan rekayasa alat berat dan pasokan komponen hidrolik serta spare parts cepat bagi pengelola armada dan operator pertambangan di seluruh dunia.</p>
                     </div>
                     <!-- Vision & Mission Side-by-Side Cards -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter mb-space-xl items-stretch">
@@ -618,38 +615,37 @@
                             <div>
                                 <h2
                                     class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-primary font-extrabold tracking-tight">
-                                    Get an Immediate Technical Quote</h2>
-                                <p class="font-body-md text-body-md text-on-primary-container mt-space-sm">Whether you
-                                    need replacement undercarriage parts, a bespoke hydraulic valve pack, or full
-                                    machinery procurement, our engineering group responds within 2 business hours.</p>
+                                    Dapatkan Penawaran Teknis Segera</h2>
+                                <p class="font-body-md text-body-md text-on-primary-container mt-space-sm">Baik Anda
+                                    membutuhkan suku cadang undercarriage pengganti, paket katup hidrolik kustom, maupun
+                                    pengadaan unit alat berat lengkap, tim teknis kami merespons dalam 2 jam kerja.</p>
                                 <div class="mt-space-xl flex flex-col gap-space-lg">
                                     <div class="flex items-start gap-space-md">
                                         <div class="text-secondary-fixed shrink-0 pt-0.5"><span
                                                 class="material-symbols-outlined text-[24px]" aria-hidden="true">location_on</span></div>
                                         <div>
-                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Global
-                                                Headquarters</p>
-                                            <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">4800
-                                                Industrial Parkway, Sector 9<br />Heavy Engineering Corridor, Detroit,
-                                                MI 48202</p>
+                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Kantor
+                                                Pusat Global</p>
+                                            <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">Jalan Industri Raya No. 88, Kawasan Pabrik Cibitung, <br /> Bekasi, Jawa Barat 
+                                                </p>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-space-md">
                                         <div class="text-secondary-fixed shrink-0 pt-0.5"><span
                                                 class="material-symbols-outlined text-[24px]" aria-hidden="true">call</span></div>
                                         <div>
-                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">24/7 Field
-                                                Technical Hotline</p>
+                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Hotline
+                                                Teknis Lapangan 24/7</p>
                                             <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">+1
-                                                (800) 846-7987 • Free Global Direct</p>
+                                                (800) 846-7987 • Sambungan Langsung Global Bebas Pulsa</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-space-md">
                                         <div class="text-secondary-fixed shrink-0 pt-0.5"><span
                                                 class="material-symbols-outlined text-[24px]" aria-hidden="true">mail</span></div>
                                         <div>
-                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Direct
-                                                Engineering Email</p>
+                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Email
+                                                Langsung Tim Teknik</p>
                                             <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">
                                                 rfq-desk@thorxup-machinery.com</p>
                                         </div>
@@ -658,10 +654,10 @@
                                         <div class="text-secondary-fixed shrink-0 pt-0.5"><span
                                                 class="material-symbols-outlined text-[24px]" aria-hidden="true">schedule</span></div>
                                         <div>
-                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Operating
-                                                Hours</p>
-                                            <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">Monday
-                                                – Friday: 06:00 – 20:00 EST<br />Emergency Breakdown: 24/7 Continuous
+                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Jam
+                                                Operasional</p>
+                                            <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">Senin
+                                                – Jumat: 06:00 – 20:00 EST<br />Penanganan Darurat Kerusakan: 24/7 Nonstop
                                             </p>
                                         </div>
                                     </div>
@@ -679,25 +675,25 @@
                             <form class="flex flex-col gap-space-md" id="rfq-form" method="POST" action="{{ route('quote.store') }}">
                                 @csrf
                                 <div class="flex items-center justify-between pb-space-xs">
-                                    <p class="font-headline-md text-headline-md text-on-surface font-bold">Request a
-                                        Formal Quote</p>
+                                    <p class="font-headline-md text-headline-md text-on-surface font-bold">Ajukan
+                                        Penawaran Resmi (RFQ)</p>
                                 </div>
                                 <!-- Full Name and Email -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
                                     <div class="flex flex-col gap-space-xs">
                                         <label class="font-label-sm text-label-sm text-on-surface font-semibold"
-                                            for="contact-name">Full Name *</label>
+                                            for="contact-name">Nama Lengkap *</label>
                                         <input
                                             class="w-full px-space-md py-space-sm rounded-md bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#3949ab] transition-all"
-                                            id="contact-name" name="full_name" placeholder="e.g. Johnathan Vance" required=""
+                                            id="contact-name" name="full_name" placeholder="cth. Budi Santoso" required=""
                                             type="text" />
                                     </div>
                                     <div class="flex flex-col gap-space-xs">
                                         <label class="font-label-sm text-label-sm text-on-surface font-semibold"
-                                            for="contact-email">Business Email *</label>
+                                            for="contact-email">Email Perusahaan *</label>
                                         <input
                                             class="w-full px-space-md py-space-sm rounded-md bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#3949ab] transition-all"
-                                            id="contact-email" name="business_email" placeholder="e.g. j.vance@quarryops.com" required=""
+                                            id="contact-email" name="business_email" placeholder="cth. b.santoso@perusahaan.co.id" required=""
                                             type="email" />
                                     </div>
                                 </div>
@@ -705,10 +701,10 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
                                     <div class="flex flex-col gap-space-xs">
                                         <label class="font-label-sm text-label-sm text-on-surface font-semibold"
-                                            for="contact-phone">Phone Number / Country Code</label>
+                                            for="contact-phone">Nomor Telepon / Kode Negara</label>
                                         <input
                                             class="w-full px-space-md py-space-sm rounded-md bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#3949ab] transition-all"
-                                            id="contact-phone" name="phone_number" placeholder="e.g. +1 (555) 019-2834" type="tel" />
+                                            id="contact-phone" name="phone_number" placeholder="cth. +62 812-3456-7890" type="tel" />
                                     </div>
                                     <div class="flex flex-col gap-space-xs">
                                     </div>
@@ -716,32 +712,32 @@
                                 <!-- Subject -->
                                 <div class="flex flex-col gap-space-xs">
                                     <label class="font-label-sm text-label-sm text-on-surface font-semibold"
-                                        for="contact-subject">Subject / Part Number Reference</label>
+                                        for="contact-subject">Subjek / Referensi Nomor Part</label>
                                     <input
                                         class="w-full px-space-md py-space-sm rounded-md bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#3949ab] transition-all"
                                         id="contact-subject" name="subject"
-                                        placeholder="e.g. RFQ for 4x HP-4200 Pumps &amp; Track Assembly" type="text" />
+                                        placeholder="cth. RFQ untuk 4x Pompa HP-4200 &amp; Track Assembly" type="text" />
                                 </div>
                                 <!-- Message -->
                                 <div class="flex flex-col gap-space-xs">
                                     <label class="font-label-sm text-label-sm text-on-surface font-semibold"
-                                        for="contact-message">Project Specifications / Requirements *</label>
+                                        for="contact-message">Spesifikasi Proyek / Kebutuhan *</label>
                                     <textarea
                                         class="w-full px-space-md py-space-sm rounded-md bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#3949ab] transition-all"
                                         id="contact-message" name="project_specifications"
-                                        placeholder="Please describe required tonnages, operating pressures, specific model numbers, delivery destination, and urgency."
+                                        placeholder="Jelaskan kapasitas tonase yang dibutuhkan, tekanan kerja, nomor model spesifik, tujuan pengiriman, dan tingkat urgensi."
                                         required="" rows="4"></textarea>
                                 </div>
                                 <!-- Submit Button -->
                                 <div
                                     class="pt-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
                                     <span class="font-label-spec text-label-spec text-outline">
-                                        Average reply speed: &lt; 120 minutes during work hours
+                                        Rata-rata kecepatan balasan: &lt; 120 menit pada jam kerja
                                     </span>
                                     <button
                                         class="w-full sm:w-auto bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-space-sm rounded-full shadow-md transition-all flex items-center justify-center gap-space-xs"
                                         type="submit">
-                                        <span>Send Message</span>
+                                        <span>Kirim Pesan</span>
                                         <span class="material-symbols-outlined text-[18px]" aria-hidden="true">send</span>
                                     </button>
                                 </div>
@@ -755,22 +751,22 @@
                     <div class="w-16 h-1 bg-primary rounded-full mx-auto mb-space-lg"></div>
                     <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg mb-space-2xl">
                         <div class="flex flex-col gap-space-xs max-w-2xl"><span
-                                class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">OFFICIAL
-                                CHANNELS &amp; E-COMMERCE</span>
+                                class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">SALURAN
+                                RESMI &amp; E-COMMERCE</span>
                             <h2
                                 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-extrabold tracking-tight">
-                                Connect With Us</h2>
+                                Terhubung Dengan Kami</h2>
                         </div>
                         <div class="flex items-center gap-space-md">
                             <p class="font-body-md text-body-md text-on-surface-variant max-w-md hidden md:block">
-                                Temukan suku cadang resmi THORXup dan ikuti pembaruan teknologi terkini melalui official
-                                marketplace dan platform kami.</p>
-                            <div class="flex items-center gap-space-xs shrink-0"><button aria-label="Slide Previous"
+                                Temukan suku cadang resmi THORXup dan ikuti pembaruan teknologi terkini melalui
+                                marketplace dan platform resmi kami.</p>
+                            <div class="flex items-center gap-space-xs shrink-0"><button aria-label="Geser Sebelumnya"
                                     class="w-12 h-12 rounded-full border border-outline-variant/30 bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary transition-all duration-300 flex items-center justify-center shadow-sm"
                                     id="slideLeftBtn"
                                     onclick="const el=document.getElementById('connect-cards-track'); if(el) el.scrollBy({left: -380, behavior: 'smooth'});"><span
                                         class="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_back</span></button><button
-                                    aria-label="Slide Next"
+                                    aria-label="Geser Berikutnya"
                                     class="w-12 h-12 rounded-full border border-outline-variant/30 bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary transition-all duration-300 flex items-center justify-center shadow-sm"
                                     id="slideRightBtn"
                                     onclick="const el=document.getElementById('connect-cards-track'); if(el) el.scrollBy({left: 380, behavior: 'smooth'});"><span
@@ -792,8 +788,8 @@
                                 <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
                                     Tokopedia</p>
-                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Official
-                                    Commercial Store • Spare Parts &amp; Equipment</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Toko
+                                    Komersial Resmi • Suku Cadang &amp; Peralatan</p>
                             </div>
                             <div
                                 class="flex items-center justify-between pt-space-md border-t border-outline-variant/30">
@@ -802,7 +798,7 @@
                                     <span class="w-2 h-2 rounded-full bg-outline-variant/50"></span>
                                     <span class="w-2 h-2 rounded-full bg-outline-variant/50"></span>
                                 </div>
-                                <a aria-label="Go to Tokopedia"
+                                <a aria-label="Buka Tokopedia"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="{{ \App\Models\Platform::first()?->tokopedia ?? '#' }}" rel="noopener noreferrer" target="_blank">
                                     <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
@@ -821,8 +817,8 @@
                                 <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
                                     Shopee Mall</p>
-                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Heavy Equipment
-                                    Spareparts Outlet &amp; Direct Dispatch</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Gerai Suku Cadang
+                                    Alat Berat &amp; Pengiriman Langsung</p>
                             </div>
                             <div
                                 class="flex items-center justify-between pt-space-md border-t border-outline-variant/30">
@@ -831,7 +827,7 @@
                                     <span class="w-2 h-2 rounded-full bg-primary"></span>
                                     <span class="w-2 h-2 rounded-full bg-outline-variant/50"></span>
                                 </div>
-                                <a aria-label="Go to Shopee Mall"
+                                <a aria-label="Buka Shopee Mall"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="{{ \App\Models\Platform::first()?->shopee ?? '#' }}" rel="noopener noreferrer" target="_blank">
                                     <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
@@ -850,8 +846,8 @@
                                 <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
                                     TikTok Shop</p>
-                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Live Stream
-                                    Consultations &amp; Direct Checkout Hub</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Konsultasi
+                                    Live Stream &amp; Pusat Pembelian Langsung</p>
                             </div>
                             <div
                                 class="flex items-center justify-between pt-space-md border-t border-outline-variant/30">
@@ -860,7 +856,7 @@
                                     <span class="w-2 h-2 rounded-full bg-outline-variant/50"></span>
                                     <span class="w-2 h-2 rounded-full bg-primary"></span>
                                 </div>
-                                <a aria-label="Go to TikTok Shop"
+                                <a aria-label="Buka TikTok Shop"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="{{ \App\Models\Platform::first()?->tiktok_shop ?? '#' }}">
                                     <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
@@ -879,8 +875,8 @@
                                 <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
                                     Bukalapak B2B</p>
-                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Enterprise
-                                    Procurement &amp; Verified Fleet Supplies</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Pengadaan
+                                    Perusahaan &amp; Pasokan Armada Terverifikasi</p>
                             </div>
                             <div
                                 class="flex items-center justify-between pt-space-md border-t border-outline-variant/30">
@@ -889,7 +885,7 @@
                                     <span class="w-2 h-2 rounded-full bg-outline-variant/50"></span>
                                     <span class="w-2 h-2 rounded-full bg-outline-variant/50"></span>
                                 </div>
-                                <a aria-label="Go to Bukalapak B2B"
+                                <a aria-label="Buka Bukalapak B2B"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="#contact">
                                     <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
@@ -908,8 +904,8 @@
                                 <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
                                     Lazada Mall</p>
-                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">OEM Spare Parts
-                                    Distribution Hub &amp; Regional Stock</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Pusat Distribusi
+                                    Suku Cadang OEM &amp; Stok Regional</p>
                             </div>
                             <div
                                 class="flex items-center justify-between pt-space-md border-t border-outline-variant/30">
@@ -918,7 +914,7 @@
                                     <span class="w-2 h-2 rounded-full bg-primary"></span>
                                     <span class="w-2 h-2 rounded-full bg-outline-variant/50"></span>
                                 </div>
-                                <a aria-label="Go to Lazada Mall"
+                                <a aria-label="Buka Lazada Mall"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="{{ \App\Models\Platform::first()?->lazada ?? '#' }}">
                                     <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>

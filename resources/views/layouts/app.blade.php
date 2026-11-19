@@ -79,14 +79,7 @@
         <link rel="preload" as="image" href="{{ asset('storage/' . $heroCarousels->first()->image) }}" fetchpriority="high">
     @endif
 
-    @php
-        $vite = app(\Illuminate\Foundation\Vite::class);
-        $appCssUrl = $vite->asset('resources/css/app.css');
-    @endphp
-    <link rel="preload" href="{{ $appCssUrl }}" as="style" crossorigin>
-    <link rel="stylesheet" href="{{ $appCssUrl }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ $appCssUrl }}"></noscript>
-    @vite(['resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head')
     @stack('styles')
 </head>
