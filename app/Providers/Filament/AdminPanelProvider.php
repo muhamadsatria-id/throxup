@@ -24,13 +24,19 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        // Samakan primary Filament dengan --color-primary di resources/css/app.css (#1e3093).
+        // 600 = warna tombol, 500 = warna hover.
+        $primary = Color::generatePalette('#1e3093');
+        $primary[500] = $primary[400];
+        $primary[600] = Color::generateV3Palette('#1e3093')[500];
+
         return $panel
             ->default()
             ->id('admin')
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => $primary,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
