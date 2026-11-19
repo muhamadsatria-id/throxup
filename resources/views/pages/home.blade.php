@@ -123,15 +123,15 @@
 @endif
 
 <section
-    class="relative w-full -mt-20 overflow-hidden bg-primary text-on-primary  flex items-center select-none cursor-grab active:cursor-grabbing"
+    class="relative w-full max-w-full -mt-20 overflow-hidden bg-primary text-on-primary flex items-center select-none cursor-grab active:cursor-grabbing"
     id="heroCarousel">
-    <div class="relative w-full h-full min-h-svh lg:min-h-svh flex transition-transform duration-700 ease-out"
+    <div class="relative w-full min-h-svh flex transition-transform duration-700 ease-out"
         id="carouselTrack">
         @forelse ($heroCarousels as $hero)
-            <div class="w-full flex-shrink-0 relative flex flex-col justify-center">
-                <div class="absolute inset-0 z-0">
+            <div class="w-full min-w-full shrink-0 relative overflow-hidden flex flex-col justify-center">
+                <div class="absolute inset-0 z-0 overflow-hidden">
                     <img alt="{{ $hero->judul }}"
-                        class="w-full h-full object-cover object-center transform scale-105"
+                        class="w-full h-full object-cover object-center"
                         loading="{{ $loop->first ? 'eager' : 'lazy' }}"
                         fetchpriority="{{ $loop->first ? 'high' : 'low' }}"
                         decoding="async"
@@ -143,12 +143,26 @@
                 </div>
                 <div class="relative z-10 max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-18 pb-space-2xl w-full flex flex-col justify-center">
                     <div class="max-w-3xl my-auto py-space-xl text-center mx-auto">
-                        <h1 class="font-display-hero text-display-hero-mobile md:text-display-hero text-on-primary tracking-tight font-extrabold leading-tight">
-                            THORXup Heavy Machinery &amp; Hydraulic Spare Parts
-                        </h1>
-                        <h2 class="mt-3 font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-primary tracking-tight font-bold leading-tight">
-                            {{ $hero->judul }}
-                        </h2>
+                        @if ($loop->first)
+                            <h1 class="font-display-hero text-display-hero-mobile md:text-display-hero text-on-primary tracking-tight font-extrabold leading-tight">
+                                THORXup Heavy Machinery &amp; Hydraulic Spare Parts
+                            </h1>
+                        @else
+                            <p class="font-display-hero text-display-hero-mobile md:text-display-hero text-on-primary tracking-tight font-extrabold leading-tight">
+                                THORXup Heavy Machinery &amp; Hydraulic Spare Parts
+                            </p>
+                        @endif
+
+                        @if ($loop->first)
+                            <h2 class="mt-3 font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-primary tracking-tight font-bold leading-tight">
+                                {{ $hero->judul }}
+                            </h2>
+                        @else
+                            <p class="mt-3 font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-primary tracking-tight font-bold leading-tight">
+                                {{ $hero->judul }}
+                            </p>
+                        @endif
+
                         @if ($hero->deskripsi)
                             <p class="mt-space-md font-body-lg text-body-lg text-on-primary-container max-w-2xl font-normal mx-auto leading-relaxed">
                                 {{ $hero->deskripsi }}
@@ -166,21 +180,26 @@
                 </div>
             </div>
         @empty
-            <div class="w-full flex-shrink-0 relative min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center">
+            <div class="w-full min-w-full shrink-0 relative min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center">
                 <p class="text-on-primary font-body-lg">Belum ada hero carousel aktif.</p>
             </div>
         @endforelse
     </div>
+
     @if ($heroCarousels->count() > 1)
         <button aria-label="Previous Slide"
             class="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/25 active:scale-95 text-on-primary backdrop-blur-md border border-white/25 shadow-xl transition-all items-center justify-center group"
             id="carouselPrevBtn">
-            <span class="material-symbols-outlined text-[28px] group-hover:-translate-x-0.5 transition-transform" aria-hidden="true">chevron_left</span>
+            <svg class="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
         </button>
         <button aria-label="Next Slide"
             class="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/25 active:scale-95 text-on-primary backdrop-blur-md border border-white/25 shadow-xl transition-all items-center justify-center group"
             id="carouselNextBtn">
-            <span class="material-symbols-outlined text-[28px] group-hover:translate-x-0.5 transition-transform" aria-hidden="true">chevron_right</span>
+            <svg class="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
         </button>
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-space-sm">
             @foreach ($heroCarousels as $index => $hero)
@@ -213,10 +232,10 @@
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
                         @forelse ($products as $product)
                             <x-card-product
-                                :image="$product->images ? asset('storage/' . $product->images[0]) : null"
-                                :category="$product->category?->nama"
-                                :title="$product->nama"
-                                :url="route('detail-product', $product->slug)" />
+                                :image="data_get($product, 'images.0') ? asset('storage/' . data_get($product, 'images.0')) : null"
+                                :category="data_get($product, 'category.nama')"
+                                :title="data_get($product, 'nama')"
+                                :url="route('detail-product', data_get($product, 'slug'))" />
                         @empty
                             <p class="col-span-full text-center text-on-surface-variant">Belum ada produk aktif.</p>
                         @endforelse

@@ -71,6 +71,20 @@ it('uses Indonesian metadata and a single h1 on the home page', function () {
         'is_active' => true,
         'order' => 1,
     ]);
+    $category = \App\Models\Category::create([
+        'nama' => 'Hydraulic Systems',
+    ]);
+    \App\Models\Product::create([
+        'category_id' => $category->id,
+        'nama' => 'Hydraulic Pump Assembly',
+        'slug' => 'hydraulic-pump-assembly',
+        'sku' => 'TH-HYD-TEST',
+        'deskripsi' => 'Pompa hidrolik untuk excavator.',
+        'benefits' => ['Aliran stabil', 'Diuji tekanan'],
+        'detail_produk' => '<p>Pompa siap dipasang.</p>',
+        'images' => ['products/test-pump.svg'],
+        'is_active' => true,
+    ]);
 
     Cache::forget('home_hero_carousels_v2');
     Cache::forget('home_featured_products_v2');

@@ -7,6 +7,8 @@ use App\Models\HeroCarousel;
 use App\Models\News;
 use App\Models\Platform;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\User;
 use App\Services\SeoService;
 use Illuminate\Support\Facades\Cache;
 
@@ -28,10 +30,19 @@ class HomeController extends Controller
             ->take(8)
             ->get()
             ->toArray());
+        $productData = array_map(function (array $product) {
+            $product['benefits'] = json_encode($product['benefits'] ?? [], JSON_THROW_ON_ERROR);
+            $product['images'] = json_encode($product['images'] ?? [], JSON_THROW_ON_ERROR);
+
+            return $product;
+        }, $productData);
         $products = Product::hydrate($productData);
         $products->each(function (Product $product) {
             $category = $product->getAttribute('category');
-            $product->setRelation('category', $category ? new \Illuminate\Support\Fluent($category) : null);
+            $product->setRelation(
+                'category',
+                $category ? Category::hydrate([$category])->first() : null
+            );
         });
 
         $newsData = Cache::remember('home_latest_news_v2', 300, fn () => News::query()
@@ -45,7 +56,10 @@ class HomeController extends Controller
         $news = News::hydrate($newsData);
         $news->each(function (News $article) {
             $author = $article->getAttribute('author');
-            $article->setRelation('author', $author ? new \Illuminate\Support\Fluent($author) : null);
+            $article->setRelation(
+                'author',
+                $author ? User::hydrate([$author])->first() : null
+            );
         });
 
         $platform = Platform::query()->first();
