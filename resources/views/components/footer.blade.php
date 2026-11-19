@@ -87,7 +87,7 @@ global infrastructure operations.</p>
 <ul class="flex flex-col gap-space-sm">
     @forelse (($menuCategories ?? []) as $category)
         <li class="font-body-sm text-body-sm text-on-primary-container hover:text-on-primary transition-colors">
-            <a href="{{ route('product', ['category' => $category['slug']]) }}">{{ $category['nama'] }}</a>
+            <a href="{{ route('product.category', ['category' => $category['slug']]) }}">{{ $category['nama'] }}</a>
         </li>
     @empty
         <li class="font-body-sm text-body-sm text-on-primary-container">Belum ada kategori produk.</li>

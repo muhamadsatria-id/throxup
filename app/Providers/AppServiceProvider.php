@@ -95,6 +95,13 @@ class AppServiceProvider extends ServiceProvider
         // SEO memakai gambar hero/logo sebagai OG image default.
         HeroCarousel::saved(fn () => Cache::forget('seo_default_image'));
         HeroCarousel::deleted(fn () => Cache::forget('seo_default_image'));
+        HeroCarousel::saved(fn () => Cache::forget('home_hero_carousels'));
+        HeroCarousel::deleted(fn () => Cache::forget('home_hero_carousels'));
+
+        Product::saved(fn () => Cache::forget('home_featured_products'));
+        Product::deleted(fn () => Cache::forget('home_featured_products'));
+        News::saved(fn () => Cache::forget('home_latest_news'));
+        News::deleted(fn () => Cache::forget('home_latest_news'));
 
         // Sitemap ikut berubah saat konten publik berubah.
         Product::saved(fn () => SeoService::flushSitemap());

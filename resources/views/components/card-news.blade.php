@@ -17,7 +17,7 @@
                 class="flex flex-wrap items-center gap-space-sm text-on-surface-variant font-label-md text-label-md mb-space-xs">
                 <span class="flex items-center gap-1 font-semibold text-primary">
                     <span
-                        class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+                        class="material-symbols-outlined text-[16px]" aria-hidden="true">admin_panel_settings</span>
                     Admin
                 </span>
                 <span class="hidden md:inline"><span>•</span>
@@ -46,7 +46,7 @@
                 href="#">
                 <span class="md:hidden">Read</span><span
                     class="hidden md:inline">Read Full Article</span>
-                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span>
             </a>
         </div>
     </div>

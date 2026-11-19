@@ -18,7 +18,9 @@
                 @if ($profileLogo)
                     <img src="{{ asset('storage/' . ltrim((string) $profileLogo, '/')) }}"
                         alt="{{ $profileName }}"
-                        class="h-12 max-w-44 object-contain">
+                        width="78"
+                        height="84"
+                        class="h-[84px] w-[78px] object-contain">
                 @else
                     @if (str_ends_with(strtolower($profileName), 'up'))
                         <span class="font-headline-md text-headline-md flex items-baseline">
@@ -57,7 +59,7 @@
 
                             type="button"><span class="font-label-lg text-label-lg">Products</span><span
 
-                                class="material-symbols-outlined text-[16px]">expand_more</span></button>
+                                class="material-symbols-outlined text-[16px]" aria-hidden="true">expand_more</span></button>
 
                         <div
 
@@ -70,7 +72,7 @@
                                 @forelse (($menuCategories ?? []) as $category)
                                 <a class="px-space-md py-space-xs text-on-surface-variant font-label-md text-label-md rounded-md hover:bg-surface-container hover:text-on-surface transition-colors"
 
-                                    href="{{ route('product', ['category' => $category['slug']]) }}">{{ $category['nama'] }}</a>
+                                    href="{{ route('product.category', ['category' => $category['slug']]) }}">{{ $category['nama'] }}</a>
                                 @empty
                                 <span class="px-space-md py-space-xs text-on-surface-variant font-label-md text-label-md">Belum ada
                                     kategori.</span>
@@ -161,14 +163,14 @@
 
                 <span>Products</span>
 
-                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                <span class="material-symbols-outlined text-[16px]" aria-hidden="true">expand_more</span>
 
             </button>
 
             <div id="mobile-products-menu" class="hidden flex flex-col gap-space-sm mt-space-sm">
 
                 @forelse (($menuCategories ?? []) as $category)
-                <a href="{{ route('product', ['category' => $category['slug']]) }}"
+                <a href="{{ route('product.category', ['category' => $category['slug']]) }}"
 
                     class="font-label-md font-bold text-base text-on-surface-variant hover:text-primary transition-colors">{{ $category['nama'] }}</a>
                 @empty

@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(Request $request, SeoService $seo)
+    public function index(Request $request, SeoService $seo, ?Category $category = null)
     {
-        $categorySlug = trim((string) $request->query('category', ''));
+        $categorySlug = $category?->slug
+            ?: trim((string) $request->query('category', ''));
         $search = trim((string) $request->query('q', ''));
 
         $products = Product::query()
@@ -30,7 +31,9 @@ class ProductController extends Controller
         $categories = Category::query()->orderBy('nama')->get();
         $activeCategory = $categories->firstWhere('slug', $categorySlug);
 
-        $baseUrl = route('product', $activeCategory ? ['category' => $activeCategory->slug] : []);
+        $baseUrl = $activeCategory
+            ? route('product.category', ['category' => $activeCategory->slug])
+            : route('product');
         $canonical = $search !== ''
             ? $baseUrl
             : $request->fullUrlWithoutQuery(['q']);

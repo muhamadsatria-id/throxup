@@ -8,7 +8,7 @@ $benefits = array_values(array_filter((array) ($product->benefits ?? []), fn ($i
 
 $breadcrumbItems = array_values(array_filter([
 ['label' => 'Products', 'url' => route('product')],
-$category ? ['label' => $category->nama, 'url' => route('product', ['category' => $category->slug]), 'hide_on_mobile' => true] : null,
+$category ? ['label' => $category->nama, 'url' => route('product.category', ['category' => $category->slug]), 'hide_on_mobile' => true] : null,
 ['label' => $product->nama],
 ]));
 
@@ -48,7 +48,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
                         @else
                         <div id="mainProductImg"
                             class="flex flex-col items-center justify-center gap-space-sm text-outline">
-                            <span class="material-symbols-outlined text-[64px]">precision_manufacturing</span>
+                            <span class="material-symbols-outlined text-[64px]" aria-hidden="true">precision_manufacturing</span>
                             <span class="font-label-md text-label-md">Foto produk belum tersedia</span>
                         </div>
                         @endif
@@ -81,7 +81,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
                     <div class="flex flex-wrap items-center gap-2 font-label-spec text-label-spec tracking-wider">
                         @if ($category)
                         <a class="text-primary font-bold uppercase hover:underline transition-all"
-                            href="{{ route('product', ['category' => $category->slug]) }}">{{ $category->nama }}</a>
+                            href="{{ route('product.category', ['category' => $category->slug]) }}">{{ $category->nama }}</a>
                         <span class="text-on-surface-variant/60">/</span>
                         @endif
                         <span class="text-on-surface-variant font-semibold">{{ $product->sku }}</span>
@@ -108,7 +108,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
                     <ul class="flex flex-col gap-space-xs">
                         @foreach ($benefits as $benefit)
                         <li class="flex items-start gap-2 font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0">check_circle</span>
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0" aria-hidden="true">check_circle</span>
                             <span>{{ $benefit }}</span>
                         </li>
                         @endforeach
@@ -147,7 +147,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
 
                     <!-- Guarantee Note -->
                     <div class="flex items-center justify-center gap-2 pt-1 text-on-surface-variant font-label-spec text-label-spec">
-                        <span class="material-symbols-outlined text-primary text-[18px]">support_agent</span>
+                        <span class="material-symbols-outlined text-primary text-[18px]" aria-hidden="true">support_agent</span>
                         <span>{{ data_get($profile ?? null, 'nama') ?: 'Tim ' . config('app.name', 'Thorxup') }} siap
                             membantu verifikasi part &amp; penawaran harga</span>
                     </div>
@@ -171,7 +171,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
             <a class="inline-flex items-center gap-2 text-primary font-label-lg text-label-lg font-semibold hover:underline shrink-0"
                 href="{{ route('product') }}">
                 <span>View All Products</span>
-                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span>
             </a>
         </div>
 
@@ -203,7 +203,7 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
             <div class="flex flex-wrap items-center gap-space-sm z-10 shrink-0">
                 <a class="bg-primary hover:bg-primary-container text-on-primary py-3.5 px-7 rounded-full font-label-lg text-label-lg font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2"
                     href="{{ $waUrl }}" rel="noopener noreferrer" target="_blank">
-                    <span class="material-symbols-outlined text-[20px]">support_agent</span>
+                    <span class="material-symbols-outlined text-[20px]" aria-hidden="true">support_agent</span>
                     <span>Contact Me</span>
                 </a>
                 <a class="bg-surface-container-high hover:bg-surface-container text-on-surface py-3.5 px-6 rounded-full font-label-lg text-label-lg font-semibold transition-all"

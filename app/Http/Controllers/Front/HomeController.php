@@ -8,36 +8,37 @@ use App\Models\News;
 use App\Models\Platform;
 use App\Models\Product;
 use App\Services\SeoService;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
     public function index(SeoService $seo)
     {
-        $heroCarousels = HeroCarousel::query()
+        $heroCarousels = Cache::remember('home_hero_carousels', 300, fn () => HeroCarousel::query()
             ->where('is_active', true)
             ->orderBy('order')
-            ->get();
+            ->get());
 
-        $products = Product::query()
+        $products = Cache::remember('home_featured_products', 300, fn () => Product::query()
             ->where('is_active', true)
             ->with('category')
             ->latest()
             ->take(8)
-            ->get();
+            ->get());
 
-        $news = News::query()
+        $news = Cache::remember('home_latest_news', 300, fn () => News::query()
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->with('author')
             ->latest('published_at')
             ->take(6)
-            ->get();
+            ->get());
 
         $platform = Platform::query()->first();
         $hero = $heroCarousels->first();
 
         $seo->apply([
-            'title' => $seo->siteName().' — Heavy Machinery, Hydraulic Systems & Spare Parts',
+            'title' => 'THORXup — Heavy Machinery & Hydraulic Spare Parts',
             'append_brand' => false,
             'description' => 'THORXup menghadirkan heavy machinery, hydraulic systems, powertrain, dan spare parts industri untuk operasi pertambangan dan manufaktur di Indonesia.',
             'canonical' => route('home'),

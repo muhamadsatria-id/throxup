@@ -39,7 +39,7 @@ class SitemapController extends Controller
             ->cursor()
             ->each(function (Category $category) use (&$urls) {
                 $urls[] = $this->entry(
-                    route('product', ['category' => $category->slug]),
+                    route('product.category', ['category' => $category->slug]),
                     $category->updated_at,
                     '0.8',
                     'weekly',

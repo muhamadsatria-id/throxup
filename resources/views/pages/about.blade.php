@@ -77,7 +77,7 @@
                             <button aria-label="Play facility video"
                                 class="w-16 h-16 rounded-full bg-surface-container-lowest text-primary shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
                                 type="button">
-                                <span class="material-symbols-outlined text-[36px] ml-1">play_arrow</span>
+                                <span class="material-symbols-outlined text-[36px] ml-1" aria-hidden="true">play_arrow</span>
                             </button>
                         </div>
                         <div

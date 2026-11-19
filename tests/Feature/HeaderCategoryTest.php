@@ -17,9 +17,9 @@ test('header product menu shows at most seven categories plus all products link'
 
     expect($html)
         ->toContain('All Products')
-        ->toContain(route('product', ['category' => 'category-1']))
-        ->toContain(route('product', ['category' => 'category-7']))
-        ->not->toContain(route('product', ['category' => 'category-8']))
+        ->toContain(route('product.category', ['category' => 'category-1']))
+        ->toContain(route('product.category', ['category' => 'category-7']))
+        ->not->toContain(route('product.category', ['category' => 'category-8']))
         ->not->toContain('Category 9');
 });
 

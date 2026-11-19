@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,17 +31,23 @@
     <link rel="sitemap" type="application/xml" href="{{ route('sitemap') }}">
     @if($favicon = data_get($profile ?? null, 'favicon'))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . $favicon) }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('storage/' . $favicon) }}">
+    @elseif($profileLogo = data_get($profile ?? null, 'logo'))
+        <link rel="icon" type="image/png" href="{{ asset('storage/' . $profileLogo) }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('storage/' . $profileLogo) }}">
     @else
         <link rel="icon" href="{{ asset('favicon.ico') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon.ico') }}">
     @endif
     {!! $embedCode(data_get($siteSetting ?? null, 'gsc_verification')) !!}
     {!! $embedCode(data_get($siteSetting ?? null, 'ga4_code')) !!}
     {!! $embedCode(data_get($siteSetting ?? null, 'gtm_head_code')) !!}
     {!! $embedCode(data_get($siteSetting ?? null, 'custom_head_scripts')) !!}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=admin_panel_settings,arrow_back,arrow_forward,calendar_month,call,check_circle,chevron_left,chevron_right,close,expand_more,folder_open,handshake,location_on,mail,person,play_arrow,play_circle,precision_manufacturing,print,schedule,search,send,shield,shopping_bag,south_east,store,support_agent,swap_horiz,verified,verified_user,visibility&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     @if(request()->routeIs('home') && isset($heroCarousels) && $heroCarousels->first()?->image)
         <link rel="preload" as="image" href="{{ asset('storage/' . $heroCarousels->first()->image) }}" fetchpriority="high">

@@ -29,16 +29,16 @@
                         <div class="flex items-center gap-space-md">
                             <div
                                 class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shadow-sm">
-                                <span class="material-symbols-outlined text-[24px]">person</span>
+                                <span class="material-symbols-outlined text-[24px]" aria-hidden="true">person</span>
                             </div>
                             <div class="flex flex-col">
                                 <span class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1">
                                     by {{ $news->author?->name ?? 'Admin' }}
                                     <span class="material-symbols-outlined text-primary text-[16px]"
-                                        title="Verified Lead Engineer">verified</span>
+                                        title="Verified Lead Engineer" aria-hidden="true">verified</span>
                                 </span>
                                 <div class="flex items-center gap-1.5 text-on-surface-variant font-label-md text-label-md">
-                                    <span class="material-symbols-outlined text-[15px]">schedule</span>
+                                    <span class="material-symbols-outlined text-[15px]" aria-hidden="true">schedule</span>
                                     <span>{{ optional($news->published_at)->format('d M Y') }}</span>
                                     <span>•</span>
                                     <span>5 min read</span>
@@ -194,13 +194,13 @@
                         <a aria-label="Share via Email"
                             class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center shadow-sm hover:bg-primary hover:text-on-primary transition-all"
                             href="mailto:?subject={{ rawurlencode($news->judul) }}&body={{ rawurlencode(request()->fullUrl()) }}">
-                            <span class="material-symbols-outlined text-[18px]">mail</span>
+                            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">mail</span>
                         </a>
                         <!-- Print -->
                         <button aria-label="Print Article"
                             class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center shadow-sm hover:bg-primary hover:text-on-primary transition-all"
                             onclick="window.print()">
-                            <span class="material-symbols-outlined text-[18px]">print</span>
+                            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">print</span>
                         </button>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                             href="{{ route('detail-news', $previousNews->slug) }}">
                             <span
                                 class="font-label-spec text-label-spec text-primary font-bold uppercase tracking-wider flex items-center gap-1 group-hover:-translate-x-1 transition-transform">
-                                <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                                <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_back</span>
                                 Previous Article
                             </span>
                             <span class="font-headline-sm text-headline-sm text-on-surface font-semibold line-clamp-2 mt-1">
@@ -228,7 +228,7 @@
                             <span
                                 class="font-label-spec text-label-spec text-primary font-bold uppercase tracking-wider flex items-center justify-end gap-1 group-hover:translate-x-1 transition-transform">
                                 Next Article
-                                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                                <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
                             </span>
                             <span class="font-headline-sm text-headline-sm text-on-surface font-semibold line-clamp-2 mt-1">
                                 {{ $nextNews->judul }}
@@ -248,7 +248,7 @@
                     </div>
                     <form id="detail-news-search-form" class="relative flex items-center" method="GET" action="{{ route('news') }}">
                         <span
-                            class="material-symbols-outlined absolute left-3 text-outline text-[18px] pointer-events-none">search</span>
+                            class="material-symbols-outlined absolute left-3 text-outline text-[18px] pointer-events-none" aria-hidden="true">search</span>
                         <input
                             class="w-full pl-9 pr-20 py-2 rounded-full border border-outline-variant/30 bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-white transition-all"
                             name="q" placeholder="Search articles, specs, part" type="text">
@@ -310,7 +310,7 @@
                 <div class="p-space-lg rounded-DEFAULT bg-primary text-white flex flex-col gap-space-sm shadow-md">
                     <div
                         class="flex items-center gap-1.5 text-primary-fixed uppercase tracking-wider font-label-spec text-label-spec font-bold">
-                        <span class="material-symbols-outlined text-[16px]">mail</span>
+                        <span class="material-symbols-outlined text-[16px]" aria-hidden="true">mail</span>
                         <span>Direct Telemetry</span>
                     </div>
                     <h4 class="font-headline-sm text-headline-sm font-bold text-white">
@@ -351,7 +351,7 @@
             <a class="hidden sm:flex items-center gap-1 font-label-lg text-label-lg text-primary hover:underline"
                 data-path="news" href="#">
                 <span>View All News</span>
-                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span>
             </a>
         </div>
         <!-- 3 FULL IMAGE OVERLAY CARDS -->
@@ -383,7 +383,7 @@
                 <a href="{{ route('news') }}"
                     class="inline-flex items-center gap-space-xs bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-space-sm rounded-full shadow-lg transition-all font-bold">
                     <span>Lihat Semua Berita</span>
-                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span>
                 </a>
             </div>
         @endif

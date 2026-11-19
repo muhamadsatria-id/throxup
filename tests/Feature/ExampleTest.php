@@ -62,3 +62,18 @@ it('shows modal carousel buttons for multiple active banners', function () {
         ->assertSee('aria-label="Banner sebelumnya"', false)
         ->assertSee('aria-label="Banner berikutnya"', false);
 });
+
+it('uses Indonesian metadata and a single h1 on the home page', function () {
+    Cache::forget('home_hero_carousels');
+    Cache::forget('home_featured_products');
+    Cache::forget('home_latest_news');
+
+    $this->get('/')
+        ->assertOk()
+        ->assertSee('<html lang="id"', false)
+        ->assertSee('THORXup — Heavy Machinery &amp; Hydraulic Spare Parts', false)
+        ->assertSee('rel="apple-touch-icon"', false);
+
+    $html = $this->get('/')->getContent();
+    expect(preg_match_all('/<h1\b/i', $html))->toBe(1);
+});

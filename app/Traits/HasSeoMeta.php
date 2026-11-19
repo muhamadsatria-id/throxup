@@ -157,7 +157,7 @@ trait HasSeoMeta
 
         // Kategori tidak punya halaman sendiri; canonical diarahkan ke katalog yang terfilter slug.
         if (static::class === Category::class && filled($this->slug ?? null)) {
-            return route('product', ['category' => $this->slug]);
+            return route('product.category', ['category' => $this->slug]);
         }
 
         if (isset($routes[static::class]) && filled($this->slug ?? null)) {

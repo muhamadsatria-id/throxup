@@ -14,7 +14,9 @@
                 class="fixed right-4 top-4 z-[100] flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-800 shadow-lg transition hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-white/40"
                 data-modal-close
                 aria-label="Tutup banner">
-                <span class="material-symbols-outlined text-[22px]" aria-hidden="true">close</span>
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
+                </svg>
             </button>
 
             @foreach ($activeModals as $index => $modal)
@@ -26,11 +28,15 @@
                             aria-label="{{ $modal->title ?: 'Lihat detail banner' }}">
                             <img src="{{ asset('storage/' . $modal->image) }}"
                                 alt="{{ $modal->title ?: 'Banner pengumuman' }}"
+                                width="1000"
+                                height="700"
                                 class="block max-h-[70vh] w-full object-contain">
                         </a>
                     @else
                         <img src="{{ asset('storage/' . $modal->image) }}"
                             alt="{{ $modal->title ?: 'Banner pengumuman' }}"
+                            width="1000"
+                            height="700"
                             class="block max-h-[70vh] w-full rounded-md object-contain">
                     @endif
                 </div>
@@ -41,13 +47,17 @@
                     class="fixed bottom-4 left-[calc(50%-48px)] z-[100] flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-800 shadow-xl transition hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-white/40 sm:absolute sm:bottom-auto sm:left-[-64px] sm:top-1/2 sm:translate-x-0 sm:-translate-y-1/2"
                     data-modal-prev
                     aria-label="Banner sebelumnya">
-                    <span class="material-symbols-outlined text-[28px]" aria-hidden="true">chevron_left</span>
+                    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </button>
                 <button type="button"
                     class="fixed bottom-4 left-[calc(50%+4px)] z-[100] flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-800 shadow-xl transition hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-white/40 sm:absolute sm:bottom-auto sm:left-auto sm:right-[-64px] sm:top-1/2 sm:translate-x-0 sm:-translate-y-1/2"
                     data-modal-next
                     aria-label="Banner berikutnya">
-                    <span class="material-symbols-outlined text-[28px]" aria-hidden="true">chevron_right</span>
+                    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </button>
             @endif
         </div>
@@ -125,6 +135,8 @@
                         loading="{{ $loop->first ? 'eager' : 'lazy' }}"
                         fetchpriority="{{ $loop->first ? 'high' : 'low' }}"
                         decoding="async"
+                        width="1920"
+                        height="1080"
                         src="{{ asset('storage/' . $hero->image) }}" />
                     <div class="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/55 to-primary/45"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-primary/30"></div>
@@ -132,8 +144,11 @@
                 <div class="relative z-10 max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-18 pb-space-2xl w-full flex flex-col justify-center">
                     <div class="max-w-3xl my-auto py-space-xl text-center mx-auto">
                         <h1 class="font-display-hero text-display-hero-mobile md:text-display-hero text-on-primary tracking-tight font-extrabold leading-tight">
-                            {{ $hero->judul }}
+                            THORXup Heavy Machinery &amp; Hydraulic Spare Parts
                         </h1>
+                        <h2 class="mt-3 font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-primary tracking-tight font-bold leading-tight">
+                            {{ $hero->judul }}
+                        </h2>
                         @if ($hero->deskripsi)
                             <p class="mt-space-md font-body-lg text-body-lg text-on-primary-container max-w-2xl font-normal mx-auto leading-relaxed">
                                 {{ $hero->deskripsi }}
@@ -160,12 +175,12 @@
         <button aria-label="Previous Slide"
             class="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/25 active:scale-95 text-on-primary backdrop-blur-md border border-white/25 shadow-xl transition-all items-center justify-center group"
             id="carouselPrevBtn">
-            <span class="material-symbols-outlined text-[28px] group-hover:-translate-x-0.5 transition-transform">chevron_left</span>
+            <span class="material-symbols-outlined text-[28px] group-hover:-translate-x-0.5 transition-transform" aria-hidden="true">chevron_left</span>
         </button>
         <button aria-label="Next Slide"
             class="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 hover:bg-white/25 active:scale-95 text-on-primary backdrop-blur-md border border-white/25 shadow-xl transition-all items-center justify-center group"
             id="carouselNextBtn">
-            <span class="material-symbols-outlined text-[28px] group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+            <span class="material-symbols-outlined text-[28px] group-hover:translate-x-0.5 transition-transform" aria-hidden="true">chevron_right</span>
         </button>
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-space-sm">
             @foreach ($heroCarousels as $index => $hero)
@@ -210,8 +225,8 @@
                         <div class="mt-space-xl flex justify-center">
                             <a href="{{ route('product') }}"
                                 class="inline-flex items-center gap-space-xs bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-space-sm rounded-full shadow-lg transition-all font-bold">
-                                <span>Lihat Semua Produk</span>
-                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                                <span>Jelajahi semua produk heavy machinery</span>
+                                    <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span>
                             </a>
                         </div>
                     @endif
@@ -270,6 +285,8 @@
                                     @if ($article->thumbnail)
                                         <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                                             alt="{{ $article->judul }}" loading="lazy" decoding="async"
+                                            width="800"
+                                            height="450"
                                             src="{{ asset('storage/' . $article->thumbnail) }}" />
                                     @endif
                                 </div>
@@ -281,10 +298,10 @@
                                                 <span>{{ optional($article->published_at)->format('d M Y') }}</span>
                                             </span>
                                         </div>
-                                        <h3
+                                        <p
                                             class="font-headline-sm text-headline-sm text-on-surface font-bold leading-snug line-clamp-2">
                                             <a href="{{ route('detail-news', $article->slug) }}">{{ $article->judul }}</a>
-                                        </h3>
+                                        </p>
                                         <p
                                             class="font-body-sm text-body-sm text-on-surface-variant mt-space-sm line-clamp-2 md:line-clamp-3">
                                             {{ \Illuminate\Support\Str::limit(strip_tags($article->deskripsi), 140) }}
@@ -302,8 +319,8 @@
                                         </div>
                                         <a class="font-label-lg text-label-lg text-primary hover:text-primary-container font-bold flex items-center gap-0.5"
                                             data-path="news" href="{{ route('detail-news', $article->slug) }}">
-                                            <span class="md:hidden">Read</span><span class="hidden md:inline">Read Article</span>
-                                            <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                                            <span class="md:hidden">Baca</span><span class="hidden md:inline">Baca {{ \Illuminate\Support\Str::limit($article->judul, 36) }}</span>
+                                            <span class="material-symbols-outlined text-[16px]" aria-hidden="true">chevron_right</span>
                                         </a>
                                     </div>
                                 </div>
@@ -316,8 +333,8 @@
                         <div class="mt-space-xl flex justify-center">
                             <a href="{{ route('news') }}"
                                 class="inline-flex items-center gap-space-xs bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-space-sm rounded-full shadow-lg transition-all font-bold">
-                                <span>Lihat Semua Berita</span>
-                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                                <span>Jelajahi semua berita dan insight industri</span>
+                                <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span>
                             </a>
                         </div>
                     @endif
@@ -345,8 +362,8 @@
                             class="bg-primary p-space-xl rounded-md shadow-md flex flex-col justify-between text-left text-on-primary">
                             <div class="flex flex-col gap-space-md">
                                 <div class="w-12 h-1 bg-secondary-fixed rounded-full"></div>
-                                <h3 class="font-headline-md text-headline-md text-on-primary font-extrabold">Our Vision
-                                </h3>
+                                <p class="font-headline-md text-headline-md text-on-primary font-extrabold">Our Vision
+                                </p>
                                 <blockquote
                                     class="font-body-lg text-body-lg text-secondary-fixed-dim leading-relaxed font-medium italic mt-space-sm">
                                     “To be trusted solution for mining operations through high performance product that
@@ -355,7 +372,7 @@
                             <div
                                 class="mt-space-xl pt-space-md border-t border-primary-container flex items-center gap-space-sm text-secondary-fixed-dim font-label-spec text-label-spec uppercase tracking-wider font-semibold">
                                 <span
-                                    class="material-symbols-outlined text-[20px] text-secondary-fixed">visibility</span><span
+                                    class="material-symbols-outlined text-[20px] text-secondary-fixed" aria-hidden="true">visibility</span><span
                                     class="text-secondary-fixed">Long-term strategic focus &amp; commitment</span></div>
                         </div>
                         <div
@@ -363,8 +380,8 @@
                             <div class="flex flex-col gap-space-md">
                                 <div>
                                     <div class="w-12 h-1 bg-primary rounded-full mb-space-sm"></div>
-                                    <h3 class="font-headline-md text-headline-md text-primary font-extrabold">Our
-                                        Mission</h3>
+                                    <p class="font-headline-md text-headline-md text-primary font-extrabold">Our
+                                        Mission</p>
                                 </div>
                                 <div class="flex flex-col gap-space-xs">
                                     <div
@@ -407,17 +424,17 @@
                     </div>
                     <!-- Core Values: 4 Pillars -->
                     <div class="mt-space-2xl">
-                        <h4
+                        <p
                             class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-lg text-center md:text-left">
                             Core Engineering Pillars
-                        </h4>
+                        </p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
                             <div class="bg-surface-container-lowest p-space-lg rounded-md shadow-sm">
                                 <div class="text-primary mb-space-sm">
-                                    <span class="material-symbols-outlined text-[32px]">verified_user</span>
+                                    <span class="material-symbols-outlined text-[32px]" aria-hidden="true">verified_user</span>
                                 </div>
-                                <h5 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
-                                    Uncompromising Quality</h5>
+                                <p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
+                                    Uncompromising Quality</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">
                                     Every component adheres to metallurgical certified stress tests, laser micrometer
                                     verification, and ISO 9001:2015 protocol.
@@ -425,10 +442,10 @@
                             </div>
                             <div class="bg-surface-container-lowest p-space-lg rounded-md shadow-sm">
                                 <div class="text-primary mb-space-sm">
-                                    <span class="material-symbols-outlined text-[32px]">precision_manufacturing</span>
+                                    <span class="material-symbols-outlined text-[32px]" aria-hidden="true">precision_manufacturing</span>
                                 </div>
-                                <h5 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
-                                    Engineering Precision</h5>
+                                <p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
+                                    Engineering Precision</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">
                                     Tight tolerance machining down to sub-micron thresholds ensures 100% plug-and-play
                                     fitment with major OEM heavy frames.
@@ -436,10 +453,10 @@
                             </div>
                             <div class="bg-surface-container-lowest p-space-lg rounded-md shadow-sm">
                                 <div class="text-primary mb-space-sm">
-                                    <span class="material-symbols-outlined text-[32px]">shield</span>
+                                    <span class="material-symbols-outlined text-[32px]" aria-hidden="true">shield</span>
                                 </div>
-                                <h5 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
-                                    Relentless Durability</h5>
+                                <p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
+                                    Relentless Durability</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">
                                     Formulated for extreme thermal variance, abrasive quarry particulates, and severe
                                     dynamic shock loads.
@@ -447,10 +464,10 @@
                             </div>
                             <div class="bg-surface-container-lowest p-space-lg rounded-md shadow-sm">
                                 <div class="text-primary mb-space-sm">
-                                    <span class="material-symbols-outlined text-[32px]">handshake</span>
+                                    <span class="material-symbols-outlined text-[32px]" aria-hidden="true">handshake</span>
                                 </div>
-                                <h5 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
-                                    Customer-First Partnership</h5>
+                                <p class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
+                                    Customer-First Partnership</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">
                                     Direct line access to application engineers, predictive spare parts inventory
                                     holding, and on-site technical support.
@@ -478,10 +495,10 @@
                                 <div class="mt-space-xl flex flex-col gap-space-lg">
                                     <div class="flex items-start gap-space-md">
                                         <div class="text-secondary-fixed shrink-0 pt-0.5"><span
-                                                class="material-symbols-outlined text-[24px]">location_on</span></div>
+                                                class="material-symbols-outlined text-[24px]" aria-hidden="true">location_on</span></div>
                                         <div>
-                                            <h4 class="font-label-lg text-label-lg text-on-primary font-bold">Global
-                                                Headquarters</h4>
+                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Global
+                                                Headquarters</p>
                                             <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">4800
                                                 Industrial Parkway, Sector 9<br />Heavy Engineering Corridor, Detroit,
                                                 MI 48202</p>
@@ -489,30 +506,30 @@
                                     </div>
                                     <div class="flex items-start gap-space-md">
                                         <div class="text-secondary-fixed shrink-0 pt-0.5"><span
-                                                class="material-symbols-outlined text-[24px]">call</span></div>
+                                                class="material-symbols-outlined text-[24px]" aria-hidden="true">call</span></div>
                                         <div>
-                                            <h4 class="font-label-lg text-label-lg text-on-primary font-bold">24/7 Field
-                                                Technical Hotline</h4>
+                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">24/7 Field
+                                                Technical Hotline</p>
                                             <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">+1
                                                 (800) 846-7987 • Free Global Direct</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-space-md">
                                         <div class="text-secondary-fixed shrink-0 pt-0.5"><span
-                                                class="material-symbols-outlined text-[24px]">mail</span></div>
+                                                class="material-symbols-outlined text-[24px]" aria-hidden="true">mail</span></div>
                                         <div>
-                                            <h4 class="font-label-lg text-label-lg text-on-primary font-bold">Direct
-                                                Engineering Email</h4>
+                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Direct
+                                                Engineering Email</p>
                                             <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">
                                                 rfq-desk@thorxup-machinery.com</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-space-md">
                                         <div class="text-secondary-fixed shrink-0 pt-0.5"><span
-                                                class="material-symbols-outlined text-[24px]">schedule</span></div>
+                                                class="material-symbols-outlined text-[24px]" aria-hidden="true">schedule</span></div>
                                         <div>
-                                            <h4 class="font-label-lg text-label-lg text-on-primary font-bold">Operating
-                                                Hours</h4>
+                                            <p class="font-label-lg text-label-lg text-on-primary font-bold">Operating
+                                                Hours</p>
                                             <p class="font-body-sm text-body-sm text-on-primary-container mt-0.5">Monday
                                                 – Friday: 06:00 – 20:00 EST<br />Emergency Breakdown: 24/7 Continuous
                                             </p>
@@ -532,8 +549,8 @@
                             <form class="flex flex-col gap-space-md" id="rfq-form" method="POST" action="{{ route('quote.store') }}">
                                 @csrf
                                 <div class="flex items-center justify-between pb-space-xs">
-                                    <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Request a
-                                        Formal Quote</h3>
+                                    <p class="font-headline-md text-headline-md text-on-surface font-bold">Request a
+                                        Formal Quote</p>
                                 </div>
                                 <!-- Full Name and Email -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
@@ -595,7 +612,7 @@
                                         class="w-full sm:w-auto bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-space-sm rounded-full shadow-md transition-all flex items-center justify-center gap-space-xs"
                                         type="submit">
                                         <span>Send Message</span>
-                                        <span class="material-symbols-outlined text-[18px]">send</span>
+                                        <span class="material-symbols-outlined text-[18px]" aria-hidden="true">send</span>
                                     </button>
                                 </div>
                             </form>
@@ -622,12 +639,12 @@
                                     class="w-12 h-12 rounded-full border border-outline-variant/30 bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary transition-all duration-300 flex items-center justify-center shadow-sm"
                                     id="slideLeftBtn"
                                     onclick="const el=document.getElementById('connect-cards-track'); if(el) el.scrollBy({left: -380, behavior: 'smooth'});"><span
-                                        class="material-symbols-outlined text-[20px]">arrow_back</span></button><button
+                                        class="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_back</span></button><button
                                     aria-label="Slide Next"
                                     class="w-12 h-12 rounded-full border border-outline-variant/30 bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary transition-all duration-300 flex items-center justify-center shadow-sm"
                                     id="slideRightBtn"
                                     onclick="const el=document.getElementById('connect-cards-track'); if(el) el.scrollBy({left: 380, behavior: 'smooth'});"><span
-                                        class="material-symbols-outlined text-[20px]">arrow_forward</span></button>
+                                        class="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_forward</span></button>
                             </div>
                         </div>
                     </div>
@@ -639,12 +656,12 @@
                             <div class="flex items-center justify-between">
                                 <span
                                     class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">Platform</span>
-                                <span class="material-symbols-outlined text-outline text-[20px]">swap_horiz</span>
+                                <span class="material-symbols-outlined text-outline text-[20px]" aria-hidden="true">swap_horiz</span>
                             </div>
                             <div class="my-auto py-space-md text-left">
-                                <h3
+                                <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
-                                    Tokopedia</h3>
+                                    Tokopedia</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Official
                                     Commercial Store • Spare Parts &amp; Equipment</p>
                             </div>
@@ -658,7 +675,7 @@
                                 <a aria-label="Go to Tokopedia"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="{{ \App\Models\Platform::first()?->tokopedia ?? '#' }}" rel="noopener noreferrer" target="_blank">
-                                    <span class="material-symbols-outlined text-[22px]">south_east</span>
+                                    <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
                                 </a>
                             </div>
                         </div>
@@ -668,12 +685,12 @@
                             <div class="flex items-center justify-between">
                                 <span
                                     class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">Platform</span>
-                                <span class="material-symbols-outlined text-outline text-[20px]">shopping_bag</span>
+                                <span class="material-symbols-outlined text-outline text-[20px]" aria-hidden="true">shopping_bag</span>
                             </div>
                             <div class="my-auto py-space-md text-left">
-                                <h3
+                                <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
-                                    Shopee Mall</h3>
+                                    Shopee Mall</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Heavy Equipment
                                     Spareparts Outlet &amp; Direct Dispatch</p>
                             </div>
@@ -687,7 +704,7 @@
                                 <a aria-label="Go to Shopee Mall"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="{{ \App\Models\Platform::first()?->shopee ?? '#' }}" rel="noopener noreferrer" target="_blank">
-                                    <span class="material-symbols-outlined text-[22px]">south_east</span>
+                                    <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
                                 </a>
                             </div>
                         </div>
@@ -697,12 +714,12 @@
                             <div class="flex items-center justify-between">
                                 <span
                                     class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">Platform</span>
-                                <span class="material-symbols-outlined text-outline text-[20px]">play_circle</span>
+                                <span class="material-symbols-outlined text-outline text-[20px]" aria-hidden="true">play_circle</span>
                             </div>
                             <div class="my-auto py-space-md text-left">
-                                <h3
+                                <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
-                                    TikTok Shop</h3>
+                                    TikTok Shop</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Live Stream
                                     Consultations &amp; Direct Checkout Hub</p>
                             </div>
@@ -716,7 +733,7 @@
                                 <a aria-label="Go to TikTok Shop"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="{{ \App\Models\Platform::first()?->tiktok_shop ?? '#' }}">
-                                    <span class="material-symbols-outlined text-[22px]">south_east</span>
+                                    <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
                                 </a>
                             </div>
                         </div>
@@ -726,12 +743,12 @@
                             <div class="flex items-center justify-between">
                                 <span
                                     class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">Platform</span>
-                                <span class="material-symbols-outlined text-outline text-[20px]">store</span>
+                                <span class="material-symbols-outlined text-outline text-[20px]" aria-hidden="true">store</span>
                             </div>
                             <div class="my-auto py-space-md text-left">
-                                <h3
+                                <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
-                                    Bukalapak B2B</h3>
+                                    Bukalapak B2B</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Enterprise
                                     Procurement &amp; Verified Fleet Supplies</p>
                             </div>
@@ -745,7 +762,7 @@
                                 <a aria-label="Go to Bukalapak B2B"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="#contact">
-                                    <span class="material-symbols-outlined text-[22px]">south_east</span>
+                                    <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
                                 </a>
                             </div>
                         </div>
@@ -755,12 +772,12 @@
                             <div class="flex items-center justify-between">
                                 <span
                                     class="font-label-spec text-label-spec text-primary tracking-widest uppercase font-bold">Platform</span>
-                                <span class="material-symbols-outlined text-outline text-[20px]">verified</span>
+                                <span class="material-symbols-outlined text-outline text-[20px]" aria-hidden="true">verified</span>
                             </div>
                             <div class="my-auto py-space-md text-left">
-                                <h3
+                                <p
                                     class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
-                                    Lazada Mall</h3>
+                                    Lazada Mall</p>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">OEM Spare Parts
                                     Distribution Hub &amp; Regional Stock</p>
                             </div>
@@ -774,7 +791,7 @@
                                 <a aria-label="Go to Lazada Mall"
                                     class="w-12 h-12 rounded-md bg-primary text-on-primary flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-primary-container border-none"
                                     href="{{ \App\Models\Platform::first()?->lazada ?? '#' }}">
-                                    <span class="material-symbols-outlined text-[22px]">south_east</span>
+                                    <span class="material-symbols-outlined text-[22px]" aria-hidden="true">south_east</span>
                                 </a>
                             </div>
                         </div>

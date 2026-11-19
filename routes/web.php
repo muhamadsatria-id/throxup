@@ -14,6 +14,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
+Route::get('/product/category/{category:slug}', [ProductController::class, 'index'])->name('product.category');
 
 // /contact mengarah ke formulir yang sama di beranda agar tidak ada halaman kosong/duplikat.
 Route::redirect('/contact', '/#contact', 301)->name('contact');

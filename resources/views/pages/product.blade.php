@@ -96,13 +96,13 @@
                     for="catalog-search">Technical Search</label>
                 <form id="product-search-form" class="relative flex items-center" method="GET" action="{{ route('product') }}">
                     <span
-                        class="material-symbols-outlined absolute left-3 text-outline text-[18px] pointer-events-none">search</span>
+                        class="material-symbols-outlined absolute left-3 text-outline text-[18px] pointer-events-none" aria-hidden="true">search</span>
                     <input
                         class="w-full pl-9 pr-8 py-2 bg-surface-container-low rounded-full font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 transition-all"
                         id="catalog-search" name="q" value="{{ $search ?? '' }}" placeholder="Part no., SKU, OEM fitment..." type="text">
                     <button aria-label="Clear Search" type="button" onclick="document.getElementById('catalog-search').value=''; document.getElementById('product-search-form').requestSubmit();"
                         class="absolute right-3 text-outline hover:text-on-surface text-[14px]">
-                        <span class="material-symbols-outlined text-[16px]">close</span>
+                        <span class="material-symbols-outlined text-[16px]" aria-hidden="true">close</span>
                     </button>
                 </form>
             </div>
@@ -123,7 +123,7 @@
                     </a>
                     @foreach ($categories as $category)
                         <a class="category-link flex items-center justify-between px-3 py-2.5 rounded-full {{ $selectedCategory === $category->slug ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:bg-surface-container' }} font-label-md text-label-md transition-all"
-                            data-category="{{ $category->slug }}" href="{{ route('product', ['category' => $category->slug]) }}">
+                            data-category="{{ $category->slug }}"                             href="{{ route('product.category', ['category' => $category->slug]) }}">
                             <span>{{ $category->nama }}</span>
                             <span class="font-label-spec text-label-spec">{{ $category->products()->count() }}</span>
                         </a>

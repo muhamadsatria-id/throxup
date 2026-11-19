@@ -14,7 +14,7 @@
                                             class="w-full bg-surface-container-low text-on-surface placeholder:text-outline text-body-md font-body-md pl-10 pr-24 py-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-primary shadow-inner"
                                             placeholder="Search articles, specs, parts..." type="text">
                                         <span
-                                            class="material-symbols-outlined text-outline absolute left-3.5 text-[20px] pointer-events-none">search</span>
+                                            class="material-symbols-outlined text-outline absolute left-3.5 text-[20px] pointer-events-none" aria-hidden="true">search</span>
                                         <button
                                             class="absolute right-1 px-space-md py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors shadow-sm"
                                             type="submit">
@@ -145,7 +145,7 @@
                                         <h3
                                             class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-2">
                                             <span
-                                                class="material-symbols-outlined text-primary text-[20px]">calendar_month</span>
+                                                class="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">calendar_month</span>
                                             Archives
                                         </h3>
                                         <span
@@ -159,7 +159,7 @@
                                                 <span
                                                     class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary flex items-center gap-2">
                                                     <span
-                                                        class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary">folder_open</span>
+                                                        class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary" aria-hidden="true">folder_open</span>
                                                     2026
                                                 </span>
 
@@ -171,7 +171,7 @@
                                                 <span
                                                     class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary flex items-center gap-2">
                                                     <span
-                                                        class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary">folder_open</span>
+                                                        class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary" aria-hidden="true">folder_open</span>
                                                     2025
                                                 </span>
 
@@ -183,7 +183,7 @@
                                                 <span
                                                     class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary flex items-center gap-2">
                                                     <span
-                                                        class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary">folder_open</span>
+                                                        class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary" aria-hidden="true">folder_open</span>
                                                     2024
                                                 </span>
 
@@ -195,7 +195,7 @@
                                                 <span
                                                     class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary flex items-center gap-2">
                                                     <span
-                                                        class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary">folder_open</span>
+                                                        class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary" aria-hidden="true">folder_open</span>
                                                     2023
                                                 </span>
 
@@ -212,7 +212,7 @@
                                     <div class="relative z-10">
                                         <div
                                             class="inline-flex items-center gap-1 text-on-primary-container font-label-spec text-label-spec uppercase tracking-wider mb-2">
-                                            <span class="material-symbols-outlined text-[16px]">mail</span>
+                                            <span class="material-symbols-outlined text-[16px]" aria-hidden="true">mail</span>
                                             Direct Telemetry
                                         </div>
                                         <h4 class="font-headline-sm text-headline-sm font-bold text-on-primary">
