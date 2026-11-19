@@ -28,7 +28,7 @@
         <div class="mt-space-md md:mt-space-lg pt-space-xs">
             <a class="inline-flex items-center gap-1 font-label-lg text-label-lg text-primary hover:text-primary-container font-bold transition-colors group-hover:translate-x-1 duration-200"
                 href="{{ $url }}">
-                <span class="md:hidden">Detail</span><span class="hidden md:inline">Detail {{ $title }}</span>
+                <span>Lihat detail</span>
                 <span class="material-symbols-outlined text-[18px]" aria-hidden="true">chevron_right</span>
             </a>
         </div>

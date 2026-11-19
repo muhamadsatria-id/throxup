@@ -152,7 +152,6 @@
         });
     </script>
 @endif
-
 <section
     class="relative w-full max-w-full -mt-20 overflow-hidden bg-primary text-on-primary flex items-center select-none cursor-grab active:cursor-grabbing"
     id="heroCarousel">
@@ -277,7 +276,7 @@
                     @endphp
 
                     <a href="{{ route('product.category', ['category' => $category->slug]) }}"
-                        class="{{ $layout }} group relative min-h-[220px] rounded-md overflow-hidden shadow-sm hover:shadow-xl border border-outline-variant/30 transition-all duration-300 flex flex-col justify-end p-space-lg
+                        class="{{ $layout }} group relative min-h-[220px] rounded-lg overflow-hidden shadow-sm hover:shadow-xl border border-outline-variant/30 transition-all duration-300 flex flex-col justify-end p-space-lg
                         {{ $isDark ? 'bg-inverse-surface text-white' : 'bg-primary-container text-on-primary' }}">
                         @if ($categoryImage)
                             <img src="{{ $categoryImage }}"
@@ -296,7 +295,7 @@
                         <div class="relative z-10 flex items-end justify-between w-full mt-auto gap-3">
                             <div class="max-w-[82%]">
                                 <span class="{{ $isDark ? 'text-secondary-fixed' : 'text-primary-fixed-dim' }} text-label-spec uppercase tracking-wider font-semibold">
-                                    Kategori
+                                    
                                 </span>
                                 <h3 class="{{ $isDark ? 'text-white' : 'text-on-primary' }} {{ $index === 0 ? 'font-headline-lg text-headline-lg' : 'font-headline-md text-headline-md' }} font-extrabold leading-tight mt-0.5">
                                     {{ $category->nama }}
@@ -355,7 +354,7 @@
                         <div class="mt-space-xl flex justify-center">
                             <a href="{{ route('product') }}"
                                 class="inline-flex items-center gap-space-xs bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-space-sm rounded-full shadow-lg transition-all font-bold">
-                                <span>Jelajahi semua produk heavy machinery</span>
+                                <span>Lihat semua produk</span>
                                     <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span>
                             </a>
                         </div>
@@ -450,7 +449,7 @@
                                         </div>
                                         <a class="font-label-lg text-label-lg text-primary hover:text-primary-container font-bold flex items-center gap-0.5"
                                             data-path="news" href="{{ route('detail-news', $article->slug) }}">
-                                            <span class="md:hidden">Baca</span><span class="hidden md:inline">Baca {{ \Illuminate\Support\Str::limit($article->judul, 36) }}</span>
+                                            <span>Baca selengkapnya</span>
                                             <span class="material-symbols-outlined text-[16px]" aria-hidden="true">chevron_right</span>
                                         </a>
                                     </div>
@@ -1009,8 +1008,6 @@
         goTo(0);
     });
 </script>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('rfq-form');
