@@ -761,7 +761,7 @@
                             <p class="font-body-md text-body-md text-on-surface-variant max-w-md hidden md:block">
                                 Temukan suku cadang resmi THORXup dan ikuti pembaruan teknologi terkini melalui
                                 marketplace dan platform resmi kami.</p>
-                            <div class="flex items-center gap-space-xs shrink-0"><button aria-label="Geser Sebelumnya"
+                            <div class="hidden md:flex items-center gap-space-xs shrink-0"><button aria-label="Geser Sebelumnya"
                                     class="w-12 h-12 rounded-full border border-outline-variant/30 bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary transition-all duration-300 flex items-center justify-center shadow-sm"
                                     id="slideLeftBtn"
                                     onclick="const el=document.getElementById('connect-cards-track'); if(el) el.scrollBy({left: -380, behavior: 'smooth'});"><span
@@ -1002,6 +1002,63 @@
         });
 
         goTo(0);
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const track = document.getElementById('connect-cards-track');
+        if (!track) return;
+
+        let isDragging = false;
+        let startX = 0;
+        let startScrollLeft = 0;
+        let hasMoved = false;
+
+        track.addEventListener('pointerdown', function (event) {
+            // Sentuhan native sudah menangani scroll di mobile; drag kursor tetap aktif di semua lebar layar.
+            if (event.pointerType === 'touch') return;
+
+            isDragging = true;
+            hasMoved = false;
+            startX = event.clientX;
+            startScrollLeft = track.scrollLeft;
+            track.style.cursor = 'grabbing';
+            track.style.userSelect = 'none';
+            track.setPointerCapture?.(event.pointerId);
+        });
+
+        track.addEventListener('pointermove', function (event) {
+            if (!isDragging) return;
+
+            const delta = event.clientX - startX;
+            if (Math.abs(delta) > 5) hasMoved = true;
+            track.scrollLeft = startScrollLeft - delta;
+        });
+
+        function stopDragging(event) {
+            if (!isDragging) return;
+
+            isDragging = false;
+            track.style.cursor = '';
+            track.style.userSelect = '';
+
+            if (event?.pointerId !== undefined && track.hasPointerCapture?.(event.pointerId)) {
+                track.releasePointerCapture(event.pointerId);
+            }
+        }
+
+        track.addEventListener('pointerup', stopDragging);
+        track.addEventListener('pointercancel', stopDragging);
+        track.addEventListener('pointerleave', stopDragging);
+
+        // Jangan sampai klik link ikut terpicu setelah user selesai menggeser.
+        track.addEventListener('click', function (event) {
+            if (!hasMoved) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            hasMoved = false;
+        }, true);
     });
 </script>
 <script>
