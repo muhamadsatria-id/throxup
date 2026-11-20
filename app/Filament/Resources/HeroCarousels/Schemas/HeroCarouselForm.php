@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\HeroCarousels\Schemas;
 
+use App\Support\ImageUploadConstraints;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -23,14 +24,15 @@ class HeroCarouselForm
                     ->nullable()->helperText('(opsional)')
                     ->rows(3)
                     ->columnSpanFull(),
-                FileUpload::make('image')
-                    ->label('Gambar Background')
-                    ->image()
-                    ->previewable(false)
-                    ->fetchFileInformation(false)
-                    ->disk('public')->visibility('public')->directory('hero-carousels')
-                    ->required()
-                    ->columnSpanFull(),
+                ImageUploadConstraints::apply(
+                    FileUpload::make('image')
+                        ->label('Gambar Background')
+                        ->previewable(false)
+                        ->fetchFileInformation(false)
+                        ->disk('public')->visibility('public')->directory('hero-carousels')
+                        ->required()
+                        ->columnSpanFull(),
+                ),
                 TextInput::make('button_text')
                     ->label('Teks Tombol')
                     ->nullable()->helperText('(opsional)')

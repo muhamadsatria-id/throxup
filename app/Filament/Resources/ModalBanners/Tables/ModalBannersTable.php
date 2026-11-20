@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ModalBanners\Tables;
 
+use App\Support\TableThumbnail;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -21,8 +22,7 @@ class ModalBannersTable
                 TextColumn::make('title')
                     ->label('Judul / Alt Text')
                     ->searchable(),
-                ImageColumn::make('image')->disk('public')->visibility('public')->checkFileExistence(false)
-                    ->label('Gambar'),
+                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('link_url')
                     ->label('URL Tujuan')
                     ->limit(50)

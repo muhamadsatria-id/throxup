@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Categories\Tables;
 
+use App\Support\TableThumbnail;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -19,13 +20,12 @@ class CategoriesTable
                 TextColumn::make('nama')
                     ->searchable()
                     ->sortable(),
+                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('slug')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deskripsi')
                     ->limit(50)
-                    ->toggleable(isToggledHiddenByDefault: true),
-                ImageColumn::make('image')->disk('public')->visibility('public')->checkFileExistence(false)
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()

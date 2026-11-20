@@ -2,8 +2,11 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Widgets\ContentStatsWidget;
 use App\Models\Profile;
+use Filament\Actions\Action;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -38,6 +41,15 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->passwordReset()
+            ->profile(EditProfile::class, isSimple: false)
+            ->userMenuItems([
+                Action::make('profile')
+                    ->label('Kelola Profil')
+                    ->icon('heroicon-o-user-circle')
+                    ->url(fn (): string => Filament::getProfileUrl())
+                    ->sort(-1),
+            ])
             ->favicon(function (): ?string {
                 $profile = Cache::get('site_profile');
 
@@ -51,7 +63,7 @@ class AdminPanelProvider extends PanelProvider
                 $path = data_get($profile, 'favicon') ?? data_get($profile, 'logo');
 
                 // Fallback sengaja null: public/favicon.ico masih 0 byte.
-                return $path ? asset('storage/' . $path) : null;
+                return $path ? asset('storage/'.$path) : null;
             })
             ->colors([
                 'primary' => $primary,

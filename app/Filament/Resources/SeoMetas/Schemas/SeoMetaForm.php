@@ -11,6 +11,7 @@ use App\Models\Platform;
 use App\Models\Product;
 use App\Models\Profile;
 use App\Models\Setting;
+use App\Support\ImageUploadConstraints;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\MorphToSelect;
@@ -71,11 +72,13 @@ class SeoMetaForm
                     ])
                     ->default('index, follow')
                     ->required(),
-                FileUpload::make('og_image')
-                    ->label('OG Image')
-                    ->image()
-                    ->disk('public')->visibility('public')->directory('seo')
-                    ->nullable()->helperText('(opsional)'),
+                ImageUploadConstraints::apply(
+                    FileUpload::make('og_image')
+                        ->label('OG Image')
+                        ->disk('public')->visibility('public')->directory('seo')
+                        ->nullable(),
+                    optional: true,
+                ),
                 KeyValue::make('schema_json')
                     ->label('Schema JSON-LD')
                     ->nullable()->helperText('(opsional)')

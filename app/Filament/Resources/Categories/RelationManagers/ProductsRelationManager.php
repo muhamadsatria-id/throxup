@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Categories\RelationManagers;
 
+use App\Support\ImageUploadConstraints;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -34,10 +35,8 @@ class ProductsRelationManager extends RelationManager
                     ->required()
                     ->maxLength(255),
                 TextInput::make('slug')
-                    ->maxLength(255)
-                    ->disabled()
-                    ->dehydrated(false)
-                    ->helperText('Diisi otomatis oleh sistem.'),
+                    ->hidden()
+                    ->dehydrated(false),
                 TextInput::make('sku')
                     ->required()
                     ->maxLength(255)
@@ -54,12 +53,14 @@ class ProductsRelationManager extends RelationManager
                     ->nullable()
                     ->helperText('(opsional) Tampil sebagai konten rich text di bagian Detail Produk halaman produk.')
                     ->columnSpanFull(),
-                FileUpload::make('images')
-                    ->image()
-                    ->multiple()
-                    ->disk('public')->visibility('public')->directory('products')
-                    ->nullable()->helperText('(opsional)')
-                    ->columnSpanFull(),
+                ImageUploadConstraints::apply(
+                    FileUpload::make('images')
+                        ->multiple()
+                        ->disk('public')->visibility('public')->directory('products')
+                        ->nullable()
+                        ->columnSpanFull(),
+                    optional: true,
+                ),
                 Toggle::make('is_active')
                     ->label('Aktif')
                     ->default(true),

@@ -17,10 +17,8 @@ class PageForm
                     ->required()
                     ->maxLength(255),
                 TextInput::make('slug')
-                    ->maxLength(255)
-                    ->disabled()
-                    ->dehydrated(false)
-                    ->helperText('Diisi otomatis oleh sistem.'),
+                    ->hidden()
+                    ->dehydrated(false),
                 RichEditor::make('konten')
                     ->required()
                     ->toolbarButtons([

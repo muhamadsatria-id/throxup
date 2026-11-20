@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
+use App\Support\ImageUploadConstraints;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -26,10 +27,8 @@ class ProductForm
                     ->required()
                     ->maxLength(255),
                 TextInput::make('slug')
-                    ->maxLength(255)
-                    ->disabled()
-                    ->dehydrated(false)
-                    ->helperText('Diisi otomatis oleh sistem.'),
+                    ->hidden()
+                    ->dehydrated(false),
                 TextInput::make('sku')
                     ->required()
                     ->maxLength(255)
@@ -46,14 +45,16 @@ class ProductForm
                     ->nullable()
                     ->helperText('(opsional) Tampil sebagai konten rich text di bagian Detail Produk halaman produk.')
                     ->columnSpanFull(),
-                FileUpload::make('images')
-                    ->image()
-                    ->multiple()
-                    ->previewable(false)
-                    ->fetchFileInformation(false)
-                    ->disk('public')->visibility('public')->directory('products')
-                    ->nullable()->helperText('(opsional)')
-                    ->columnSpanFull(),
+                ImageUploadConstraints::apply(
+                    FileUpload::make('images')
+                        ->multiple()
+                        ->previewable(false)
+                        ->fetchFileInformation(false)
+                        ->disk('public')->visibility('public')->directory('products')
+                        ->nullable()
+                        ->columnSpanFull(),
+                    optional: true,
+                ),
                 Toggle::make('is_active')
                     ->label('Aktif')
                     ->default(true),

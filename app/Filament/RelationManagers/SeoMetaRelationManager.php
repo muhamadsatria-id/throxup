@@ -2,6 +2,7 @@
 
 namespace App\Filament\RelationManagers;
 
+use App\Support\ImageUploadConstraints;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -18,12 +19,17 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class SeoMetaRelationManager extends RelationManager
 {
     protected static string $relationship = 'seoMeta';
 
-    
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return false;
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -56,11 +62,13 @@ class SeoMetaRelationManager extends RelationManager
                     ])
                     ->default('index, follow')
                     ->required(),
-                FileUpload::make('og_image')
-                    ->label('OG Image')
-                    ->image()
-                    ->disk('public')->visibility('public')->directory('seo')
-                    ->nullable()->helperText('(opsional)'),
+                ImageUploadConstraints::apply(
+                    FileUpload::make('og_image')
+                        ->label('OG Image')
+                        ->disk('public')->visibility('public')->directory('seo')
+                        ->nullable(),
+                    optional: true,
+                ),
                 KeyValue::make('schema_json')
                     ->label('Schema JSON-LD')
                     ->nullable()->helperText('(opsional)')

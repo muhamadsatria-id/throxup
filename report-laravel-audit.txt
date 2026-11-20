@@ -1,0 +1,21 @@
+﻿=== 1. CEK CETAKAN MENTAH BLADE (POTENSI XSS) ===
+
+resources\views\components\breadcrumb-navigation.blade.php:84:    <script type="application/ld+json">{!! json_encode($breadcrumbSchema, $jsonFlags) 
+!!}</script>
+resources\views\layouts\app.blade.php:30:    {!! SEO::generate() !!}
+resources\views\layouts\app.blade.php:68:    {!! $embedCode(data_get($siteSetting ?? null, 'gsc_verification')) !!}
+resources\views\layouts\app.blade.php:69:    {!! $embedCode(data_get($siteSetting ?? null, 'ga4_code')) !!}
+resources\views\layouts\app.blade.php:70:    {!! $embedCode(data_get($siteSetting ?? null, 'gtm_head_code')) !!}
+resources\views\layouts\app.blade.php:71:    {!! $embedCode(data_get($siteSetting ?? null, 'custom_head_scripts')) !!}
+resources\views\layouts\app.blade.php:87:    {!! $embedCode(data_get($siteSetting ?? null, 'gtm_body_code')) !!}
+resources\views\layouts\app.blade.php:104:    {!! $embedCode(data_get($siteSetting ?? null, 'custom_body_scripts')) !!}
+resources\views\pages\about.blade.php:42:                        {!! $profile?->deskripsi ?: 'Profil perusahaan belum diisi.' !!}
+resources\views\pages\detail-news.blade.php:84:                    {!! $news->deskripsi !!}
+resources\views\pages\detail-product.blade.php:101:                        {!! nl2br(e($product->deskripsi)) !!}
+resources\views\pages\detail-product.blade.php:131:                        {!! $product->detail_produk !!}
+
+=== 2. CEK MASS ASSIGNMENT (GUARDED KOSONG) ===
+
+=== 3. CEK RAW SQL QUERY ===
+
+

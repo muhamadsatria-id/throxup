@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Profiles\Schemas;
 
+use App\Support\ImageUploadConstraints;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TagsInput;
@@ -50,18 +51,22 @@ class ProfileForm
                     ->nullable()->helperText('(opsional)')
                     ->rows(3)
                     ->columnSpanFull(),
-                FileUpload::make('logo')
-                    ->image()
-                    ->previewable(false)
-                    ->fetchFileInformation(false)
-                    ->disk('public')->visibility('public')->directory('profiles')
-                    ->nullable()->helperText('(opsional)'),
-                FileUpload::make('favicon')
-                    ->image()
-                    ->previewable(false)
-                    ->fetchFileInformation(false)
-                    ->disk('public')->visibility('public')->directory('profiles')
-                    ->nullable()->helperText('(opsional)'),
+                ImageUploadConstraints::apply(
+                    FileUpload::make('logo')
+                        ->previewable(false)
+                        ->fetchFileInformation(false)
+                        ->disk('public')->visibility('public')->directory('profiles')
+                        ->nullable(),
+                    optional: true,
+                ),
+                ImageUploadConstraints::apply(
+                    FileUpload::make('favicon')
+                        ->previewable(false)
+                        ->fetchFileInformation(false)
+                        ->disk('public')->visibility('public')->directory('profiles')
+                        ->nullable(),
+                    optional: true,
+                ),
             ]);
     }
 }

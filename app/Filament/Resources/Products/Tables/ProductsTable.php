@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\Products\Tables;
 
+use App\Support\TableThumbnail;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -21,6 +23,10 @@ class ProductsTable
                 TextColumn::make('nama')
                     ->searchable()
                     ->sortable(),
+                TableThumbnail::apply(ImageColumn::make('images'))
+                    ->getStateUsing(fn ($record) => is_array($record->images ?? null)
+                        ? (collect($record->images)->first() ?: null)
+                        : null),
                 TextColumn::make('sku')
                     ->searchable()
                     ->copyable(),

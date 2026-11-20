@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ModalBanners\Schemas;
 
+use App\Support\ImageUploadConstraints;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -17,14 +18,15 @@ class ModalBannerForm
                     ->label('Judul / Alt Text')
                     ->nullable()->helperText('(opsional)')
                     ->maxLength(255),
-                FileUpload::make('image')
-                    ->label('Gambar Banner')
-                    ->image()
-                    ->previewable(false)
-                    ->fetchFileInformation(false)
-                    ->disk('public')->visibility('public')->directory('modal-banners')
-                    ->required()
-                    ->columnSpanFull(),
+                ImageUploadConstraints::apply(
+                    FileUpload::make('image')
+                        ->label('Gambar Banner')
+                        ->previewable(false)
+                        ->fetchFileInformation(false)
+                        ->disk('public')->visibility('public')->directory('modal-banners')
+                        ->required()
+                        ->columnSpanFull(),
+                ),
                 TextInput::make('link_url')
                     ->label('URL Tujuan')
                     ->url()

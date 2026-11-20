@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\HeroCarousels\Tables;
 
+use App\Support\TableThumbnail;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -24,8 +25,7 @@ class HeroCarouselsTable
                     ->label('Headline')
                     ->searchable()
                     ->sortable(),
-                ImageColumn::make('image')->disk('public')->visibility('public')->checkFileExistence(false)
-                    ->label('Gambar'),
+                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('order')
                     ->label('Urutan')
                     ->sortable(),
