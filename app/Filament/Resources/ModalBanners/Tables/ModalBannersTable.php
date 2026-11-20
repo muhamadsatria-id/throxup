@@ -19,10 +19,10 @@ class ModalBannersTable
     {
         return $table
             ->columns([
+                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('title')
                     ->label('Judul / Alt Text')
                     ->searchable(),
-                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('link_url')
                     ->label('URL Tujuan')
                     ->limit(50)

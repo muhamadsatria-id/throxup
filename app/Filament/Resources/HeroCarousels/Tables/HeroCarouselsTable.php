@@ -21,11 +21,11 @@ class HeroCarouselsTable
             ->reorderable('order')
             ->defaultSort('order')
             ->columns([
+                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('judul')
                     ->label('Headline')
                     ->searchable()
                     ->sortable(),
-                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('order')
                     ->label('Urutan')
                     ->sortable(),

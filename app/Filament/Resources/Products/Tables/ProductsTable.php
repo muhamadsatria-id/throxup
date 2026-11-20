@@ -20,13 +20,13 @@ class ProductsTable
     {
         return $table
             ->columns([
-                TextColumn::make('nama')
-                    ->searchable()
-                    ->sortable(),
                 TableThumbnail::apply(ImageColumn::make('images'))
                     ->getStateUsing(fn ($record) => is_array($record->images ?? null)
                         ? (collect($record->images)->first() ?: null)
                         : null),
+                TextColumn::make('nama')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('sku')
                     ->searchable()
                     ->copyable(),

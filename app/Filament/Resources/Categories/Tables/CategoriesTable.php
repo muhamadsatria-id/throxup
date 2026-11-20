@@ -17,10 +17,10 @@ class CategoriesTable
     {
         return $table
             ->columns([
+                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('nama')
                     ->searchable()
                     ->sortable(),
-                TableThumbnail::apply(ImageColumn::make('image')),
                 TextColumn::make('slug')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
