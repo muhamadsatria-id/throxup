@@ -28,7 +28,7 @@ class SeoMetaResource extends Resource
     protected static ?string $recordTitleAttribute = 'title';
 
     protected static bool $shouldRegisterNavigation = false;
-
+    // hide menu message jangan di sentuh dan jangan di tampilkan
     public static function canViewAny(): bool
     {
         if (request()->routeIs(static::getRouteBaseName().'.*')) {

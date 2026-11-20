@@ -83,7 +83,7 @@
                 <div class="flex flex-col gap-space-lg text-on-surface font-body-lg text-body-lg leading-relaxed">
                     {!! $news->deskripsi !!}
                 <!-- SECONDARY IN-BODY IMAGE -->
-                    <figure class="flex flex-col gap-space-xs my-space-sm">
+                    <!-- <figure class="flex flex-col gap-space-xs my-space-sm">
                         <div
                             class="relative w-full aspect-[16/9] rounded-DEFAULT overflow-hidden bg-surface-container shadow-md">
                             <img class="w-full h-full object-cover"
@@ -95,30 +95,30 @@
                         <figcaption class="font-body-sm text-body-sm text-on-surface-variant italic px-space-xs">
                             Figure 2.0: Synchronized torque output matching across turbo-diesel powertrain interfaces.
                         </figcaption>
-                    </figure>
-                    <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
+                    </figure> -->
+                    <!-- <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
                         Field Validation Across Mining Operations
-                    </h2>
-                    <p>
+                    </h2> -->
+                    <!-- <p>
                         Over 2,400 hours of continuous telemetric data were captured at an iron ore extraction quarry in the
                         Pilbara region of Western Australia. Equipped with high-frequency CAN-bus logging nodes, twin THORXup
                         crawler excavators handled blasted basalt rock with high abrasive density. Test metrics proved that
                         the electro-proportional variable system achieved higher bucket fill rates while dropping average
                         hourly fuel burn from 38.4 liters down to 31.4 liters per operational hour.
-                    </p>
-                    <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
+                    </p> -->
+                    <!-- <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
                         Thermal Dissipation and Life Cycle Longevity
-                    </h2>
-                    <p>
+                    </h2> -->
+                    <!-- <p>
                         Lowering hydraulic throttling losses results in immediate secondary benefits: operating oil reservoir
                         temperatures fell by an average of 14°C throughout peak summer cycles. Because hydraulic fluid remains
                         below its thermal degradation threshold, elastomer seal oxidation and cylinder packing degradation are
                         extended by approximately 3,000 engine service hours, substantially reducing unscheduled field
                         overhauls.
-                    </p>
+                    </p> -->
                 </div>
                 <!-- SOURCE & PHOTO ATTRIBUTION -->
-                <div
+                <!-- <div
                     class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
                     <div class="flex items-center gap-2">
                         <span
@@ -132,7 +132,7 @@
                         <span class="text-on-surface">THORXup Heavy Industries Media Lab / Industrial Telemetry
                             Archives</span>
                     </div>
-                </div>
+                </div> -->
                 <!-- SOCIAL SHARE BUTTONS BAR -->
                 <div
                     class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md py-space-md bg-surface-container-low px-space-lg rounded-DEFAULT">

@@ -24,6 +24,16 @@ use UnitEnum;
 
 class QuoteRequestResource extends Resource
 {
+
+    public static function canViewAny(): bool
+        {
+            if (request()->routeIs(static::getRouteBaseName().'.*')) {
+                abort(404);
+            }
+
+            return false;
+        }
+
     protected static ?string $model = QuoteRequest::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedInboxArrowDown;

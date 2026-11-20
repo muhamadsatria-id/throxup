@@ -7,13 +7,14 @@
 
 <div
     class="bg-surface-container-lowest rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
-    <div class="relative h-40 md:h-52 bg-surface-container overflow-hidden rounded-t-DEFAULT">
-        @if ($image)
-            <img alt="{{ $title }}" title="{{ $title }}" loading="lazy" decoding="async" width="800" height="600"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                src="{{ $image }}" />
-        @endif
-    </div>
+<div class="relative flex items-center justify-center w-full h-40 md:h-52 bg-surface-container-low overflow-hidden ">
+    @if ($image)
+        <img alt="{{ $title }}" title="{{ $title }}" loading="lazy" decoding="async"
+            style="width: 75%; height: 75%; object-fit: contain;"
+            class="transition-transform duration-500 group-hover:scale-105"
+            src="{{ $image }}" />
+    @endif
+</div>
     <div class="p-space-md md:p-space-lg flex-1 flex flex-col justify-between">
         <div>
             @if ($category)

@@ -176,7 +176,7 @@
 
             <p class="font-body-sm text-body-sm text-on-primary-container">Copyright © 2026 thorxup design by 3idea.id</p>
 
-            <div class="flex items-center gap-space-lg"><a
+            <!-- <div class="flex items-center gap-space-lg"><a
 
                     class="font-body-sm text-body-sm text-on-primary-container hover:text-on-primary transition-colors"
 
@@ -184,7 +184,7 @@
 
                     class="font-body-sm text-body-sm text-on-primary-container hover:text-on-primary transition-colors"
 
-                    data-path="terms-of-service" href="#">Terms of Service</a></div>
+                    data-path="terms-of-service" href="#">Terms of Service</a></div> -->
 
         </div>
 

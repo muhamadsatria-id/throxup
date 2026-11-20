@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use App\Models\Category;
 use App\Models\HeroCarousel;
 use App\Models\ModalBanner;
@@ -29,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        if (str_contains(config('app.url'), 'https://') || request()->header('x-forwarded-proto') === 'https') {
+            URL::forceScheme('https');
+        }
+
         View::composer('*', function ($view) {
             $profileData = Schema::hasTable('profiles')
                 ? Cache::rememberForever('site_profile', fn () => Profile::first()?->toArray())

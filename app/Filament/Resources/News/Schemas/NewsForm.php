@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\News\Schemas;
 
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -25,9 +26,11 @@ class NewsForm
                     ->required()
                     ->maxLength(255),
                 TextInput::make('slug')
+                    ->required()
                     ->maxLength(255)
                     ->disabled()
                     ->dehydrated(false)
+                    ->hidden()
                     ->helperText('Diisi otomatis oleh sistem.'),
                 FileUpload::make('thumbnail')
                     ->image()

@@ -40,9 +40,10 @@ $waUrl = $waPhone ? "https://wa.me/{$waPhone}?text={$waMessage}" : route('home')
                 <!-- Main Large Display Container -->
                 <div class="relative bg-surface-container-lowest rounded-md p-space-md shadow-md overflow-hidden group">
                     <div
-                        class="relative w-full h-[440px] md:h-[520px] rounded-md overflow-hidden bg-surface-container-high flex items-center justify-center cursor-crosshair">
+                        class="relative w-full h-[440px] md:h-[520px] rounded-md overflow-hidden bg-surface-container-low flex items-center justify-center cursor-crosshair">
                         @if ($mainImage)
                         <img alt="{{ $product->nama }}" id="mainProductImg" src="{{ $mainImage }}"
+                        style="width: 80%; height: 80%; object-fit: contain;"
                             loading="eager" fetchpriority="high" decoding="async"
                             class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
                         @else

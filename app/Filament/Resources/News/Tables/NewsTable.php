@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\News\Tables;
 
+use Filament\Forms\Components\Hidden;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -23,6 +24,7 @@ class NewsTable
                     ->limit(50)
                     ->tooltip(fn (TextColumn $column): ?string => strlen($column->getState()) > $column->getCharacterLimit() ? $column->getState() : null),
                 TextColumn::make('slug')
+                    
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('author.name')
